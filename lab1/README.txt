@@ -9,11 +9,13 @@ For both main folder (iir,iir_LA):
 	-netlist: files used for place and route.
 	-syn: the files obtained by sinopsys and scripts.
 	-report_clock_*: report_area, report_timing, report_power of the structure taking in account.
-
+	-PowerReport: in this folder there are the power report obtained by innovous.
+	
 The tree folder organization is the following:
 .
 ├── iir
 │   ├── innovus
+|   | 	├── PowerReport
 │   │   ├── netlist
 │   │   ├── saif
 │   │   ├── sim
@@ -33,6 +35,7 @@ The tree folder organization is the following:
 │   └── vcd
 └── iir_LA
     ├── innovus
+    | 	├── PowerReport
     │   ├── netlist
     │   ├── saif
     │   ├── sim
