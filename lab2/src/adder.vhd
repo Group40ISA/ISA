@@ -65,6 +65,8 @@ architecture RTL of adder is
 	signal Carry_level6 : std_logic_vector(61 downto 0);
 	signal Sum_level6   : std_logic_vector(61 downto 0);
 
+	signal operand1, operand2 : std_logic_vector(63 downto 0);
+
 begin
 
 	-- LEVEL 1 ----------------------------------------
@@ -388,14 +390,14 @@ begin
 
 	-- LEVEL 4 ----------------------------------------
 	
-	L4_HA1 : ha port map(Input_PP1(6), Input_PP2(5), Carry_level4(0), Sum_level4(0));
+	L4_HA1 : ha port map(Input_PP1(6), Input_PP2(6), Carry_level4(0), Sum_level4(0));
     L4_HA2 : ha port map(Input_PP4(4), Input_PP5(2), Carry_level4(3), Sum_level4(3));
     L4_HA3 : ha port map(Input_PP16(30), Input_PP17(29), Carry_level4(103), Sum_level4(103));
     L4_HA4 : ha port map(Input_PP14(36), Input_PP15(34), Carry_level4(105), Sum_level4(105));
 
-    L4_FA1 : fa port map(Input_PP1(7), Input_PP2(6), Input_PP3(5), Carry_level4(1), Sum_level4(1));
-    L4_FA2 : fa port map(Input_PP1(8), Input_PP2(7), Input_PP3(6), Carry_level4(2), Sum_level4(2));
-    L4_FA3_1 : fa port map(Input_PP1(9), Input_PP2(8), Input_PP3(7), Carry_level4(4), Sum_level4(4));
+    L4_FA1 : fa port map(Input_PP1(7), Input_PP2(7), Input_PP3(5), Carry_level4(1), Sum_level4(1));
+    L4_FA2 : fa port map(Input_PP1(8), Input_PP2(8), Input_PP3(6), Carry_level4(2), Sum_level4(2));
+    L4_FA3_1 : fa port map(Input_PP1(9), Input_PP2(9), Input_PP3(7), Carry_level4(4), Sum_level4(4));
     L4_FA3_2 : fa port map(Input_PP4(5), Input_PP5(3), Input_PP6(1), Carry_level4(5), Sum_level4(5));
     L4_FA4_1 : fa port map(Sum_level3(0), Input_PP3(8), Input_PP4(6), Carry_level4(6), Sum_level4(6));
     L4_FA4_2 : fa port map(Input_PP5(4), Input_PP6(2), Input_PP7(0), Carry_level4(7), Sum_level4(7));
@@ -485,11 +487,14 @@ begin
 
 	-- OUT_RCA ----------------------------------------
 
+	operand1 <=   Carry_level6(60 downto 0) & Sum_level6(0) & Input_PP1(1) & Input_PP1(0);
+	operand2 <=   Sum_level6(61 downto 1) & Input_PP3(0) & Input_PP2(1) & Input_PP2(0);
+
 	-- SUM OUT ----------------------------------------
 	sum : process(SumEnable)
 	begin
 		if SumEnable = '1' then
-			Output <= (others => '0');
+			Output <= operand1 + operand1;
 		end if;
 	end process sum;
 
