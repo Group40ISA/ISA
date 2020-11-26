@@ -15,7 +15,7 @@ architecture RTL of hd is
 	
 begin
 
-sum <= a xor b;
-cout <= a and b;
+sum_ha <= a xor b;
+cout_ha <= a and b;
 
 end architecture RTL;

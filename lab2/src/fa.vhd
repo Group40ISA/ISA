@@ -16,7 +16,7 @@ architecture structural of fa is
 	
 begin
 
-sum <= a xor b xor c_1;
-cout <= (a and b) or (a and c_1) or (b and c_1);
+sum_fa <= a xor b xor c_1;
+cout_fa <= (a and b) or (a and c_1) or (b and c_1);
 
 end architecture structural;
