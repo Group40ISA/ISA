@@ -4,7 +4,6 @@ use ieee.numeric_std.all;
 
 entity adder is
 	port(
-		SumEnable  : in  std_logic;
 		Input_PP1  : in  std_logic_vector(35 downto 0);
 		Input_PP2  : in  std_logic_vector(36 downto 0);
 		Input_PP3  : in  std_logic_vector(36 downto 0);

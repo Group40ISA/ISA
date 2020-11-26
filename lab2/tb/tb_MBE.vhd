@@ -95,7 +95,6 @@ begin
 		);
 		
 	adder1: adder port map(
-		SumEnable  => OE_sig,
 		Input_PP1  => Output_PP1,
 		Input_PP2  => Output_PP2,
 		Input_PP3  => Output_PP3,

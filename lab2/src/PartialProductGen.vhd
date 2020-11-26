@@ -23,7 +23,7 @@ entity PartialProductGen is
 		Output_PP13 : out std_logic_vector(36 downto 0);
 		Output_PP14 : out std_logic_vector(36 downto 0);
 		Output_PP15 : out std_logic_vector(36 downto 0);
-		Output_PP16 : out std_logic_vector(35 downto 0);
+		Output_PP16 : out std_logic_vector(33 downto 0);
 		Output_PP17 : out std_logic_vector(34 downto 0)
 	);
 end entity PartialProductGen;
