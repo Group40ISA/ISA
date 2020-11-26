@@ -7,8 +7,8 @@ entity fa is
 		a : in std_logic;
 		b : in std_logic;
 		c_1 : in std_logic;
-		sum : out std_logic;
-		cout: out std_logic
+		sum_fa : out std_logic;
+		cout_fa : out std_logic
 	);
 end entity fa;
 
