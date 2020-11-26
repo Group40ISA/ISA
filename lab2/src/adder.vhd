@@ -94,13 +94,13 @@ begin
 	L1_HA5 : ha port map(Input_PP10(14), Input_PP11(12), Carry_level1(15), Sum_level1(15));
 
 	L1_FA_CENTRE : for I in 31 to 35 generate
-		L1_REGX : fa
+		L1_REGX_I : fa
 			port map(Input_PP1(I), Input_PP2(I), Input_PP3(I - 2), Carry_level1(16 + (I - 31) * 4), Sum_level1(16 + (I - 31) * 4));
-		L1_REGY : fa
+		L1_REGY_I : fa
 			port map(Input_PP1(I - 4), Input_PP2(I - 6), Input_PP3(I - 8), Carry_level1(17 + (I - 31) * 4), Sum_level1(17 + (I - 31) * 4));
-		L1_REGZ : fa
+		L1_REGZ_I : fa
 			port map(Input_PP1(I - 10), Input_PP2(I - 12), Input_PP3(I - 14), Carry_level1(18 + (I - 31) * 4), Sum_level1(18 + (I - 31) * 4));
-		L1_REGW : fa
+		L1_REGW_I : fa
 			port map(Input_PP1(I - 16), Input_PP2(I - 18), Input_PP3(I - 20), Carry_level1(19 + (I - 31) * 4), Sum_level1(19 + (I - 31) * 4));
 	end generate L1_FA_CENTRE;
 
@@ -192,13 +192,13 @@ begin
 	L2_FA14_4 : fa port map(Input_PP14(6), Input_PP15(4), Input_PP16(2), Carry_level2(47), Sum_level2(47));
 
 	FA_CENTRE2 : for I in 31 to 36 generate
-		L2_REGX : fa
+		L2_REGX_I : fa
 			port map(Carry_level1(12 + (I - 31) * 4), Carry_level1(13 + (I - 31) * 4), Carry_level1(14 + (I - 31) * 4), Carry_level2(48 + (I - 31) * 4), Sum_level2(48 + (I - 31) * 4));
-		L2_REGY : fa
+		L2_REGY_I : fa
 			port map(Carry_level1(15 + (I - 31) * 4), Sum_level1(16 + (I - 31) * 4), Sum_level1(17 + (I - 31) * 4), Carry_level2(49 + (I - 31) * 4), Sum_level2(49 + (I - 31) * 4));
-		L2_REGZ : fa
+		L2_REGZ_I : fa
 			port map(Sum_level1(18 + (I - 31) * 4), Sum_level1(19 + (I - 31) * 4), Input_PP13(I - 22), Carry_level2(50 + (I - 31) * 4), Sum_level2(50 + (I - 31) * 4));
-		L2_REGW : fa
+		L2_REGW_I : fa
 			port map(Input_PP14(I - 24), Input_PP15(I - 26), Input_PP16(I - 28), Carry_level2(51 + (I - 31) * 4), Sum_level2(51 + (I - 31) * 4));
 	end generate FA_CENTRE2;
 
@@ -337,11 +337,11 @@ begin
 	L3_FA19_3 : fa port map(Sum_level2(42), Sum_level2(43), Input_PP16(1), Carry_level3(53), Sum_level3(53));
 	
 	FA_CENTRE_L3 : for I in 0 to 14 generate
-		L3_REGX : fa
+		L3_REGX_I : fa
 			port map(Carry_level2(40 + I*4), Carry_level2(41 + I*4), Carry_level2(42 + I*4), Carry_level3(54 + I*3) ,Sum_level3(54 + I*3));
-		L3_REGY : fa
+		L3_REGY_I : fa
 			port map(Carry_level2(43 + I*4), Sum_level2(44 + I*4), Sum_level2(45 + I*4),Carry_level3(55 + I*3),Sum_level3(55 + I*3));
-		L3_REGZ : fa
+		L3_REGZ_I : fa
 			port map(Sum_level2(46 + I*4), Sum_level2(47 + I*4), Input_PP17(I),Carry_level3(56 + I*3),Sum_level3(56 + I*3));
 	end generate FA_CENTRE_L3;
 	
@@ -414,8 +414,8 @@ begin
     --   prov3 : fa port map(Carry_level3(9), Carry_level3(10), Carry_level3(11), Carry_level4(16), Sum_level4(18));
     --   prova4 : fa port map(Sum_level3(12), Sum_level3(13), Sum_level3(14), Carry_level4(17), Sum_level4(19));
     FA_CENTER4 : FOR I in 1 to 38 generate
-        L4_FA_center_I_1 : fa port map(Carry_level3(3 * I + 3), Carry_level3(3 * I + 4), Carry_level3(3 * I + 5), Carry_level4(2 * I + 14), Sum_level4(2 * I + 14));
-        L4_FA_center_I_2 : fa port map(Sum_level3(3 * I + 6), Sum_level3(3 * I + 7), Sum_level3(3 * I + 8), Carry_level4(2 * I + 15), Sum_level4(2 * I + 15));
+        L4_FAX_I : fa port map(Carry_level3(3 * I + 3), Carry_level3(3 * I + 4), Carry_level3(3 * I + 5), Carry_level4(2 * I + 14), Sum_level4(2 * I + 14));
+        L4_FAY_I : fa port map(Sum_level3(3 * I + 6), Sum_level3(3 * I + 7), Sum_level3(3 * I + 8), Carry_level4(2 * I + 15), Sum_level4(2 * I + 15));
     end generate FA_CENTER4;
 
     L4_FA91_1 : fa port map(Carry_level3(120), Carry_level3(121), Carry_level3(122), Carry_level4(92), Sum_level4(92));
@@ -445,7 +445,7 @@ begin
 	L5_FA4 : fa port map(Carry_level4(1), Sum_level4(2), Sum_level4(3), Carry_level5(4), Sum_level5(4));
 
 	L5_FA_CENTRE : for I in 5 to 55 generate
-		L5_REGX : fa port map(Carry_level4(I - 3 + (I - 5)), Carry_level4(I - 2 + (I - 5)), Sum_level4(I - 1 + (I - 5)), Carry_level5(I), Sum_level5(I));
+		L5_REGX_I : fa port map(Carry_level4(I - 3 + (I - 5)), Carry_level4(I - 2 + (I - 5)), Sum_level4(I - 1 + (I - 5)), Carry_level5(I), Sum_level5(I));
 	end generate L5_FA_CENTRE;
 
 	L5_FA5 : fa port map(Carry_level4(104), Sum_level4(105), Input_PP16(32), Carry_level5(56), Sum_level5(56));
@@ -471,7 +471,7 @@ begin
 	L6_FA6 : fa port map(Carry_level5(1), Sum_level5(2), Input_PP6(0), Carry_level6(6), Sum_level6(6));
 
 	L6_FA_CENTRE : for I in 7 to 56 generate
-		L5_REGX : fa port map(Carry_level5(I - 3), Sum_level5(I - 2), Sum_level4(I - 2 + (I - 7)), Carry_level6(I), Sum_level6(I));
+		L5_REGX_I : fa port map(Carry_level5(I - 3), Sum_level5(I - 2), Sum_level4(I - 2 + (I - 7)), Carry_level6(I), Sum_level6(I));
 	end generate L6_FA_CENTRE;
 
 	L6_FA7 : fa port map(Carry_level5(54), Sum_level5(55), Input_PP17(29), Carry_level6(57), Sum_level6(57));
