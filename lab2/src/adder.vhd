@@ -492,7 +492,7 @@ begin
 
 	-- SUM OUT ----------------------------------------
 
-	Output <= std_logic_vector(unsignend(operand1) + unsigned(operand2));
+	Output <= std_logic_vector(unsigned(operand1) + unsigned(operand2));
 
 
 end architecture RTL;
