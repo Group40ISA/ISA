@@ -67,7 +67,7 @@ architecture RTL of adder is
 
 begin
 
-	-- LEVEL 7 ----------------------------------------
+	-- LEVEL 1 ----------------------------------------
 
 	L1_HA1 : ha port map(Input_PP1(24), Input_PP2(24), Carry_level1(0), Sum_level1(0));
 
