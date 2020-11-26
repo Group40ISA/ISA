@@ -28,7 +28,7 @@ architecture RTL of tb_MBE is
 		Output_PP14 : out std_logic_vector(36 downto 0);
 		Output_PP15 : out std_logic_vector(36 downto 0);
 		Output_PP16 : out std_logic_vector(35 downto 0);
-		Output_PP17 : out std_logic_vector(34 downto 0)
+		Output_PP17 : out std_logic_vector(33 downto 0)
 	);
 end component PartialProductGen;
 
@@ -64,7 +64,7 @@ end component adder;
 	signal Output_PP11,Output_PP12,output_PP13 : std_logic_vector(36 downto 0);
 	signal Output_PP14,Output_PP15 : std_logic_vector(36 downto 0);
 	signal Output_PP1,Output_PP16 : std_logic_vector(35 downto 0);
-	signal Output_PP17 : std_logic_vector(34 downto 0);
+	signal Output_PP17 : std_logic_vector(33 downto 0);
 	signal Output : std_logic_vector(63 downto 0);
 
 begin
