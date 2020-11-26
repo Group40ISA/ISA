@@ -103,5 +103,5 @@ begin
 			Output_PP17 <= ram_block(16)(33 downto 0);
 		--end if;
 	--end if;
-end process out_reg;
+--end process out_reg;
 end architecture RTL;
