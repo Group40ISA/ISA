@@ -4,16 +4,27 @@ use ieee.numeric_std.all;
 
 entity PartialProductGen is
 	port(
-		clk        : in  std_logic;
-		rst        : in  std_logic;
-		x          : in  std_logic_vector(7 downto 0);
-		A          : in  std_logic_vector(7 downto 0);
-		OE         : out  std_logic;
-		Output_PP1 : out std_logic_vector(11 downto 0);
-		Output_PP2 : out std_logic_vector(12 downto 0);
-		Output_PP3 : out std_logic_vector(12 downto 0);
-		Output_PP4 : out std_logic_vector(11 downto 0);
-		Output_PP5 : out std_logic_vector(10 downto 0)
+		clk         : in  std_logic;
+		rst         : in  std_logic;
+		x           : in  std_logic_vector(31 downto 0);
+		A           : in  std_logic_vector(31 downto 0);
+		Output_PP1  : out std_logic_vector(35 downto 0);
+		Output_PP2  : out std_logic_vector(36 downto 0);
+		Output_PP3  : out std_logic_vector(36 downto 0);
+		Output_PP4  : out std_logic_vector(36 downto 0);
+		Output_PP5  : out std_logic_vector(36 downto 0);
+		Output_PP6  : out std_logic_vector(36 downto 0);
+		Output_PP7  : out std_logic_vector(36 downto 0);
+		Output_PP8  : out std_logic_vector(36 downto 0);
+		Output_PP9  : out std_logic_vector(36 downto 0);
+		Output_PP10 : out std_logic_vector(36 downto 0);
+		Output_PP11 : out std_logic_vector(36 downto 0);
+		Output_PP12 : out std_logic_vector(36 downto 0);
+		Output_PP13 : out std_logic_vector(36 downto 0);
+		Output_PP14 : out std_logic_vector(36 downto 0);
+		Output_PP15 : out std_logic_vector(36 downto 0);
+		Output_PP16 : out std_logic_vector(35 downto 0);
+		Output_PP17 : out std_logic_vector(34 downto 0)
 	);
 end entity PartialProductGen;
 
@@ -21,18 +32,29 @@ architecture RTL of PartialProductGen is
 
 	component mem is
 		port(
-			clk        : in  std_logic;
-			rst        : in  std_logic;
-			S          : in  std_logic;
-			Input_PP   : in  std_logic_vector(7 downto 0);
-			OE         : out std_logic;
-			Output_PP1 : out std_logic_vector(11 downto 0);
-			Output_PP2 : out std_logic_vector(12 downto 0);
-			Output_PP3 : out std_logic_vector(12 downto 0);
-			Output_PP4 : out std_logic_vector(11 downto 0);
-			Output_PP5 : out std_logic_vector(10 downto 0));
+			clk         : in  std_logic;
+			rst         : in  std_logic;
+			S           : in  std_logic;
+			Input_PP    : in  std_logic_vector(31 downto 0);
+			Output_PP1  : out std_logic_vector(35 downto 0);
+			Output_PP2  : out std_logic_vector(36 downto 0);
+			Output_PP3  : out std_logic_vector(36 downto 0);
+			Output_PP4  : out std_logic_vector(36 downto 0);
+			Output_PP5  : out std_logic_vector(36 downto 0);
+			Output_PP6  : out std_logic_vector(36 downto 0);
+			Output_PP7  : out std_logic_vector(36 downto 0);
+			Output_PP8  : out std_logic_vector(36 downto 0);
+			Output_PP9  : out std_logic_vector(36 downto 0);
+			Output_PP10 : out std_logic_vector(36 downto 0);
+			Output_PP11 : out std_logic_vector(36 downto 0);
+			Output_PP12 : out std_logic_vector(36 downto 0);
+			Output_PP13 : out std_logic_vector(36 downto 0);
+			Output_PP14 : out std_logic_vector(36 downto 0);
+			Output_PP15 : out std_logic_vector(36 downto 0);
+			Output_PP16 : out std_logic_vector(35 downto 0);
+			Output_PP17 : out std_logic_vector(34 downto 0));
 	end component mem;
-	signal OE_sig   : std_logic;
+
 	component shift is
 		generic(parallelism : integer := 7);
 		port(
@@ -44,19 +66,19 @@ architecture RTL of PartialProductGen is
 	end component shift;
 	signal inputMBE : std_logic_vector(2 downto 0);
 
-	signal A_tmp : std_logic_vector(7 downto 0);
-	signal A_int : std_logic_vector(7 downto 0);
+	signal A_tmp : std_logic_vector(31 downto 0);
+	signal A_int : std_logic_vector(31 downto 0);
 
 	component NotBlock is
 		port(
-			A              : in  std_logic_vector(7 downto 0);
+			A              : in  std_logic_vector(31 downto 0);
 			NotEnable      : in  std_logic;
-			PartialProduct : out std_logic_vector(7 downto 0)
+			PartialProduct : out std_logic_vector(31 downto 0)
 		);
 	end component NotBlock;
-	signal OutMBE_Mux : std_logic_vector(7 downto 0);
-	signal zero       : std_logic_vector(7 downto 0);
-	signal pp         : std_logic_vector(7 downto 0);
+	signal OutMBE_Mux : std_logic_vector(31 downto 0);
+	signal zero       : std_logic_vector(31 downto 0);
+	signal pp         : std_logic_vector(31 downto 0);
 
 	component MBE_tab is
 		port(
@@ -83,11 +105,11 @@ begin
 	with MuxSel select OutMBE_Mux <=
 		zero when "00",
 		A_int when "01",
-	    A_int(6 downto 0) & '0' when "10",
+	    A_int(30 downto 0) & '0' when "10",
 	    zero when others;
 
 	x_reg : shift
-		generic map(parallelism => 8)
+		generic map(parallelism => 32)
 		port map(
 			clk => clk,
 			rst => rst,
@@ -111,16 +133,27 @@ begin
 
 	mem_pp : mem
 		port map(
-			clk        => clk,
-			rst        => rst,
-			S          => NotEn,
-			Input_PP   => pp,
-			OE         => OE_sig,
-			Output_PP1 => Output_PP1,
-			Output_PP2 => Output_PP2,
-			Output_PP3 => Output_PP3,
-			Output_PP4 => Output_PP4,
-			Output_PP5 => Output_PP5
+			clk         => clk,
+			rst         => rst,
+			S           => NotEn,
+			Input_PP    => pp,
+			Output_PP1  => Output_PP1,
+			Output_PP2  => Output_PP2,
+			Output_PP3  => Output_PP3,
+			Output_PP4  => Output_PP4,
+			Output_PP5  => Output_PP5,
+			Output_PP6  => Output_PP6,
+			Output_PP7  => Output_PP7,
+			Output_PP8  => Output_PP8,
+			Output_PP9  => Output_PP9,
+			Output_PP10 => Output_PP10,
+			Output_PP11 => Output_PP11,
+			Output_PP12 => Output_PP12,
+			Output_PP13 => Output_PP13,
+			Output_PP14 => Output_PP14,
+			Output_PP15 => Output_PP15,
+			Output_PP16 => Output_PP16,
+			Output_PP17 => Output_PP17
 		);
 
 end architecture RTL;

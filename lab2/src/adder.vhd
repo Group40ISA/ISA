@@ -491,11 +491,8 @@ begin
 	operand2 <=   Sum_level6(61 downto 1) & Input_PP3(0) & Input_PP2(1) & Input_PP2(0);
 
 	-- SUM OUT ----------------------------------------
-	sum : process(SumEnable)
-	begin
-		if SumEnable = '1' then
-			Output <= operand1 + operand1;
-		end if;
-	end process sum;
+
+	Output <= operand1 + operand2;
+
 
 end architecture RTL;
