@@ -1,0 +1,335 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/sim
+Eadder
+Z1 w1606413710
+Z2 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 0
+R0
+Z5 8C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/adder.vhd
+Z6 FC:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/adder.vhd
+l0
+L5 1
+VofNAn^OSzC`4?LgnDi1Mb0
+!s100 Mc^:Mg;8M_Nc?R>0c^4>d0
+Z7 OV;C;2020.1;71
+32
+Z8 !s110 1606495406
+!i10b 1
+Z9 !s108 1606495406.000000
+Z10 !s90 -reportprogress|300|-work|work|C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/adder.vhd|
+Z11 !s107 C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/adder.vhd|
+!i113 1
+Z12 o-work work
+Z13 tExplicit 1 CvgOpt 0
+Artl
+R2
+R3
+R4
+DEx4 work 5 adder 0 22 ofNAn^OSzC`4?LgnDi1Mb0
+!i122 0
+l69
+L28 470
+VNGL`zR72a_Sg0l1gla]7d2
+!s100 gL;jQBQ]]ZHPe5TKA7YLY2
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Efa
+Z14 w1606493126
+R2
+R3
+R4
+!i122 1
+R0
+Z15 8C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/fa.vhd
+Z16 FC:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/fa.vhd
+l0
+L5 1
+VD;dPlA7zZf9m?5oDKmfcR1
+!s100 SaE?Kn?A@DQBlg2[R6l<93
+R7
+32
+Z17 !s110 1606495407
+!i10b 1
+R9
+Z18 !s90 -reportprogress|30|-work|work|C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/fa.vhd|
+Z19 !s107 C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/fa.vhd|
+!i113 1
+R12
+R13
+Astructural
+R2
+R3
+R4
+DEx4 work 2 fa 0 22 D;dPlA7zZf9m?5oDKmfcR1
+!i122 1
+l17
+L15 8
+V7DdR55d[EjNDY`@S]N`Q73
+!s100 <j15g_oJl?8<6]D`4?^h90
+R7
+32
+R17
+!i10b 1
+R9
+R18
+R19
+!i113 1
+R12
+R13
+Eha
+w1606417451
+R2
+R3
+R4
+!i122 2
+R0
+8C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/ha.vhd
+FC:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/ha.vhd
+l0
+L5 1
+VR4VDDA2Jzz18QcigA[LXF0
+!s100 f2VX7Vb0daTj^PnelogI53
+R7
+32
+R17
+!i10b 1
+Z20 !s108 1606495407.000000
+!s90 -reportprogress|30|-work|work|C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/ha.vhd|
+!s107 C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/ha.vhd|
+!i113 1
+R12
+R13
+Embe_tab
+Z21 w1606408916
+R2
+R3
+R4
+!i122 3
+R0
+Z22 8C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/MBE_tab.vhd
+Z23 FC:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/MBE_tab.vhd
+l0
+L5 1
+VQi5bYDlRhUQ53SRzW<bAG2
+!s100 gRF6=h<_Uja7W9RM=G7<22
+R7
+32
+R17
+!i10b 1
+R20
+Z24 !s90 -reportprogress|30|-work|work|C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/MBE_tab.vhd|
+Z25 !s107 C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/MBE_tab.vhd|
+!i113 1
+R12
+R13
+Artl
+R2
+R3
+R4
+DEx4 work 7 mbe_tab 0 22 Qi5bYDlRhUQ53SRzW<bAG2
+!i122 3
+l15
+L13 15
+V>?[cbF7ScNGBWC]NF8Jj`0
+!s100 [?c<NaGLO;dT8I?[>_;La0
+R7
+32
+R17
+!i10b 1
+R20
+R24
+R25
+!i113 1
+R12
+R13
+Emem
+Z26 w1606412695
+R2
+R3
+R4
+!i122 4
+R0
+Z27 8C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/mem.vhd
+Z28 FC:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/mem.vhd
+l0
+L5 1
+VcZ@KR^UMQa9RDNNAFVLlZ0
+!s100 ]Y=<TjI3Jz6TSckm3QSTE0
+R7
+32
+R17
+!i10b 1
+R20
+Z29 !s90 -reportprogress|30|-work|work|C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/mem.vhd|
+Z30 !s107 C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/mem.vhd|
+!i113 1
+R12
+R13
+Artl
+R2
+R3
+R4
+DEx4 work 3 mem 0 22 cZ@KR^UMQa9RDNNAFVLlZ0
+!i122 4
+l35
+L31 77
+VT7iXPEzNEf;C9Wi:4PB8O1
+!s100 5H^]bY_mH54BG[ILS3DaR0
+R7
+32
+R17
+!i10b 1
+R20
+R29
+R30
+!i113 1
+R12
+R13
+Enotblock
+Z31 w1606413488
+R2
+R3
+R4
+!i122 5
+R0
+Z32 8C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/NotBlock.vhd
+Z33 FC:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/NotBlock.vhd
+l0
+L5 1
+VVgk8PCXoagEnUU?fzA2YJ3
+!s100 PL4]JU^dz?<PieOkXblml0
+R7
+32
+R17
+!i10b 1
+R20
+Z34 !s90 -reportprogress|30|-work|work|C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/NotBlock.vhd|
+Z35 !s107 C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/NotBlock.vhd|
+!i113 1
+R12
+R13
+Artl
+R2
+R3
+R4
+DEx4 work 8 notblock 0 22 Vgk8PCXoagEnUU?fzA2YJ3
+!i122 5
+l15
+L13 11
+VgIA?UAAf>AZjRhD^a17lJ2
+!s100 G]NHU:C8m43_Z:l5SzJa?1
+R7
+32
+R17
+!i10b 1
+R20
+R34
+R35
+!i113 1
+R12
+R13
+Epartialproductgen
+Z36 w1606413367
+R2
+R3
+R4
+!i122 6
+R0
+Z37 8C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/PartialProductGen.vhd
+Z38 FC:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/PartialProductGen.vhd
+l0
+L5 1
+VE:ReKB1?TSV27Ki6?BogL2
+!s100 KN4AaLX1BV8__9bCKcm>R2
+R7
+32
+R17
+!i10b 1
+R20
+Z39 !s90 -reportprogress|30|-work|work|C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/PartialProductGen.vhd|
+Z40 !s107 C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/PartialProductGen.vhd|
+!i113 1
+R12
+R13
+Artl
+R2
+R3
+R4
+DEx4 work 17 partialproductgen 0 22 E:ReKB1?TSV27Ki6?BogL2
+!i122 6
+l92
+L31 129
+V8WOn4H:n24d9W`a7FD9Hn3
+!s100 A`QW43@e9XV=c^Gk<6TIb3
+R7
+32
+R17
+!i10b 1
+R20
+R39
+R40
+!i113 1
+R12
+R13
+Eshift
+R21
+R2
+R3
+R4
+!i122 7
+R0
+Z41 8C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/shift.vhd
+Z42 FC:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/shift.vhd
+l0
+L5 1
+Ve0=^_0dDePd4SUoQ4b3je0
+!s100 fWCS]SD;EMSR94EDMIdoR1
+R7
+32
+R17
+!i10b 1
+R20
+Z43 !s90 -reportprogress|30|-work|work|C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/shift.vhd|
+!s107 C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/shift.vhd|
+!i113 1
+R12
+R13
+Artl
+R2
+R3
+R4
+DEx4 work 5 shift 0 22 e0=^_0dDePd4SUoQ4b3je0
+!i122 7
+l19
+L15 28
+V9BbeEh3mGHCTU2>B4@X;L3
+!s100 BR[YWiTSlk9W_dXT2N9d81
+R7
+32
+R17
+!i10b 1
+R20
+R43
+Z44 !s107 C:/Users/39373/Documents/Uni/Magistrale/IntegratedSystemArchitecture/Labs/ISA/lab2/src/shift.vhd|
+!i113 1
+R12
+R13
