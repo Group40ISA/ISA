@@ -6,8 +6,8 @@ entity ha is
 	port(
 		a : in std_logic;
 		b : in std_logic;
-		sum_ha :out std_logic;
-		cout_ha:out std_logic
+		cout_ha:out std_logic;
+		sum_ha :out std_logic
 	);
 end entity ha;
 

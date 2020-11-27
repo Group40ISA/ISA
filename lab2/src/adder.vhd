@@ -32,8 +32,8 @@ architecture RTL of adder is
 			a       : in  std_logic;
 			b       : in  std_logic;
 			c_1     : in  std_logic;
-			sum_fa  : out std_logic;
-			cout_fa : out std_logic
+			cout_fa : out std_logic;
+			sum_fa  : out std_logic
 		);
 	end component fa;
 
@@ -41,8 +41,8 @@ architecture RTL of adder is
 		port(
 			a       : in  std_logic;
 			b       : in  std_logic;
-			sum_ha  : out std_logic;
-			cout_ha : out std_logic
+			cout_ha : out std_logic;
+			sum_ha  : out std_logic
 		);
 	end component ha;
 
