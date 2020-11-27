@@ -11,7 +11,7 @@ entity ha is
 	);
 end entity ha;
 
-architecture RTL of hd is
+architecture RTL of ha is
 	
 begin
 
