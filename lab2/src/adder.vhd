@@ -21,7 +21,7 @@ entity adder is
 		Input_PP15 : in  std_logic_vector(36 downto 0);
 		Input_PP16 : in  std_logic_vector(35 downto 0);
 		Input_PP17 : in  std_logic_vector(33 downto 0);
-		Output     : out std_logic_vector(63 downto 0)
+		Product    : out std_logic_vector(63 downto 0)
 	);
 end entity adder;
 
@@ -491,7 +491,7 @@ begin
 
 	-- SUM OUT ----------------------------------------
 
-	Output <= std_logic_vector(unsigned(operand1) + unsigned(operand2));
+	Product <= std_logic_vector(unsigned(operand1) + unsigned(operand2));
 
 
 end architecture RTL;
