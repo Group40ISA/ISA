@@ -11,6 +11,9 @@ Lab3:
 Members of the group:
 
 274913 Menditto Gianluca
+
 275289 Orabona Michelangelo
+
 274916 Santoro Andrea Giovanni
+
 274914 Virigilio Raffele
