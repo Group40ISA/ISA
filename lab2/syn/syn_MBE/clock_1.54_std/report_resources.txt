@@ -1,0 +1,54 @@
+ 
+****************************************
+Report : resources
+Design : FPmul
+Version: O-2018.06-SP4
+Date   : Sun Nov 29 13:19:48 2020
+****************************************
+
+
+Resource Report for this hierarchy in file
+        ../../src/multiplier/fpmul_stage1_struct.vhd
+=============================================================================
+| Cell           | Module         | Parameters | Contained Operations       |
+=============================================================================
+| add_x_70       | DW01_add       | width=64   | I2/MBE/DADDATREE/add_494 (adder.vhd:494) |
+| add_x_71       | DW01_inc       | width=25   | I3/I11/add_45 (fpround_fpround.vhd:45) |
+| add_x_76       | DW01_add       | width=8    | I3/I9/add_41_aco (fpnormalize_fpnormalize.vhd:41) |
+| add_x_78       | DW01_add       | width=8    | I4/I1/add_41_aco (fpnormalize_fpnormalize.vhd:41) |
+| DP_OP_117J5_122_7755            |            |                            |
+|                | DP_OP_117J5_122_7755 |      |                            |
+=============================================================================
+
+Datapath Report for DP_OP_117J5_122_7755
+==============================================================================
+| Cell                 | Contained Operations                                |
+==============================================================================
+| DP_OP_117J5_122_7755 | I2/add_133 (fpmul_stage2_struct.vhd:133)            |
+|                      | I2/add_133_2 (fpmul_stage2_struct.vhd:133)          |
+==============================================================================
+
+==============================================================================
+|       |      | Data     |       |                                          |
+| Var   | Type | Class    | Width | Expression                               |
+==============================================================================
+| I1    | PI   | Unsigned | 8     |                                          |
+| I2    | PI   | Unsigned | 8     |                                          |
+| O1    | PO   | Unsigned | 8     | I1 + I2 + $unsigned(1'b1) (fpmul_stage2_struct.vhd:133) |
+==============================================================================
+
+
+Implementation Report
+===============================================================================
+|                    |                  | Current            | Set            |
+| Cell               | Module           | Implementation     | Implementation |
+===============================================================================
+| add_x_70           | DW01_add         | pparch (area,speed)                 |
+| add_x_71           | DW01_inc         | apparch (area)     |                |
+| add_x_76           | DW01_add         | apparch (area)     |                |
+| add_x_78           | DW01_add         | apparch (area)     |                |
+| DP_OP_117J5_122_7755                  |                    |                |
+|                    | DP_OP_117J5_122_7755 | str (area)     |                |
+===============================================================================
+
+1

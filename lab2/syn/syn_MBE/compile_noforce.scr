@@ -1,0 +1,42 @@
+variable targetcompilation "../../src/multiplier/fpmul_pipeline.vhd"
+variable top_hierarchy "FPmul"
+variable clock "1.68"
+
+analyze -format vhdl ../../src/multiplier/unpackfp_unpackfp.vhd
+analyze -format vhdl ../../src/multiplier/packfp_packfp.vhd
+analyze -format vhdl ../../src/multiplier/fpround_fpround.vhd
+analyze -format vhdl ../../src/multiplier/fpnormalize_fpnormalize.vhd
+analyze -format vhdl ../../src/multiplier/fpmul_stage1_struct.vhd
+analyze -format vhdl ../../src/multiplier/fpmul_stage2_struct.vhd
+analyze -format vhdl ../../src/multiplier/fpmul_stage3_struct.vhd
+analyze -format vhdl ../../src/multiplier/fpmul_stage4_struct.vhd
+analyze -format vhdl ../../src/MBE_mul/adder.vhd
+analyze -format vhdl ../../src/MBE_mul/fa.vhd
+analyze -format vhdl ../../src/MBE_mul/ha.vhd
+analyze -format vhdl ../../src/MBE_mul/MBE_tab.vhd
+analyze -format vhdl ../../src/MBE_mul/MBEX1.vhd
+analyze -format vhdl ../../src/MBE_mul/MBEX17.vhd
+analyze -format vhdl ../../src/MBE_mul/mul.vhd
+analyze -format vhdl ../../src/MBE_mul/NotBlock.vhd
+
+analyze -format vhdl $targetcompilation
+
+elaborate $top_hierarchy -arch pipeline -lib work > elaborate_transcript.txt
+create_clock -name my_clk -period $clock clk 
+set_dont_touch_network my_clk
+
+set_clock_uncertainty 0.07 [get_clocks my_clk]
+set_input_delay 0.5 -max -clock my_clk [remove_from_collection [all_inputs] clk ]
+set_output_delay 0.5 -max -clock my_clk [all_outputs]
+
+set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
+set_load $OLOAD [all_outputs]
+
+
+sh mkdir clock_$clock
+ungroup -all -flatten
+compile_ultra
+report_timing > clock_$clock/report_timing.txt
+report_area > clock_$clock/report_area_vhd.txt
+report_resources > clock_$clock/report_resources.txt
+
