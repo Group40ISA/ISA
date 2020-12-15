@@ -8,46 +8,18 @@ V0>?LFc7[?^HIge3>LX7VN1
 o-quiet -auto_acc_if_foreign -work work
 tExplicit 1
 OE;O;6.2g;35
-Eadder
-w1606589831
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/adder.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/adder.vhd
-l0
-L5
-VOHi9Cd;E>fD=ZeAUTWPB:2
-OE;C;6.2g;35
-32
-o-work work
-tExplicit 1
-Artl
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-DE work adder OHi9Cd;E>fD=ZeAUTWPB:2
-32
-M2 ieee std_logic_1164
-M1 ieee numeric_std
-l69
-L28
-V@=R9MR5CC;cP0eDX^::k=1
-OE;C;6.2g;35
-o-work work
-tExplicit 1
 Eclk_gen
 w1602087452
 DP ieee std_logic_unsigned hEMVMlaNCR^<OOoVNV;m90
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/tb/clk_gen.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/tb/clk_gen.vhd
+32
+8/home/isa40/Desktop/lab2/2.1/tb/clk_gen.vhd
+F/home/isa40/Desktop/lab2/2.1/tb/clk_gen.vhd
 l0
 L6
 V9>XQk1@5b0]>9Gf2aS]582
 OE;C;6.2g;35
-32
 o-work work
 tExplicit 1
 Abeh
@@ -66,20 +38,19 @@ OE;C;6.2g;35
 o-work work
 tExplicit 1
 Edata_maker
-w1606643917
+w1604761101
 DP std textio K]Z^fghZ6B=BjnK5NomDT3
 DP ieee std_logic_textio 8YS?iX`WD1REQG`ZRYQGB2
 DP ieee std_logic_unsigned hEMVMlaNCR^<OOoVNV;m90
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/tb/data_maker.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/tb/data_maker.vhd
+32
+8/home/isa40/Desktop/lab2/2.1/tb/data_maker.vhd
+F/home/isa40/Desktop/lab2/2.1/tb/data_maker.vhd
 l0
 L10
 VLE_0flDHQzh@Zd=A`>bC63
 OE;C;6.2g;35
-32
 o-work work
 tExplicit 1
 Abeh
@@ -97,7 +68,7 @@ M2 ieee std_logic_textio
 M1 std textio
 l24
 L19
-VP6JPlJ8oK^gICEG[kjJ;O3
+V^UDZdzW:Ai^QR4N8iZA]R3
 OE;C;6.2g;35
 o-work work
 tExplicit 1
@@ -108,14 +79,13 @@ DP ieee std_logic_textio 8YS?iX`WD1REQG`ZRYQGB2
 DP ieee std_logic_unsigned hEMVMlaNCR^<OOoVNV;m90
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/tb/data_sink.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/tb/data_sink.vhd
+32
+8/home/isa40/Desktop/lab2/2.1/tb/data_sink.vhd
+F/home/isa40/Desktop/lab2/2.1/tb/data_sink.vhd
 l0
 L10
 V]H8:0JE;eM_mCB35g8>3i1
 OE;C;6.2g;35
-32
 o-work work
 tExplicit 1
 Abeh
@@ -137,61 +107,34 @@ VWNz5hEC0[^X8W[fbi3M^d0
 OE;C;6.2g;35
 o-work work
 tExplicit 1
-Efa
-w1606583660
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/fa.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/fa.vhd
-l0
-L5
-V0R6BQjbIK=IY?eb?774VO2
-OE;C;6.2g;35
-32
-o-work work
-tExplicit 1
-Astructural
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-DE work fa 0R6BQjbIK=IY?eb?774VO2
-32
-M2 ieee std_logic_1164
-M1 ieee numeric_std
-l17
-L15
-V=BCHZ1GEQWXXGA7VQU]i01
-OE;C;6.2g;35
-o-work work
-tExplicit 1
 Efpmul
-w1604767793
+w1604761645
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpmul_pipeline.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpmul_pipeline.vhd
+32
+8/home/isa40/Desktop/lab2/2.1/src/multiplier/fpmul_pipeline.vhd
+F/home/isa40/Desktop/lab2/2.1/src/multiplier/fpmul_pipeline.vhd
 l0
 L16
-VMTNARGigef09?4bdLdKEj2
+V0d_<m>Sgkm8@;W83ea5N31
 OE;C;6.2g;35
-32
 o-work work
 tExplicit 1
 Apipeline
+DE work shift 1M2hN]mZkE`3j8JKQkK4l1
 DE work fpmul_stage4 N1GY_8IF3EoF4kH5SbF;o0
 DE work fpmul_stage3 Q3o@L>cmoeJeoT?6@jEN^1
 DE work fpmul_stage2 XnDgZj[EI0K611[[;lKBU3
 DE work fpmul_stage1 zaU7S:07LL<1B@Qm[ML^U2
-DE work fpmul MTNARGigef09?4bdLdKEj2
+DE work fpmul 0d_<m>Sgkm8@;W83ea5N31
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
 32
 M2 ieee std_logic_1164
 M1 ieee std_logic_arith
-l169
-L44
-V[Im@HP=YSf2Cbc7[bGVg30
+l175
+L48
+V7`Z<VafkLJ<ok<kZV;LYj0
 OE;C;6.2g;35
 o-work work
 tExplicit 1
@@ -221,9 +164,8 @@ Efpmul_stage1
 w1254929557
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpmul_stage1_struct.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpmul_stage1_struct.vhd
+8/home/isa40/Desktop/lab2/2.1/src/multiplier/fpmul_stage1_struct.vhd
+F/home/isa40/Desktop/lab2/2.1/src/multiplier/fpmul_stage1_struct.vhd
 l0
 L16
 VzaU7S:07LL<1B@Qm[ML^U2
@@ -246,12 +188,11 @@ OE;C;6.2g;35
 o-work work
 tExplicit 1
 Efpmul_stage2
-w1606642230
+w1254929557
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpmul_stage2_struct.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpmul_stage2_struct.vhd
+8/home/isa40/Desktop/lab2/2.1/src/multiplier/fpmul_stage2_struct.vhd
+F/home/isa40/Desktop/lab2/2.1/src/multiplier/fpmul_stage2_struct.vhd
 l0
 L16
 VXnDgZj[EI0K611[[;lKBU3
@@ -266,9 +207,9 @@ DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
 32
 M2 ieee std_logic_1164
 M1 ieee std_logic_arith
-l81
-L60
-V0ZojH<MQamEZlmYlbGk;50
+l74
+L59
+VSfiGoANzLF9DLb6HB@C7R2
 OE;C;6.2g;35
 o-work work
 tExplicit 1
@@ -276,9 +217,8 @@ Efpmul_stage3
 w1254929557
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpmul_stage3_struct.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpmul_stage3_struct.vhd
+8/home/isa40/Desktop/lab2/2.1/src/multiplier/fpmul_stage3_struct.vhd
+F/home/isa40/Desktop/lab2/2.1/src/multiplier/fpmul_stage3_struct.vhd
 l0
 L16
 VQ3o@L>cmoeJeoT?6@jEN^1
@@ -307,9 +247,8 @@ Efpmul_stage4
 w1254929557
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpmul_stage4_struct.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpmul_stage4_struct.vhd
+8/home/isa40/Desktop/lab2/2.1/src/multiplier/fpmul_stage4_struct.vhd
+F/home/isa40/Desktop/lab2/2.1/src/multiplier/fpmul_stage4_struct.vhd
 l0
 L16
 VN1GY_8IF3EoF4kH5SbF;o0
@@ -339,9 +278,8 @@ w1254929557
 DP ieee std_logic_unsigned hEMVMlaNCR^<OOoVNV;m90
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpnormalize_fpnormalize.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpnormalize_fpnormalize.vhd
+8/home/isa40/Desktop/lab2/2.1/src/multiplier/fpnormalize_fpnormalize.vhd
+F/home/isa40/Desktop/lab2/2.1/src/multiplier/fpnormalize_fpnormalize.vhd
 l0
 L17
 Vm?8C<n[ikYJm2_A=12[fI1
@@ -369,9 +307,8 @@ w1254929557
 DP ieee std_logic_unsigned hEMVMlaNCR^<OOoVNV;m90
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpround_fpround.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/fpround_fpround.vhd
+8/home/isa40/Desktop/lab2/2.1/src/multiplier/fpround_fpround.vhd
+F/home/isa40/Desktop/lab2/2.1/src/multiplier/fpround_fpround.vhd
 l0
 L17
 V1b_2E@OFSlTlh?nojmF=[1
@@ -394,175 +331,12 @@ V_Haao=oHGMcb5[nI_cA;Z1
 OE;C;6.2g;35
 o-work work
 tExplicit 1
-Eha
-w1606583660
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/ha.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/ha.vhd
-l0
-L5
-VjzJ1Hb_;i9ZEzMkaPkl`E1
-OE;C;6.2g;35
-32
-o-work work
-tExplicit 1
-Artl
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-DE work ha jzJ1Hb_;i9ZEzMkaPkl`E1
-32
-M2 ieee std_logic_1164
-M1 ieee numeric_std
-l16
-L14
-VER87PD>aV5g2iHk@HZK901
-OE;C;6.2g;35
-o-work work
-tExplicit 1
-Embe_tab
-w1606408916
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/MBE_tab.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/MBE_tab.vhd
-l0
-L5
-V^n4IC0^XmH_kLcF=SmW723
-OE;C;6.2g;35
-32
-o-work work
-tExplicit 1
-Artl
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-DE work mbe_tab ^n4IC0^XmH_kLcF=SmW723
-32
-M2 ieee std_logic_1164
-M1 ieee numeric_std
-l15
-L13
-V1jWbk1A6Z]WGbX9:nG=Fd2
-OE;C;6.2g;35
-o-work work
-tExplicit 1
-Embex1
-w1606589831
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/MBEX1.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/MBEX1.vhd
-l0
-L5
-Vka<Jjje`bn4^;7o5KehT<2
-OE;C;6.2g;35
-32
-o-work work
-tExplicit 1
-Artl
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-DE work mbex1 ka<Jjje`bn4^;7o5KehT<2
-32
-M2 ieee std_logic_1164
-M1 ieee numeric_std
-l35
-L14
-V16^O^5DZo]fge]iZ9YHX62
-OE;C;6.2g;35
-o-work work
-tExplicit 1
-Embex17
-w1606590081
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/MBEX17.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/MBEX17.vhd
-l0
-L5
-V4H3bA@?nOXXK^mW@Q0h6l1
-OE;C;6.2g;35
-32
-o-work work
-tExplicit 1
-Artl
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-DE work mbex17 4H3bA@?nOXXK^mW@Q0h6l1
-32
-M2 ieee std_logic_1164
-M1 ieee numeric_std
-l46
-L29
-V79555H?Ai?799^k?U4KE=3
-OE;C;6.2g;35
-o-work work
-tExplicit 1
-Emul
-w1606589831
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/mul.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/mul.vhd
-l0
-L5
-V];JODk3b^:o2L=T_mF=@E1
-OE;C;6.2g;35
-32
-o-work work
-tExplicit 1
-Artl
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-DE work mul ];JODk3b^:o2L=T_mF=@E1
-32
-M2 ieee std_logic_1164
-M1 ieee numeric_std
-l63
-L11
-Vj1zhMCHBeceZS:TcYeYf13
-OE;C;6.2g;35
-o-work work
-tExplicit 1
-Enotblock
-w1606589831
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/NotBlock.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/MBE_mul/NotBlock.vhd
-l0
-L5
-VFH5HoBZh1FYGn=Wh@eaYh1
-OE;C;6.2g;35
-32
-o-work work
-tExplicit 1
-Artl
-DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
-DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-DE work notblock FH5HoBZh1FYGn=Wh@eaYh1
-32
-M2 ieee std_logic_1164
-M1 ieee numeric_std
-l15
-L13
-VC2[^F9`azJJEKOZ>l<F>73
-OE;C;6.2g;35
-o-work work
-tExplicit 1
 Epackfp
 w1254929557
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/packfp_packfp.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/packfp_packfp.vhd
+8/home/isa40/Desktop/lab2/2.1/src/multiplier/packfp_packfp.vhd
+F/home/isa40/Desktop/lab2/2.1/src/multiplier/packfp_packfp.vhd
 l0
 L16
 VQOKhnVU5Xh6KfNCo>NM9T0
@@ -584,23 +358,22 @@ OE;C;6.2g;35
 o-work work
 tExplicit 1
 Eshift
-w1604767841
+w1604761435
 DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/shift.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/shift.vhd
+32
+8/home/isa40/Desktop/lab2/2.1/src/multiplier/shift.vhd
+F/home/isa40/Desktop/lab2/2.1/src/multiplier/shift.vhd
 l0
 L5
-VDiYZLCJFX=>UKPKWZe>Lk1
+V1M2hN]mZkE`3j8JKQkK4l1
 OE;C;6.2g;35
-32
 o-work work
 tExplicit 1
 Artl
 DP ieee numeric_std =NSdli^?T5OD8;4F<blj<3
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-DE work shift DiYZLCJFX=>UKPKWZe>Lk1
+DE work shift 1M2hN]mZkE`3j8JKQkK4l1
 32
 M2 ieee std_logic_1164
 M1 ieee numeric_std
@@ -611,24 +384,23 @@ OE;C;6.2g;35
 o-work work
 tExplicit 1
 vtb_fp
+IhZ7A@i6F9Ii:MKk1@0c1<0
 VA`^<?nm^fiXDJ9g6`BlF03
+w1604761709
+8/home/isa40/Desktop/lab2/2.1/tb/tb_fp.v
+F/home/isa40/Desktop/lab2/2.1/tb/tb_fp.v
+L0 3
+VA`^<?nm^fiXDJ9g6`BlF03
+OE;L;6.2g;35
 r1
 31
-I]0PMIK5E2`gEY9DRUh98O1
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-w1604766499
-8/home/isa40/Desktop/lab2_part1/2.1/tb/tb_fp.v
-F/home/isa40/Desktop/lab2_part1/2.1/tb/tb_fp.v
-L0 3
-OE;L;6.2g;35
 o-work work
 Eunpackfp
 w1254929557
 DP ieee std_logic_arith GJbAT?7@hRQU9IQ702DT]2
 DP ieee std_logic_1164 GH1=`jDDBJ=`LM;:Ak`kf2
-d/home/isa40/Desktop/lab2_part1/2.1/sim
-8/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/unpackfp_unpackfp.vhd
-F/home/isa40/Desktop/lab2_part1/2.1/src/multiplier/unpackfp_unpackfp.vhd
+8/home/isa40/Desktop/lab2/2.1/src/multiplier/unpackfp_unpackfp.vhd
+F/home/isa40/Desktop/lab2/2.1/src/multiplier/unpackfp_unpackfp.vhd
 l0
 L15
 VUD4QzDMVAZMzcP]Lb;DC_0

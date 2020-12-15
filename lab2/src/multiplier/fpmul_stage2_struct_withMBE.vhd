@@ -13,7 +13,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ENTITY FPmul_stage2 IS
+ENTITY FPmul_stage2_withMBE IS
    PORT( 
       A_EXP           : IN     std_logic_vector (7 DOWNTO 0);
       A_SIG           : IN     std_logic_vector (31 DOWNTO 0);
@@ -36,7 +36,7 @@ ENTITY FPmul_stage2 IS
 
 -- Declarations
 
-END FPmul_stage2 ;
+END FPmul_stage2_withMBE ;
 
 
 --
@@ -57,7 +57,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 
-ARCHITECTURE struct OF FPmul_stage2 IS
+ARCHITECTURE struct OF FPmul_stage2_withMBE IS
 
    -- Architecture declarations
 
@@ -136,12 +136,11 @@ BEGIN
 
    -- ModuleWare code(v1.1) for instance 'I2' of 'mult'
 
-   I2combo : PROCESS (A_SIG, B_SIG)
-   VARIABLE dtemp : unsigned(63 DOWNTO 0);
-   BEGIN
-      dtemp := (unsigned(A_SIG) * unsigned(B_SIG));
-      prod <= std_logic_vector(dtemp);
-   END PROCESS I2combo;
+   Instance port mappings.
+   MBE: mul PORT MAP (X => A_SIG, 
+   		A => B_SIG,
+   		P => PROD
+   		); 
 
    -- ModuleWare code(v1.1) for instance 'I6' of 'vdd'
    

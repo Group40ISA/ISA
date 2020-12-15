@@ -1,4 +1,4 @@
-variable targetcompilation "../../src/multiplier/fpmul_pipeline.vhd"
+variable targetcompilation "../../src/multiplier/fpmul_pipeline_oneOutReg_withMBE.vhd"
 variable top_hierarchy "FPmul"
 variable clock "1.54"
 
@@ -7,7 +7,7 @@ analyze -format vhdl ../../src/multiplier/packfp_packfp.vhd
 analyze -format vhdl ../../src/multiplier/fpround_fpround.vhd
 analyze -format vhdl ../../src/multiplier/fpnormalize_fpnormalize.vhd
 analyze -format vhdl ../../src/multiplier/fpmul_stage1_struct.vhd
-analyze -format vhdl ../../src/multiplier/fpmul_stage2_struct.vhd
+analyze -format vhdl ../../src/multiplier/fpmul_stage2_struct_withMBE.vhd
 analyze -format vhdl ../../src/multiplier/fpmul_stage3_struct.vhd
 analyze -format vhdl ../../src/multiplier/fpmul_stage4_struct.vhd
 analyze -format vhdl ../../src/MBE_mul/adder.vhd

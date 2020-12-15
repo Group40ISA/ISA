@@ -1,7 +1,7 @@
-variable targetcompilation "../src/multiplier/fpmul_pipeline.vhd"
+variable targetcompilation "../src/multiplier/fpmul_pipeline_oneOutReg.vhd"
 variable top_hierarchy "FPmul"
 variable clock "0.0"
-
+variable mult "CSA"
 
 analyze -format vhdl ../src/multiplier/unpackfp_unpackfp.vhd
 analyze -format vhdl ../src/multiplier/packfp_packfp.vhd
@@ -26,10 +26,11 @@ set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
 set_load $OLOAD [all_outputs]
 
 
-sh mkdir clock_$clock
+sh mkdir clock_$clock_$mult
 ungroup -all -flatten
-compile_ultra
-report_timing > clock_$clock/report_timing.txt
-report_area > clock_$clock/report_area_vhd.txt
-report_resources > clock_$clock/report_resources.txt
+set_implementation DW02_mult/$mult [find cell *mult*]
+compile
+report_timing > clock_$mult_$clock/report_timing.txt
+report_area > clock_$mult_$clock/report_area_vhd.txt
+report_resources > clock_$mult_$clock/report_resources.txt
 
