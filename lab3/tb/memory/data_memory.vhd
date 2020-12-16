@@ -14,7 +14,7 @@ ENTITY data_memory IS
         data_parallelism : INTEGER := 32);
     PORT (
         input_data : IN STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
-        address : IN STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0)
+        address : IN STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0);
         end_code, read_en, write_en : IN STD_LOGIC;
         output_data : OUT STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0)
     );
