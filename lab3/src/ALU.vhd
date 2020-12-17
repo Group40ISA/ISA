@@ -28,13 +28,16 @@ architecture RTL of ALU is
 begin
 	A_sel <= AluCtrl(3);
 	B_sel <= AluCtrl(2);
+
 	Mux_sel <= AluCtrl(1 downto 0);
+	
 	zero1 <= (others => '0');
-	set(31 downto 1) <= (others => '0') ;
-	set(0) <= '1';
-	set_zero(31 downto 0) <= (others => '0') ;
-	B_sel_extended(31 downto 1) <= (others  => '0');
-	B_sel_extended(0) <= B_sel;
+	
+	set <= (0 => '1', others => '0') ;
+	set_zero <= (others => '0') ;
+	
+	B_sel_extended <= (0 => B_sel, others  => '0');
+	
 	Slt_ctrl  <= Add_out(31) & B_sel;
 	
 	with A_sel select Op1 <=
