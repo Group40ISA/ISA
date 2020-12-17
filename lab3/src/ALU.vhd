@@ -55,9 +55,9 @@ begin
 		(others => 'U') when others; 
 		
 	Add_out <= std_logic_vector(signed(Op1) + signed(Op2) + signed(B_sel_extended));
-	process(Add_out)
+	process(Add_out,A_sel)
 	begin
-		if(Add_out = zero1 )then
+		if(Add_out = zero1 or A_sel = '1')then
 			zero <= '1';
 		else
 			zero <= '0';
