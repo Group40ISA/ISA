@@ -25,6 +25,7 @@ begin
 		"0011" when "00-010",	--LW,SW
 		"0111" when "01-000",	--BEQ
 		"0111" when "100010", 	--SLT
+		"1000" when "11----",   --JAL
 		"UUUU" when others;
 
 end architecture RTL;
