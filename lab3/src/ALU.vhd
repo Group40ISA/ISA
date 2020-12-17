@@ -1,80 +1,76 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity ALU is
-	port(
-		A, B : in std_logic_vector (31 downto 0);
-		AluCtrl : in std_logic_vector (3 downto 0);
-		zero : out std_logic; 
-		result: out std_logic_vector (31 downto 0)
+ENTITY ALU IS
+	PORT (
+		A, B : IN STD_LOGIC_VECTOR (31 DOWNTO 0);
+		AluCtrl : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
+		zero : OUT STD_LOGIC;
+		result : OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
 	);
-end entity ALU;
+END ENTITY ALU;
 
-architecture RTL of ALU is
-	
-	signal A_sel, B_sel : std_logic;
-	signal Mux_sel : std_logic_vector (1 downto 0);
-	signal Op1, Op2 : std_logic_vector (31 downto 0);
-	signal Add_out, Shift_out : std_logic_vector (31 downto 0);
-	signal zero1 : std_logic_vector (31 downto 0);
-	signal set : std_logic_vector(31 downto 0);
-	signal Adder_mux_out : std_logic_vector(31 downto 0);
-	signal B_sel_extended : std_logic_vector(31 downto 0);
-	signal Slt_ctrl : std_logic_vector(1 downto 0);
-	signal set_zero : std_logic_vector(31 downto 0);
-	  
-	
-begin
+ARCHITECTURE RTL OF ALU IS
+
+	SIGNAL A_sel, B_sel : STD_LOGIC;
+	SIGNAL Mux_sel : STD_LOGIC_VECTOR (1 DOWNTO 0);
+	SIGNAL Op1, Op2 : STD_LOGIC_VECTOR (31 DOWNTO 0);
+	SIGNAL Add_out, Shift_out : STD_LOGIC_VECTOR (31 DOWNTO 0);
+	SIGNAL zero1 : STD_LOGIC_VECTOR (31 DOWNTO 0);
+	SIGNAL set : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL Adder_mux_out : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL B_sel_extended : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL Slt_ctrl : STD_LOGIC_VECTOR(1 DOWNTO 0);
+	SIGNAL set_zero : STD_LOGIC_VECTOR(31 DOWNTO 0);
+BEGIN
 	A_sel <= AluCtrl(3);
 	B_sel <= AluCtrl(2);
 
-	Mux_sel <= AluCtrl(1 downto 0);
-	
-	zero1 <= (others => '0');
-	
-	set <= (0 => '1', others => '0') ;
-	set_zero <= (others => '0') ;
-	
-	B_sel_extended <= (0 => B_sel, others  => '0');
-	
-	Slt_ctrl  <= Add_out(31) & B_sel;
-	
-	with A_sel select Op1 <=
-		A when '0',
-		not A when '1',
-		(others => 'U') when others;
-		
-	with B_sel select Op2 <=
-		B when '0',
-		not B when '1',
-		(others => 'U') when others;
-		
-	with Mux_sel select result <=
-		(Op1 and Op2) when "00",
-		Adder_mux_out when "11",
-		Shift_out when "10",
-		(Op1 xor Op2) when "01",
-		(others => 'U') when others; 
-		
-	Add_out <= std_logic_vector(signed(Op1) + signed(Op2) + signed(B_sel_extended));
-	process(Add_out,A_sel)
-	begin
-		if(Add_out = zero1 or A_sel = '1')then
-			zero <= '1';
-		else
-			zero <= '0';
-		end if;
-	end process;
-	
-	with Slt_ctrl select  Adder_mux_out  <= 
-		Add_out when "00" | "10",
-		set when "11",
-		set_zero when "01",
-		(others => 'U') when others;
-		
-	Shift_out <= std_logic_vector(shift_right(signed(Op1),to_integer(unsigned(Op2(3 downto 0)))));
-	
-		 
+	Mux_sel <= AluCtrl(1 DOWNTO 0);
 
-end architecture RTL;
+	zero1 <= (OTHERS => '0');
+
+	set <= (0 => '1', OTHERS => '0');
+	set_zero <= (OTHERS => '0');
+
+	B_sel_extended <= (0 => B_sel, OTHERS => '0');
+
+	Slt_ctrl <= Add_out(31) & B_sel;
+
+	WITH A_sel SELECT Op1 <=
+		A WHEN '0',
+		NOT A WHEN '1',
+		(OTHERS => 'U') WHEN OTHERS;
+
+	WITH B_sel SELECT Op2 <=
+		B WHEN '0',
+		NOT B WHEN '1',
+		(OTHERS => 'U') WHEN OTHERS;
+
+	WITH Mux_sel SELECT result <=
+		(Op1 AND Op2) WHEN "00",
+		Adder_mux_out WHEN "11",
+		Shift_out WHEN "10",
+		(Op1 XOR Op2) WHEN "01",
+		(OTHERS => 'U') WHEN OTHERS;
+
+	Add_out <= STD_LOGIC_VECTOR(signed(Op1) + signed(Op2) + signed(B_sel_extended));
+	PROCESS (Add_out, A_sel)
+	BEGIN
+		IF (Add_out = zero1 OR A_sel = '1') THEN
+			zero <= '1';
+		ELSE
+			zero <= '0';
+		END IF;
+	END PROCESS;
+
+	WITH Slt_ctrl SELECT Adder_mux_out <=
+		Add_out WHEN "00" | "10",
+		set WHEN "11",
+		set_zero WHEN "01",
+		(OTHERS => 'U') WHEN OTHERS;
+
+	Shift_out <= STD_LOGIC_VECTOR(shift_right(signed(Op1), to_integer(unsigned(Op2(3 DOWNTO 0)))));
+
+END ARCHITECTURE RTL;
