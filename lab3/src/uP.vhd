@@ -1,180 +1,188 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity uP is
-    port(
-        clk            : in  std_logic;
-        rst            : in  std_logic;
-        instruction    : in  std_logic_vector(31 downto 0);
-        data           : in  std_logic_vector(31 downto 0);
-        pc             : out std_logic_vector(31 downto 0);
-        out_rf         : out std_logic_vector(31 downto 0);
-        alu_result     : out std_logic_vector(31 downto 0);
-        data_mem_read  : out std_logic;
-        data_mem_write : out std_logic
+ENTITY uP IS
+    PORT (
+        clk : IN STD_LOGIC;
+        rst : IN STD_LOGIC;
+        instruction : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+        data : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+        pc : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+        out_rf : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+        alu_result : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+        data_mem_read : OUT STD_LOGIC;
+        data_mem_write : OUT STD_LOGIC
     );
-end entity uP;
+END ENTITY uP;
 
-architecture structural of uP is
-    component ALU
-        port(
-            A, B    : in  std_logic_vector(31 downto 0);
-            AluCtrl : in  std_logic_vector(3 downto 0);
-            zero    : out std_logic;
-            result  : out std_logic_vector(31 downto 0)
+ARCHITECTURE structural OF uP IS
+    COMPONENT ALU
+        PORT (
+            A, B : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            AluCtrl : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+            zero : OUT STD_LOGIC;
+            result : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
         );
-    end component ALU;
+    END COMPONENT ALU;
 
-    component CU
-        port(
-            opcode          : in  std_logic_vector(6 downto 0);
-            Branch          : out std_logic;
-            MemRead         : out std_logic;
-            MemToReg        : out std_logic;
-            AluOp           : out std_logic_vector(1 downto 0);
-            MemWrite        : out std_logic;
-            AluSrc          : out std_logic;
-            RegWrite        : out std_logic;
-            write_back_ctrl : out std_logic
+    COMPONENT CU
+        PORT (
+            opcode : IN STD_LOGIC_VECTOR(6 DOWNTO 0);
+            Branch : OUT STD_LOGIC;
+            MemRead : OUT STD_LOGIC;
+            MemToReg : OUT STD_LOGIC;
+            AluOp : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+            MemWrite : OUT STD_LOGIC;
+            AluSrc : OUT STD_LOGIC;
+            RegWrite : OUT STD_LOGIC;
+            write_back_ctrl : OUT STD_LOGIC
         );
-    end component CU;
+    END COMPONENT CU;
 
-    component AluControl
-        port(
-            AluOp     : in  std_logic_vector(1 downto 0);
-            add_AluOp : in  std_logic_vector(3 downto 0);
-            AluCtrl   : out std_logic_vector(3 downto 0)
+    COMPONENT AluControl
+        PORT (
+            AluOp : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+            add_AluOp : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+            AluCtrl : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
         );
-    end component AluControl;
+    END COMPONENT AluControl;
 
-    component RegisterFile
-        port(
-            RReg1    : in  std_logic_vector(4 downto 0);
-            RReg2    : in  std_logic_vector(4 downto 0);
-            WReg     : in  std_logic_vector(4 downto 0);
-            WData    : in  std_logic_vector(31 downto 0);
-            RegWrite : in  std_logic;
-            Read1    : out std_logic_vector(31 downto 0);
-            Read2    : out std_logic_vector(31 downto 0)
+    COMPONENT RegisterFile
+        PORT (rst : in std_logic;
+            RReg1 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
+            RReg2 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
+            WReg : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
+            WData : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            RegWrite : IN STD_LOGIC;
+            Read1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            Read2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
         );
-    end component RegisterFile;
+    END COMPONENT RegisterFile;
 
-    component Imm_Gen
-        port(
-            instr : in  std_logic_vector(31 downto 0);
-            imm   : out std_logic_vector(31 downto 0)
+    COMPONENT Imm_Gen
+        PORT (
+            instr : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            imm : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
         );
-    end component Imm_Gen;
+    END COMPONENT Imm_Gen;
 
     ----------------------------------------------------------
     -------CU SIGNALs-----------------------------------------
-    signal branch, mem_read, mem_to_reg, mem_write, alu_src, reg_write, write_back_ctrl : std_logic;
-    signal alu_op                                                                       : std_logic_vector(1 downto 0);
+    SIGNAL branch, mem_read, mem_to_reg, mem_write, alu_src, reg_write, write_back_ctrl : STD_LOGIC;
+    SIGNAL alu_op : STD_LOGIC_VECTOR(1 DOWNTO 0);
     ----------------------------------------------------------
     -------------------ALU_CTRL SIGNALs-----------------------
-    signal alu_ctrl                                                                     : std_logic_vector(3 downto 0);
+    SIGNAL alu_ctrl : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL add_AluOpCtrl : STD_LOGIC_VECTOR(3 DOWNTO 0);
     ----------------------------------------------------------
     -------------------ALU SIGNALs----------------------------
-    signal zero                                                                         : std_logic;
-    signal wb_sel_mux                                                                   : std_logic_vector(1 downto 0);
+    SIGNAL zero : STD_LOGIC;
+    SIGNAL wb_sel_mux : STD_LOGIC_VECTOR(1 DOWNTO 0);
+    SIGNAL alu_result_signal : STD_LOGIC_VECTOR(31 DOWNTO 0);
     ----------------------------------------------------------
     -------------------RF SIGNALs-----------------------------
-    signal read1, read2                                                                 : std_logic_vector(31 downto 0);
-    signal out_writeback_mux                                                            : std_logic_vector(31 downto 0);
-    signal alu_input                                                                    : std_logic_vector(31 downto 0);
-    signal immediate                                                                    : std_logic_vector(31 downto 0);
-    signal out_mem_mux                                                                  : std_logic_vector(31 downto 0);
+    SIGNAL read1, read2 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL out_writeback_mux : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL alu_input : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL immediate : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL out_mem_mux : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
     --------------------BRANCH SIGNALS------------------------------------
-    signal pc_jump, pc_int, pc_next, mux_to_pc : std_logic_vector(31 downto 0); -- vedere se vogliono farloda 32 o 5
-    signal four_byte                           : std_logic_vector(31 downto 0);
+    SIGNAL pc_jump, pc_int, pc_next, mux_to_pc : STD_LOGIC_VECTOR(31 DOWNTO 0); -- vedere se vogliono farloda 32 o 5
+    SIGNAL four_byte : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
-begin
+BEGIN
 
-    pc                     <= pc_int;
-    four_byte(31 downto 5) <= (others => '0');
-    four_byte(4 downto 0)  <= "10000";
+    pc <= pc_int;
+    --four_byte <= (5 downto 0 => "100000" ,OTHERS => '0');
+    four_byte <= (0 => '1', OTHERS => '0');
+    --four_byte(4 DOWNTO 0) <= "10000";
 
-    process(clk, rst)
-    begin
-        if (rst = '1') then
-            pc_int <= (others => '0');
-        elsif (clk'event and clk = '1') then
+    PROCESS (clk, rst)
+    BEGIN
+        IF (rst = '1') THEN
+            pc_int <= (OTHERS => '0');
+        ELSIF (clk'event AND clk = '1') THEN
             pc_int <= mux_to_pc;
-        end if;
-    end process;
+        END IF;
+    END PROCESS;
 
-    pc_next <= std_logic_vector(unsigned(pc_int) + unsigned(four_byte));
-    pc_jump <= std_logic_vector(unsigned(pc_int) + unsigned(immediate));
+    pc_next <= STD_LOGIC_VECTOR(unsigned(pc_int) + unsigned(four_byte));
+    pc_jump <= STD_LOGIC_VECTOR(unsigned(pc_int) + unsigned(immediate));
 
-    with (branch and zero) select mux_to_pc <=
-        pc_jump when '1',
-        pc_next when others;
+    WITH (branch AND zero) SELECT mux_to_pc <=
+    pc_jump WHEN '1',
+    pc_next WHEN OTHERS;
     --------------------------------------------------------------------------------------------------------
     imm : Imm_Gen
-        port map(
-            instr => instruction,
-            imm   => immediate
-        );
+    PORT MAP(
+        instr => instruction,
+        imm => immediate
+    );
     RF : RegisterFile
-        port map(
-            RReg1    => instruction(19 downto 15),
-            RReg2    => instruction(24 downto 20),
-            WReg     => instruction(11 downto 7),
-            WData    => out_writeback_mux,
-            RegWrite => reg_write,
-            Read1    => read1,
-            Read2    => read2
-        );
+    PORT MAP(rst => rst,
+        RReg1 => instruction(19 DOWNTO 15),
+        RReg2 => instruction(24 DOWNTO 20),
+        WReg => instruction(11 DOWNTO 7),
+        WData => out_writeback_mux,
+        RegWrite => reg_write,
+        Read1 => read1,
+        Read2 => read2
+    );
     out_rf <= read2;
 
-    with alu_src select alu_input <=
-        read2 when '0',
-        immediate when '1';
+    WITH alu_src SELECT alu_input <=
+        immediate WHEN '1',
+        read2 WHEN OTHERS;
     -------------------------------------------------------------------------------------------------------
     cu_op : CU
-        port map(
-            opcode          => instruction(6 downto 0),
-            Branch          => branch,
-            MemRead         => mem_read,
-            MemToReg        => mem_to_reg,
-            AluOp           => alu_op,
-            MemWrite        => mem_write,
-            AluSrc          => alu_src,
-            RegWrite        => reg_write,
-            write_back_ctrl => write_back_ctrl
-        );
-    data_mem_read  <= mem_read;
+    PORT MAP(
+        opcode => instruction(6 DOWNTO 0),
+        Branch => branch,
+        MemRead => mem_read,
+        MemToReg => mem_to_reg,
+        AluOp => alu_op,
+        MemWrite => mem_write,
+        AluSrc => alu_src,
+        RegWrite => reg_write,
+        write_back_ctrl => write_back_ctrl
+    );
+    data_mem_read <= mem_read;
     data_mem_write <= mem_write;
 
     -------------------------------------------------------------------------------------------------------
     aluctrl : AluControl
-        port map(
-            AluOp     => alu_op,
-            add_AluOp => instruction(30) & instruction(14 downto 12),
-            AluCtrl   => alu_ctrl
-        );
+    PORT MAP(
+        AluOp => alu_op,
+        add_AluOp => add_AluOpCtrl,
+        AluCtrl => alu_ctrl
+    );
+
+    add_AluOpctrl <= instruction(30) & instruction(14 DOWNTO 12);
 
     op : ALU
-        port map(
-            A       => read1,
-            B       => alu_input,
-            AluCtrl => alu_ctrl,
-            zero    => zero,
-            result  => alu_result
-        );
+    PORT MAP(
+        A => read1,
+        B => alu_input,
+        AluCtrl => alu_ctrl,
+        zero => zero,
+        result => alu_result_signal
+    );
+
+    alu_result <= alu_result_signal;
 
     wb_sel_mux <= mem_to_reg & write_back_ctrl;
 
-    with wb_sel_mux select out_mem_mux <=
-        data when "10",                 --select the out of memory
-        pc_jump when "11",              --select the AUIPC way
-        alu_result when "00",           --select the alu way
-        immediate when "01";            --select the LUI way
+    WITH wb_sel_mux SELECT out_mem_mux <=
+        data WHEN "10", --select the out of memory
+        pc_jump WHEN "11", --select the AUIPC way
+        alu_result_signal WHEN "00", --select the alu way
+        immediate WHEN "01", --select the LUI way
+        data WHEN OTHERS;
 
-    with (branch and reg_write) select out_writeback_mux <=
-        pc_jump when '1',
-        out_mem_mux when others;
+    WITH (branch AND reg_write) SELECT out_writeback_mux <=
+    pc_jump WHEN '1',
+    out_mem_mux WHEN OTHERS;
 
-end architecture structural;
+END ARCHITECTURE structural;

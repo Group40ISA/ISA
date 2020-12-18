@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity RegisterFile is
-	port(
+	port(rst : in std_logic;
 		 RReg1 : in std_logic_vector (4 downto 0);
 		 RReg2 : in std_logic_vector (4 downto 0);
 		 WReg :  in std_logic_vector (4 downto 0);
@@ -21,13 +21,14 @@ architecture RTL of RegisterFile is
 	signal RegF : RF;
 		
 begin
-	RegF(0) <= (others => '0');
 	Read1 <= RegF (to_integer(unsigned (RReg1)));
 	Read2 <= RegF (to_integer(unsigned (RReg2)));
 	
-	process(RegWrite, WData, WReg)
+	process(RegWrite, WData, WReg, rst)
 	begin
-		if (RegWrite = '1') then
+		if (rst = '1') then
+			RegF <= (others => (others => '0'));
+		elsif (RegWrite = '1') then -- TODO: control for x0
 			RegF (to_integer(unsigned (WReg))) <= WData;
 		end if;
 	end process;

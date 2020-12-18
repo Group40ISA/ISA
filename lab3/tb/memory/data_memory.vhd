@@ -10,8 +10,9 @@ USE ieee.std_logic_textio.ALL;
 
 ENTITY data_memory IS
     GENERIC (
-        address_parallelism : INTEGER := 6;
-        data_parallelism : INTEGER := 32);
+        address_parallelism : INTEGER := 32;
+        data_parallelism : INTEGER := 32;
+        memory_depth : integer := 5);
     PORT (
         input_data : IN STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
         address : IN STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0);
@@ -24,7 +25,7 @@ ARCHITECTURE rtl OF data_memory IS
 
     FILE text_content : text;
     
-    TYPE memory IS ARRAY (2 ** address_parallelism - 1 DOWNTO 0) OF STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
+    TYPE memory IS ARRAY ( (2 ** memory_depth) - 1 DOWNTO 0) OF STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
     SIGNAL data_mem : memory;
 
 BEGIN
@@ -33,9 +34,9 @@ BEGIN
         VARIABLE out_data_line : line;
         VARIABLE out_pointer : INTEGER := 0; -- variable that points at successive lines of the memory for every written line
     BEGIN
-        file_open(text_content, "C:\Users\39373\Documents\Uni\Magistrale\IntegratedSystemArchitecture\Labs\ISA\lab3\tb\content.txt", write_mode);
+        file_open(text_content, "C:\Users\39373\Documents\Uni\Magistrale\IntegratedSystemArchitecture\Labs\ISA\lab3\tb\memory\content_data.txt", write_mode);
         IF end_code = '1' THEN
-            WHILE out_pointer < 2 ** address_parallelism LOOP
+            WHILE (out_pointer < 2 ** memory_depth) LOOP
                 write(out_data_line, to_integer(signed(data_mem(out_pointer))));
                 writeline(text_content, out_data_line);
                 out_pointer := out_pointer + 1;
