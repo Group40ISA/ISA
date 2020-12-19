@@ -36,9 +36,8 @@ BEGIN
         VARIABLE out_pointer : INTEGER := 0; -- variable that points at successive lines of the memory for every written line
     BEGIN
         file_open(text_content, "C:\Users\39373\Documents\Uni\Magistrale\IntegratedSystemArchitecture\Labs\ISA\lab3\tb\memory\content_data.txt", write_mode);
-        IF init = '1' THEN
-            data_mem <= (OTHERS => (OTHERS => '0'));
-        ELSIF end_code = '1' THEN
+
+        IF end_code = '1' THEN
             WHILE (out_pointer < 2 ** memory_depth) LOOP
                 write(out_data_line, to_integer(signed(data_mem(out_pointer))));
                 writeline(text_content, out_data_line);
@@ -52,20 +51,17 @@ BEGIN
     --  process to have a transparent read/write data_memory                      --
     --------------------------------------------------------------------------------
 
-    write_proc : PROCESS (write_en, address)
+    read_write_proc : PROCESS (init, write_en, read_en, address)
     BEGIN
-        IF write_en = '1' THEN
+        IF init = '1' THEN
+            data_mem <= (OTHERS => (OTHERS => '0'));
+        elsIF write_en = '1' THEN
             data_mem(to_integer(unsigned(address))) <= input_data;
-        END IF;
-    END PROCESS write_proc;
-
-    read_proc : PROCESS (read_en, address)
-    BEGIN
-        IF read_en = '1' THEN
+        elsIF read_en = '1' THEN
             output_data <= data_mem(to_integer(unsigned(address)));
         ELSE
             output_data <= (OTHERS => '0');
         END IF;
-    END PROCESS read_proc;
+    END PROCESS read_write_proc;
 
 END ARCHITECTURE rtl;
