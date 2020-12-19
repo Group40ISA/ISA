@@ -41,7 +41,7 @@ BEGIN
         VARIABLE init_pointer : INTEGER := 0; -- variable that points at successive lines of the memory for every read line
         VARIABLE value_instr : STD_LOGIC_VECTOR(instruction_parallelism - 1 DOWNTO 0);
     BEGIN
-        file_open(text_file, "C:\Users\39373\Documents\Uni\Magistrale\IntegratedSystemArchitecture\Labs\ISA\lab3\tb\memory\code.txt", read_mode);
+        file_open(text_file, "/home/raffaele/Scrivania/Uni/II anno/ISA/git_hub/ISA/lab3/tb/memory/code.txt", read_mode);
 
         IF init = '1' THEN
             WHILE NOT(endfile(text_file)) AND init_pointer < 2 ** memory_depth LOOP -- stops the loop if exceed text_memory dim.

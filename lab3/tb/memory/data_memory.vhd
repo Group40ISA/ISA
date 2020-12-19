@@ -31,11 +31,15 @@ ARCHITECTURE rtl OF data_memory IS
 
 BEGIN
 
-    proc_out : PROCESS (end_code, init)
+    proc_out : PROCESS (end_code)
         VARIABLE out_data_line : line;
         VARIABLE out_pointer : INTEGER := 0; -- variable that points at successive lines of the memory for every written line
     BEGIN
+<<<<<<< HEAD
+        file_open(text_content, "/home/raffaele/Scrivania/Uni/II anno/ISA/git_hub/ISA/lab3/tb/content_data.txt", write_mode);
+=======
         file_open(text_content, "C:\Users\39373\Documents\Uni\Magistrale\IntegratedSystemArchitecture\Labs\ISA\lab3\tb\memory\content_data.txt", write_mode);
+>>>>>>> f2817ca5f7f00722bc0ce69bffd314c0c4da3ad4
 
         IF end_code = '1' THEN
             WHILE (out_pointer < 2 ** memory_depth) LOOP

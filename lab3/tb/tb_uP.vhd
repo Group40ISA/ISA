@@ -34,18 +34,20 @@ ARCHITECTURE rtl OF tb_uP IS
         );
     END COMPONENT text_memory;
 
-    COMPONENT data_memory IS
-        GENERIC (
-            address_parallelism : INTEGER := 32;
-            data_parallelism : INTEGER := 32;
-            memory_depth : integer := 5);
-        PORT (
-            input_data : IN STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
-            address : IN STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0);
-            end_code, read_en, write_en : IN STD_LOGIC;
-            output_data : OUT STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0)
+    component data_memory
+        generic(
+            address_parallelism : INTEGER;
+            data_parallelism    : INTEGER;
+            memory_depth        : INTEGER
         );
-    END COMPONENT data_memory;
+        port(
+            init                        : IN  STD_LOGIC;
+            input_data                  : IN  STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
+            address                     : IN  STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0);
+            end_code, read_en, write_en : IN  STD_LOGIC;
+            output_data                 : OUT STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0)
+        );
+    end component data_memory;
 
     SIGNAL clk, rst, data_mem_read, data_mem_write : STD_LOGIC;
     SIGNAL instruction, data, pc_sig, out_rf, alu_result : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -62,7 +64,7 @@ BEGIN
         out_rf => out_rf,
         alu_result => alu_result,
         data_mem_read => data_mem_read,
-        data_mem_write => data_mem_read);
+        data_mem_write => data_mem_write);
 
     instr_mem : text_memory GENERIC MAP(
         address_parallelism => 32,
@@ -80,6 +82,7 @@ BEGIN
         memory_depth => 5
     )
     PORT MAP(
+        init => init,
         input_data => out_rf,
         address => alu_result,
         end_code => end_code,
@@ -98,12 +101,13 @@ BEGIN
 
     stimuli: process
     begin
+        end_code <= '0';
         rst  <= '1';
         init <= '1';
         wait for 100 ps;
         rst  <= '0';
         init <= '0';
-        wait for 2 ns;
+        wait for 4 ns;
         end_code <= '1';
         wait for 1 ns;
         end_code <= '0';
