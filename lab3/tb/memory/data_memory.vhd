@@ -57,7 +57,9 @@ BEGIN
             data_mem <= (OTHERS => (OTHERS => '0'));
         elsIF write_en = '1' THEN
             data_mem(to_integer(unsigned(address))) <= input_data;
-        elsIF read_en = '1' THEN
+        end if;
+        
+        IF read_en = '1' THEN
             output_data <= data_mem(to_integer(unsigned(address)));
         ELSE
             output_data <= (OTHERS => '0');
