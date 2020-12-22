@@ -13,7 +13,8 @@ ENTITY data_memory IS
         address_parallelism : INTEGER := 32;
         data_parallelism : INTEGER := 32;
         memory_depth : INTEGER := 5);
-    PORT ( clk : in std_logic;
+    PORT (
+    	clk :IN STD_LOGIC;
         init : IN STD_LOGIC;
         input_data : IN STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
         address : IN STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0);
@@ -31,11 +32,11 @@ ARCHITECTURE rtl OF data_memory IS
 
 BEGIN
 
-    proc_out : PROCESS (end_code)
+    proc_out : PROCESS (end_code, data_mem)
         VARIABLE out_data_line : line;
-        VARIABLE out_pointer : INTEGER := 0; -- variable that points at successive lines of the memory for every written line
+        VARIABLE out_pointer : INTEGER := 0; 
     BEGIN
-        file_open(text_content, "C:\Users\39373\Documents\Uni\Magistrale\IntegratedSystemArchitecture\Labs\ISA\lab3\tb\memory\content_data.txt", write_mode);
+        file_open(text_content, "/home/raffaele/Scrivania/Uni/II anno/ISA/git_hub/ISA/lab3/tb/memory/content_data.txt", write_mode);
 
         IF end_code = '1' THEN
             WHILE (out_pointer < 2 ** memory_depth) LOOP
@@ -51,17 +52,17 @@ BEGIN
     --  process to have a transparent read/write data_memory                      --
     --------------------------------------------------------------------------------
 
-    read_write_proc : PROCESS (init, write_en, read_en, address, clk)
+    read_write_proc : PROCESS (init, write_en, read_en, address, input_data,clk)
     BEGIN
         IF init = '1' THEN
             data_mem <= (OTHERS => (OTHERS => '0'));
-        elsIF clk'event and clk = '0' then
-         if write_en = '1' THEN
+        elsIF clk'event and clk='0' and write_en = '1' THEN
             data_mem(to_integer(unsigned(address))) <= input_data;
-         end if;
+        else 
+            data_mem <= data_mem;
         end if;
         
-        IF read_en = '1' THEN
+        IF read_en = '1' and init='0' THEN
             output_data <= data_mem(to_integer(unsigned(address)));
         END IF;
     END PROCESS read_write_proc;
