@@ -161,7 +161,7 @@ BEGIN
         AluCtrl => alu_ctrl
     );
 
-    add_AluOpctrl <= instruction(30) & instruction(14 DOWNTO 12);
+    add_AluOpCtrl <= instruction(30) & instruction(14 DOWNTO 12);
 
     op : ALU
     PORT MAP(
