@@ -49,15 +49,16 @@ ARCHITECTURE structural OF uP IS
     END COMPONENT AluControl;
 
     COMPONENT RegisterFile
-        PORT (rst : in std_logic;
-            RReg1 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
-            RReg2 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
-            WReg : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
-            WData : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            RegWrite : IN STD_LOGIC;
-            Read1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-            Read2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
-        );
+        PORT (clk : in std_logic;
+              rst : in std_logic;
+              RReg1 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
+              RReg2 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
+              WReg : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
+              WData : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+              RegWrite : IN STD_LOGIC;
+              Read1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+              Read2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+              );
     END COMPONENT RegisterFile;
 
     COMPONENT Imm_Gen
@@ -121,15 +122,16 @@ BEGIN
         imm => immediate
     );
     RF : RegisterFile
-    PORT MAP(rst => rst,
-        RReg1 => instruction(19 DOWNTO 15),
-        RReg2 => instruction(24 DOWNTO 20),
-        WReg => instruction(11 DOWNTO 7),
-        WData => out_writeback_mux,
-        RegWrite => reg_write,
-        Read1 => read1,
-        Read2 => read2
-    );
+    PORT MAP(clk => clk,
+            rst => rst,
+            RReg1 => instruction(19 DOWNTO 15),
+            RReg2 => instruction(24 DOWNTO 20),
+            WReg => instruction(11 DOWNTO 7),
+            WData => out_writeback_mux,
+            RegWrite => reg_write,
+            Read1 => read1,
+            Read2 => read2
+            );
     out_rf <= read2;
 
     WITH alu_src SELECT alu_input <=

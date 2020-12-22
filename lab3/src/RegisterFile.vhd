@@ -3,7 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity RegisterFile is
-	port(rst : in std_logic;
+	port(clk : in std_logic;
+	 	 rst : in std_logic;
 		 RReg1 : in std_logic_vector (4 downto 0);
 		 RReg2 : in std_logic_vector (4 downto 0);
 		 WReg :  in std_logic_vector (4 downto 0);
@@ -28,8 +29,10 @@ begin
 	begin
 		if (rst = '1') then
 			RegF <= (others => (others => '0'));
-		elsif (RegWrite = '1' and to_integer(unsigned(Wreg)) /= 0) then -- TODO: control for x0
-			RegF (to_integer(unsigned (WReg))) <= WData;
+		elsif clk'event and clk = '0' then
+			if(RegWrite = '1' and to_integer(unsigned(Wreg)) /= 0) then -- TODO: control for x0
+				RegF (to_integer(unsigned (WReg))) <= WData;
+			end if;
 		end if;
 	end process;
 			

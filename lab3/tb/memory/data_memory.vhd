@@ -13,7 +13,7 @@ ENTITY data_memory IS
         address_parallelism : INTEGER := 32;
         data_parallelism : INTEGER := 32;
         memory_depth : INTEGER := 5);
-    PORT (
+    PORT ( clk : in std_logic;
         init : IN STD_LOGIC;
         input_data : IN STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
         address : IN STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0);
@@ -51,18 +51,18 @@ BEGIN
     --  process to have a transparent read/write data_memory                      --
     --------------------------------------------------------------------------------
 
-    read_write_proc : PROCESS (init, write_en, read_en, address)
+    read_write_proc : PROCESS (init, write_en, read_en, addres, clks)
     BEGIN
         IF init = '1' THEN
             data_mem <= (OTHERS => (OTHERS => '0'));
-        elsIF write_en = '1' THEN
+        elsIF clk'event and clk = '0' then
+         if write_en = '1' THEN
             data_mem(to_integer(unsigned(address))) <= input_data;
+         end if;
         end if;
         
         IF read_en = '1' THEN
             output_data <= data_mem(to_integer(unsigned(address)));
-        ELSE
-            output_data <= (OTHERS => '0');
         END IF;
     END PROCESS read_write_proc;
 
