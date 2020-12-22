@@ -51,7 +51,7 @@ BEGIN
     --  process to have a transparent read/write data_memory                      --
     --------------------------------------------------------------------------------
 
-    read_write_proc : PROCESS (init, write_en, read_en, addres, clks)
+    read_write_proc : PROCESS (init, write_en, read_en, address, clk)
     BEGIN
         IF init = '1' THEN
             data_mem <= (OTHERS => (OTHERS => '0'));

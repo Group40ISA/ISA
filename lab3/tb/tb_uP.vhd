@@ -81,7 +81,7 @@ BEGIN
         data_parallelism => 32,
         memory_depth => 5
     )
-    PORT MAP(clk => clk;
+    PORT MAP(clk => clk,
         init => init,
         input_data => out_rf,
         address => alu_result,
