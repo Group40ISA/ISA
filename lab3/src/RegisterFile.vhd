@@ -28,7 +28,7 @@ begin
 	begin
 		if (rst = '1') then
 			RegF <= (others => (others => '0'));
-		elsif (RegWrite = '1') then -- TODO: control for x0
+		elsif (RegWrite = '1' and to_integer(unsigned(Wreg)) /= 0) then -- TODO: control for x0
 			RegF (to_integer(unsigned (WReg))) <= WData;
 		end if;
 	end process;

@@ -40,8 +40,7 @@ begin
     ---per dissipare meno, MemToReg è posto ad 1 quando il MUX non viene percorso
 
     with opcode select MemToReg <=
-        '1' when "0000011" | "0100011"|"0010111"|"1101111", --to use the final mux with4 way, 
-        --is necessary add also the AUIPC instr.
+        '1' when "0000011" | "0100011"|"0010111"|"1101111", 
         '0' when "0110011" | "0010011"|"1100011"|"0110111",
         'U' when others;
 
@@ -61,7 +60,7 @@ begin
         'U' when others;
 
     with opcode select write_back_ctrl <=
-        '1' when "0010111" | "0110111",
+        '1' when "0010111" | "0110111" | "1101111",
         '0' when others;
 
 end architecture RTL;

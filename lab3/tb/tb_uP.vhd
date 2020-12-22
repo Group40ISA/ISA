@@ -110,7 +110,7 @@ BEGIN
         wait for 4 ns;
         end_code <= '1';
         wait for 1 ns;
-        end_code <= '0';
+        end_code <= '1';
         wait;
     end process stimuli;
 

@@ -21,8 +21,8 @@ m:
 	.globl	__start
 __start:
 	li x13,7          # put 7 in x16 
-	li x5,7
+	li x5,7           # put 7 as base address
 
-	sw x13,0(x5)      # store the result	
+	sw x13,24(x5)      # store the result	
 
 	

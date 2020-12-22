@@ -17,6 +17,7 @@ begin
 	opcode <= instr(6 downto 0);
 	ext <= (others => instr(31));
 	with opcode select imm <=
+		 ext & instr(31 downto 25) & instr(12 downto 8) when "0100011",
 		 ext & instr(31 downto 20) when "0010011"|"0000011", --ADDI,ANDI,LW,SRAI
 		 ext(18 downto 0) & instr(31) & instr(7) & instr(30 downto 25) & instr(11 downto 8) & '0' when "1100011", --BEQ
 		 instr(31 downto 12) & "000000000000" when "0010111"|"0110111", --AUIPC,LUI
