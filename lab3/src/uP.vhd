@@ -96,9 +96,7 @@ ARCHITECTURE structural OF uP IS
 BEGIN
 
     pc <= pc_int;
-    --four_byte <= (5 downto 0 => "100000" ,OTHERS => '0');
-    four_byte <= (0 => '1', OTHERS => '0');
-    --four_byte(4 DOWNTO 0) <= "10000";
+    four_byte <= ( 5 => '1', OTHERS => '0');
 
     PROCESS (clk, rst)
     BEGIN
@@ -109,8 +107,8 @@ BEGIN
         END IF;
     END PROCESS;
 
-    pc_next <= STD_LOGIC_VECTOR(unsigned(pc_int) + unsigned(four_byte));
-    pc_jump <= STD_LOGIC_VECTOR(unsigned(pc_int) + unsigned(immediate));
+    pc_next <= STD_LOGIC_VECTOR(unsigned(pc_int) + unsigned(four_byte));    
+    pc_jump <= STD_LOGIC_VECTOR(signed(pc_int) + signed(immediate));
 
     WITH (branch AND zero) SELECT mux_to_pc <=
     pc_jump WHEN '1',
@@ -184,7 +182,7 @@ BEGIN
         data WHEN OTHERS;
 
     WITH (branch AND reg_write) SELECT out_writeback_mux <=
-    pc_jump WHEN '1',
+    pc_next WHEN '1',
     out_mem_mux WHEN OTHERS;
 
 END ARCHITECTURE structural;

@@ -21,18 +21,19 @@ ARCHITECTURE rtl OF tb_uP IS
         );
     END COMPONENT uP;
 
-    COMPONENT text_memory IS
-        GENERIC (
-            address_parallelism : INTEGER := 32;
-            instruction_parallelism : INTEGER := 32;
-            memory_depth : integer := 5);
-        PORT (
-            address : IN STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0);
-            init : IN STD_LOGIC;
-            end_code : IN STD_LOGIC;
+    component text_memory
+        generic(
+            address_parallelism     : INTEGER;
+            instruction_parallelism : INTEGER;
+            memory_depth            : integer
+        );
+        port(
+            address     : IN  STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0);
+            init        : IN  STD_LOGIC;
+            end_code    : out STD_LOGIC;
             instruction : OUT STD_LOGIC_VECTOR(instruction_parallelism - 1 DOWNTO 0)
         );
-    END COMPONENT text_memory;
+    end component text_memory;
 
     component data_memory
         generic(
@@ -70,7 +71,7 @@ BEGIN
     instr_mem : text_memory GENERIC MAP(
         address_parallelism => 32,
         instruction_parallelism => 32,
-        memory_depth => 5)
+        memory_depth => 8)
     PORT MAP(
         address => pc_sig,
         init => init,
@@ -80,7 +81,7 @@ BEGIN
     data_mem : data_memory GENERIC MAP(
         address_parallelism => 32,
         data_parallelism => 32,
-        memory_depth => 5
+        memory_depth => 8
     )
     PORT MAP(
         clk => clk,
@@ -103,16 +104,11 @@ BEGIN
 
     stimuli: process
     begin
-        end_code <= '0';
         rst  <= '1';
         init <= '1';
         wait for 100 ps;
         rst  <= '0';
         init <= '0';
-        wait for 4 ns;
-        end_code <= '1';
-        wait for 1 ns;
-        end_code <= '1';
         wait;
     end process stimuli;
 
