@@ -37,7 +37,7 @@ BEGIN
         VARIABLE out_data_line : line;
         VARIABLE out_pointer   : INTEGER := 0;
     BEGIN
-        file_open(text_content, "/home/raffaele/Scrivania/Uni/II anno/ISA/git_hub/ISA/lab3/tb/memory/content_data.txt", write_mode);
+        file_open(text_content, "C:\Users\39373\Documents\Uni\Magistrale\IntegratedSystemArchitecture\Labs\ISA\lab3\tb\memory\content_data.txt", write_mode);
 
         IF end_code = '1' THEN
             WHILE (out_pointer < 2 ** memory_depth) LOOP
@@ -59,7 +59,7 @@ BEGIN
         VARIABLE value_instr   : STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
     BEGIN
         IF init = '1' THEN
-            file_open(text_file,"/home/raffaele/Scrivania/Uni/II anno/ISA/git_hub/ISA/lab3/tb/memory/data.txt", read_mode);
+            file_open(text_file,"C:\Users\39373\Documents\Uni\Magistrale\IntegratedSystemArchitecture\Labs\ISA\lab3\tb\memory\data.txt", read_mode);
             WHILE NOT (endfile(text_file)) AND init_pointer < 32 * (2 ** memory_depth) LOOP -- stops the loop if exceed text_memory dim.
                 readline(text_file, in_instr_line);
                 read(in_instr_line, value_instr);
@@ -68,6 +68,13 @@ BEGIN
                 data_mem(init_pointer + 2) <= value_instr(15 downto 8);
                 data_mem(init_pointer + 3) <= value_instr(7 downto 0);
                 init_pointer               := init_pointer + 4;
+            END LOOP;
+            WHILE init_pointer < 32 * (2 ** memory_depth) LOOP
+            data_mem(init_pointer)     <= (OTHERS => '0');
+            data_mem(init_pointer + 1) <= (OTHERS => '0');
+            data_mem(init_pointer + 2) <= (OTHERS => '0');
+            data_mem(init_pointer + 3) <= (OTHERS => '0');
+            init_pointer               := init_pointer + 4;
             END LOOP;
             file_close(text_file);
         elsIF clk'event and clk = '0' and write_en = '1' THEN

@@ -49,16 +49,17 @@ ARCHITECTURE structural OF uP IS
     END COMPONENT AluControl;
 
     COMPONENT RegisterFile
-        PORT (clk : in std_logic;
-              rst : in std_logic;
-              RReg1 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
-              RReg2 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
-              WReg : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
-              WData : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-              RegWrite : IN STD_LOGIC;
-              Read1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-              Read2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
-              );
+        PORT (
+            clk : IN STD_LOGIC;
+            rst : IN STD_LOGIC;
+            RReg1 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
+            RReg2 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
+            WReg : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
+            WData : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            RegWrite : IN STD_LOGIC;
+            Read1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            Read2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+        );
     END COMPONENT RegisterFile;
 
     COMPONENT Imm_Gen
@@ -90,24 +91,25 @@ ARCHITECTURE structural OF uP IS
     SIGNAL out_mem_mux : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
     --------------------BRANCH SIGNALS------------------------------------
-    SIGNAL pc_jump, pc_int, pc_next, mux_to_pc : STD_LOGIC_VECTOR(31 DOWNTO 0); -- vedere se vogliono farloda 32 o 5
+    SIGNAL pc_jump, pc_next, mux_to_pc : STD_LOGIC_VECTOR(31 DOWNTO 0); -- vedere se vogliono farloda 32 o 5
+    SIGNAL pc_int : STD_LOGIC_VECTOR(31 DOWNTO 0) := STD_LOGIC_VECTOR(TO_UNSIGNED(4194304, 32));
     SIGNAL four_byte : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 BEGIN
 
     pc <= pc_int;
-    four_byte <= ( 2 => '1', OTHERS => '0');
+    four_byte <= (2 => '1', OTHERS => '0');
 
     PROCESS (clk, rst)
     BEGIN
         IF (rst = '1') THEN
-            pc_int <= (OTHERS => '0');
+            pc_int <= STD_LOGIC_VECTOR(to_unsigned(4194304, 32));
         ELSIF (clk'event AND clk = '1') THEN
             pc_int <= mux_to_pc;
         END IF;
     END PROCESS;
 
-    pc_next <= STD_LOGIC_VECTOR(unsigned(pc_int) + unsigned(four_byte));    
+    pc_next <= STD_LOGIC_VECTOR(unsigned(pc_int) + unsigned(four_byte));
     pc_jump <= STD_LOGIC_VECTOR(signed(pc_int) + signed(immediate));
 
     WITH (branch AND zero) SELECT mux_to_pc <=
@@ -120,16 +122,17 @@ BEGIN
         imm => immediate
     );
     RF : RegisterFile
-    PORT MAP(clk => clk,
-            rst => rst,
-            RReg1 => instruction(19 DOWNTO 15),
-            RReg2 => instruction(24 DOWNTO 20),
-            WReg => instruction(11 DOWNTO 7),
-            WData => out_writeback_mux,
-            RegWrite => reg_write,
-            Read1 => read1,
-            Read2 => read2
-            );
+    PORT MAP(
+        clk => clk,
+        rst => rst,
+        RReg1 => instruction(19 DOWNTO 15),
+        RReg2 => instruction(24 DOWNTO 20),
+        WReg => instruction(11 DOWNTO 7),
+        WData => out_writeback_mux,
+        RegWrite => reg_write,
+        Read1 => read1,
+        Read2 => read2
+    );
     out_rf <= read2;
 
     WITH alu_src SELECT alu_input <=
