@@ -96,7 +96,7 @@ ARCHITECTURE structural OF uP IS
 BEGIN
 
     pc <= pc_int;
-    four_byte <= ( 5 => '1', OTHERS => '0');
+    four_byte <= ( 2 => '1', OTHERS => '0');
 
     PROCESS (clk, rst)
     BEGIN
