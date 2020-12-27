@@ -71,8 +71,7 @@ BEGIN
     instr_mem : text_memory GENERIC MAP(
         address_parallelism => 32,
         instruction_parallelism => 32,
-        memory_depth => 13
-        )
+        memory_depth => 8)
     PORT MAP(
         address => pc_sig,
         init => init,
