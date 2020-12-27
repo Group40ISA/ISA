@@ -56,7 +56,7 @@ BEGIN
 		(OTHERS => 'U') WHEN OTHERS;
 
 	Add_out <= STD_LOGIC_VECTOR(signed(Op1) + signed(Op2) + signed(B_sel_extended));
-	PROCESS (Add_out, A_sel)
+	PROCESS (Add_out, A_sel)--@suppressive
 	BEGIN
 		IF (Add_out = zero1 OR A_sel = '1') THEN
 			zero <= '1';

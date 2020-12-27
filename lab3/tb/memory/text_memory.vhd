@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 --  text_emory which takes initialisation content form a file.                --
 --------------------------------------------------------------------------------
 
@@ -11,8 +11,7 @@ USE ieee.std_logic_textio.ALL;
 ENTITY text_memory IS
     GENERIC(
         address_parallelism     : INTEGER := 32;
-        instruction_parallelism : INTEGER := 32;
-        memory_depth            : INTEGER := 5);
+        instruction_parallelism : INTEGER := 32);
     PORT(
         address     : IN  STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0);
         init        : IN  STD_LOGIC;
@@ -32,14 +31,14 @@ ARCHITECTURE rtl OF text_memory IS
 BEGIN
 
 
-    proc_init : PROCESS(init, address)
+    proc_init : PROCESS(init, address) --@suppressive
         VARIABLE in_instr_line : line;
         VARIABLE init_pointer  : INTEGER := 4194304; -- variable that points at successive lines of the memory for every read line
         VARIABLE value_instr   : STD_LOGIC_VECTOR(instruction_parallelism - 1 DOWNTO 0);
     BEGIN
         IF init = '1' THEN
             file_open(text_file, "/home/raffaele/Scrivania/Uni/II anno/ISA/git_hub/ISA/lab3/tb/memory/code.txt", read_mode);
-            WHILE NOT (endfile(text_file)) LOOP --AND init_pointer < 4 * (2 ** memory_depth) LOOP -- stops the loop if exceed text_memory dim.
+            WHILE NOT (endfile(text_file)) LOOP -- stops the loop if exceed text_memory dim.
                 readline(text_file, in_instr_line);
                 read(in_instr_line, value_instr);
                 text_mem(init_pointer)     <= value_instr(31 DOWNTO 24);

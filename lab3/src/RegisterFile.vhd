@@ -32,7 +32,7 @@ begin
             RegF <= (others => (others => '0'));
         end if;
        if (clk = '0' and clk'event) then
-            if (RegWrite = '1' and rst = '0' and WReg /= "00000") then 
+            if (RegWrite = '1' and rst = '0' and WReg /= "00000") then -- TODO: control for x0
                 RegF(to_integer(unsigned(WReg))) <= WData;
             end if;
         end if;
