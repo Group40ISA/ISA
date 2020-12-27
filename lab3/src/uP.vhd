@@ -91,8 +91,8 @@ ARCHITECTURE structural OF uP IS
     SIGNAL out_mem_mux : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
     --------------------BRANCH SIGNALS------------------------------------
-    SIGNAL pc_jump, pc_next, mux_to_pc : STD_LOGIC_VECTOR(31 DOWNTO 0); -- vedere se vogliono farloda 32 o 5
-    SIGNAL pc_int : STD_LOGIC_VECTOR(31 DOWNTO 0) := STD_LOGIC_VECTOR(TO_UNSIGNED(4194304, 32));
+    SIGNAL pc_jump, pc_next, mux_to_pc : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL pc_int : STD_LOGIC_VECTOR(31 DOWNTO 0);--:= STD_LOGIC_VECTOR(TO_UNSIGNED(4194304, 32));
     SIGNAL four_byte : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 BEGIN
