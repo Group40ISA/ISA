@@ -36,19 +36,24 @@ BEGIN
         VARIABLE out_data_line : line;
         VARIABLE out_pointer   : INTEGER := 268500992;
         variable in_text       : std_logic_vector(31 downto 0);
+        variable mem_text      : memory;
     BEGIN
         IF end_code = '1' and end_code'event THEN
+            mem_text := data_mem;
             file_open(text_content, "/home/raffaele/Scrivania/Uni/II anno/ISA/git_hub/ISA/lab3/tb/memory/content_data.txt", append_mode);
+
             WHILE (out_pointer < 268505088) LOOP
-                in_text(31 downto 24) := data_mem(out_pointer);
-                in_text(23 downto 16) := data_mem(out_pointer + 1);
-                in_text(15 downto 8)  := data_mem(out_pointer + 2);
-                in_text(7 downto 0)   := data_mem(out_pointer + 3);
-                write(out_data_line, to_integer(signed(in_text)));
+                in_text     := mem_text(out_pointer) & mem_text((out_pointer + 1)) & mem_text((out_pointer + 2)) & mem_text((out_pointer + 3));
+                --                in_text(31 downto 24) := mem_text(out_pointer);
+                --                in_text(23 downto 16) := mem_text((out_pointer + 1));
+                --                in_text(15 downto 8)  := mem_text((out_pointer + 2));
+                --                in_text(7 downto 0)   := mem_text((out_pointer + 3));
+                write(out_data_line, in_text, right);
                 writeline(text_content, out_data_line);
                 out_pointer := out_pointer + 4;
             END LOOP;
             file_close(text_content);
+
         END IF;
     END PROCESS proc_out;
 

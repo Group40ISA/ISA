@@ -38,7 +38,7 @@ BEGIN
     BEGIN
         IF init = '1' THEN
             file_open(text_file, "/home/raffaele/Scrivania/Uni/II anno/ISA/git_hub/ISA/lab3/tb/memory/code.txt", read_mode);
-            WHILE NOT (endfile(text_file)) LOOP -- stops the loop if exceed text_memory dim.
+            WHILE NOT (endfile(text_file)) and init_pointer <=4194388 LOOP -- stops the loop if exceed text_memory dim.
                 readline(text_file, in_instr_line);
                 read(in_instr_line, value_instr);
                 text_mem(init_pointer)     <= value_instr(31 DOWNTO 24);
