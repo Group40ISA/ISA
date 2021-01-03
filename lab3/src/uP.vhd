@@ -69,6 +69,18 @@ ARCHITECTURE structural OF uP IS
 		);
 	END COMPONENT Imm_Gen;
 
+	component Forward_unit
+		port(
+			rs_1, rs_2                     : in  std_logic_vector(4 downto 0);
+			rd_ex_mem, rd_mem_wb           : in  std_logic_vector(4 downto 0);
+			reg_wrt_ex_mem, reg_wrt_mem_wb : in  std_logic;
+			alu_src                        : in  std_logic;
+			wb_sel_mux_ex_mem              : in  std_logic_vector(1 downto 0);
+			rst                            : in  std_logic;
+			forward_A, forward_B           : out std_logic_vector(1 downto 0)
+		);
+	end component Forward_unit;
+
 	----------------------------------------------------------
 	---------------------CU SIGNALs---------------------------
 	SIGNAL branch, mem_read, mem_to_reg, mem_write, alu_src, reg_write, write_back_ctrl : STD_LOGIC;
@@ -77,11 +89,11 @@ ARCHITECTURE structural OF uP IS
 	----------------------------------------------------------
 	-------------------ALU_CTRL SIGNALs-----------------------
 	SIGNAL alu_ctrl                                                                     : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	SIGNAL Forward_A, Forward_B                                                         : STD_LOGIC_VECTOR(1 DOWNTO 0);
 	----------------------------------------------------------
 	-------------------ALU SIGNALs----------------------------
 	SIGNAL zero                                                                         : STD_LOGIC;
-	SIGNAL wb_sel_mux                                                                   : STD_LOGIC_VECTOR(1 DOWNTO 0);
-	SIGNAL alu_result_signal                                                            : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL alu_result_signal, alu_input_A, alu_input_B                                  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	----------------------------------------------------------
 	-------------------RF SIGNALs-----------------------------
 	SIGNAL read1, read2                                                                 : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -101,6 +113,7 @@ ARCHITECTURE structural OF uP IS
 	-----------------PIPE SIGNAL STAGE ID/EX----------------------------
 	SIGNAL branch_ID_EX, mem_read_ID_EX, mem_to_reg_ID_EX, mem_write_ID_EX              : STD_LOGIC;
 	SIGNAL alu_src_ID_EX, reg_write_ID_EX, write_back_ctrl_ID_EX                        : STD_LOGIC;
+	SIGNAL rs_1, rs_2                                                                   : STD_LOGIC_VECTOR(4 DOWNTO 0);
 	SIGNAL alu_op_ID_EX                                                                 : STD_LOGIC_VECTOR(1 DOWNTO 0);
 	SIGNAL pc_int_ID_EX                                                                 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL read1_ID_EX, read2_ID_EX                                                     : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -119,12 +132,12 @@ ARCHITECTURE structural OF uP IS
 	SIGNAL read2_EX_MEM                                                                 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL WReg_EX_MEM                                                                  : STD_LOGIC_VECTOR(4 DOWNTO 0);
 	SIGNAL immediate_EX_MEM                                                             : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	-------------------------------------------------------------------------------
+	SIGNAL wb_sel_mux_EX_MEM                                                            : STD_LOGIC_VECTOR(1 DOWNTO 0);
+	------------------------------------------------------------------------------- 
 	-------------------PIPE SIGNAL STAGE WRITE BACK--------------------------------
 	SIGNAL pc_jump_MEM_WB                                                               : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL JAL_signal_MEM_WB                                                            : STD_LOGIC;
-	SIGNAL mem_to_reg_MEM_WB                                                            : STD_LOGIC;
-	SIGNAL write_back_ctrl_MEM_WB                                                       : STD_LOGIC;
+	SIGNAL wb_sel_mux_MEM_WB                                                            : STD_LOGIC_VECTOR(1 DOWNTO 0);
 	SIGNAL alu_result_signal_MEM_WB                                                     : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL pc_next_MEM_WB                                                               : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL WReg_MEM_WB                                                                  : STD_LOGIC_VECTOR(4 DOWNTO 0);
@@ -178,9 +191,9 @@ BEGIN
 			rst      => rst,
 			RReg1    => instruction_IF_ID(19 DOWNTO 15),
 			RReg2    => instruction_IF_ID(24 DOWNTO 20),
-			WReg     => WReg_MEM_WB, 
+			WReg     => WReg_MEM_WB,
 			WData    => out_writeback_mux,
-			RegWrite => reg_write_MEM_WB,   
+			RegWrite => reg_write_MEM_WB,
 			Read1    => read1,
 			Read2    => read2
 		);
@@ -213,6 +226,8 @@ BEGIN
 			read1_ID_EX           <= (OTHERS => '0');
 			read2_ID_EX           <= (OTHERS => '0');
 			immediate_ID_EX       <= (OTHERS => '0');
+			rs_1                  <= (OTHERS => '0');
+			rs_2                  <= (OTHERS => '0');
 			WReg_ID_EX            <= (OTHERS => '0');
 			add_AluOpCtrl_ID_EX   <= (OTHERS => '0');
 			pc_next_ID_EX         <= (OTHERS => '0');
@@ -231,6 +246,8 @@ BEGIN
 			read1_ID_EX           <= read1;
 			read2_ID_EX           <= read2;
 			immediate_ID_EX       <= immediate;
+			rs_1                  <= instruction_IF_ID(19 DOWNTO 15);
+			rs_2                  <= instruction_IF_ID(24 DOWNTO 20);
 			WReg_ID_EX            <= instruction_IF_ID(11 DOWNTO 7);
 			add_AluOpCtrl_ID_EX   <= instruction_IF_ID(30) & instruction_IF_ID(14 DOWNTO 12);
 		END IF;
@@ -248,13 +265,40 @@ BEGIN
 		immediate_ID_EX WHEN '1',
 		read2_ID_EX WHEN OTHERS;
 
+	WITH Forward_A SELECT alu_input_A <=
+		read1_ID_EX WHEN "00",
+		alu_result_signal_EX_MEM WHEN "01",
+		out_mem_mux WHEN "10",
+		pc_jump_EX_MEM	WHEN "11",(OTHERS => 'U') WHEN OTHERS;
+
+	WITH Forward_B SELECT alu_input_B <=
+		alu_input WHEN "00",
+		alu_result_signal_EX_MEM WHEN "01",
+	out_mem_mux WHEN "10",
+	pc_jump_EX_MEM	WHEN "11",(OTHERS => 'U') WHEN OTHERS;
+
 	op : ALU
 		PORT MAP(
-			A       => read1_ID_EX,
-			B       => alu_input,
+			A       => alu_input_A,
+			B       => alu_input_B,
 			AluCtrl => alu_ctrl,
 			zero    => zero,
 			result  => alu_result_signal
+		);
+
+	forward : Forward_unit
+		PORT map(
+			rs_1 => rs_1,
+			rs_2 => rs_2,
+			rd_ex_mem => WReg_EX_MEM,
+			rd_mem_wb => WReg_MEM_WB,
+			reg_wrt_ex_mem => reg_write_EX_MEM,
+			reg_wrt_mem_wb => reg_write_MEM_WB,
+			alu_src => alu_src,
+			wb_sel_mux_ex_mem => wb_sel_mux_EX_MEM,
+			rst => rst,
+			forward_A => Forward_A,
+			forward_B => Forward_B
 		);
 
 	pc_jump <= STD_LOGIC_VECTOR(signed(pc_int_ID_EX) + signed(immediate_ID_EX));
@@ -274,7 +318,7 @@ BEGIN
 			alu_result_signal_EX_MEM <= (OTHERS => '0');
 			read2_EX_MEM             <= (OTHERS => '0');
 			WReg_EX_MEM              <= (OTHERS => '0');
-			immediate_EX_MEM         <= (OTHERS  => '0');
+			immediate_EX_MEM         <= (OTHERS => '0');
 
 		ELSIF (clk'event AND clk = '1') THEN
 
@@ -296,31 +340,30 @@ BEGIN
 	END PROCESS;
 	-------------------------------------------------------------------------------------------------------
 	------------------------------ MEMORIZATION STAGE------------------------------------------------------
-	JAL_signal     <= branch_EX_MEM AND reg_write_EX_MEM;
-	alu_result     <= alu_result_signal_EX_MEM;
-	out_rf         <= read2_EX_MEM;
-	data_mem_read  <= mem_read_EX_MEM;
-	data_mem_write <= mem_write_EX_MEM;
+	JAL_signal        <= branch_EX_MEM AND reg_write_EX_MEM;
+	alu_result        <= alu_result_signal_EX_MEM;
+	out_rf            <= read2_EX_MEM;
+	data_mem_read     <= mem_read_EX_MEM;
+	data_mem_write    <= mem_write_EX_MEM;
+	wb_sel_mux_EX_MEM <= mem_to_reg_EX_MEM & write_back_ctrl_EX_MEM;
 
 	MEM_WB : PROCESS(clk, rst)
 	BEGIN
 		IF (rst = '1') THEN
 			pc_jump_MEM_WB           <= (OTHERS => '0');
 			JAL_signal_MEM_WB        <= '0';
-			mem_to_reg_MEM_WB        <= '0';
-			write_back_ctrl_MEM_WB   <= '0';
+			wb_sel_mux_MEM_WB        <= "00";
 			alu_result_signal_MEM_WB <= (OTHERS => '0');
 			pc_next_MEM_WB           <= (OTHERS => '0');
-            immediate_MEM_WB         <= (OTHERS => '0');
+			immediate_MEM_WB         <= (OTHERS => '0');
 			WReg_MEM_WB              <= (OTHERS => '0');
 			reg_write_MEM_WB         <= '0';
-			data_MEM_WB              <= (OTHERS  => '0');
+			data_MEM_WB              <= (OTHERS => '0');
 
 		ELSIF (clk'event AND clk = '1') THEN
 			pc_jump_MEM_WB           <= pc_jump_EX_MEM;
 			JAL_signal_MEM_WB        <= JAL_signal;
-			mem_to_reg_MEM_WB        <= mem_to_reg_EX_MEM;
-			write_back_ctrl_MEM_WB   <= write_back_ctrl_EX_MEM;
+			wb_sel_mux_MEM_WB        <= wb_sel_mux_EX_MEM;
 			alu_result_signal_MEM_WB <= alu_result_signal_EX_MEM;
 			pc_next_MEM_WB           <= pc_next_EX_MEM;
 			immediate_MEM_WB         <= immediate_EX_MEM;
@@ -330,20 +373,18 @@ BEGIN
 
 		END IF;
 	END PROCESS;
-	
+
 	-------------------------------------------------------------------------------------------------
 	----------------------------------WRITE BACK STAGE-----------------------------------------------
-    wb_sel_mux <= mem_to_reg_MEM_WB & write_back_ctrl_MEM_WB;
-
-    WITH wb_sel_mux SELECT out_mem_mux <=
-	        data_MEM_WB WHEN "10", --select the out of memory       
-	        pc_jump_MEM_WB WHEN "11", --select the AUIPC way
+	WITH wb_sel_mux_MEM_WB SELECT out_mem_mux <=
+		data_MEM_WB WHEN "10",          --select the out of memory       
+		pc_jump_MEM_WB WHEN "11",       --select the AUIPC way
 	        alu_result_signal_MEM_WB WHEN "00", --select the alu way
 	        immediate_MEM_WB WHEN "01", --select the LUI way
 	        data_MEM_WB WHEN OTHERS;
-   
-    WITH (JAL_signal_MEM_WB) SELECT out_writeback_mux <=
+
+	WITH (JAL_signal_MEM_WB) SELECT out_writeback_mux <=
 		pc_next_MEM_WB WHEN '1',
-		out_mem_mux WHEN OTHERS; 
-		
+		out_mem_mux WHEN OTHERS;
+
 END ARCHITECTURE structural;
