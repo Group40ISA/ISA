@@ -26,7 +26,7 @@ begin
 		if (rs_1 = rd_ex_mem) then
 			if (wb_sel_mux_ex_mem = "11") then
 				forward_A <= "11";      ---AUIPC way
-			elsif (wb_sel_mux_ex_mem = "00") then
+			elsif (wb_sel_mux_ex_mem = "00" or wb_sel_mux_ex_mem= "01") then
 				forward_A <= "01";      ---ALU way
 			else
 				forward_A   <= "00";

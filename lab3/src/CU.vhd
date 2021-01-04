@@ -11,6 +11,7 @@ entity CU is
         AluOp           : out std_logic_vector(1 downto 0);
         MemWrite        : out std_logic;
         AluSrc          : out std_logic;
+        Lui_ctrl		: out std_logic;
         RegWrite        : out std_logic;
         write_back_ctrl : out std_logic
     );
@@ -49,8 +50,8 @@ begin
         'U' when others;
 
     with opcode select AluSrc <=
-        '0' when "0110011" | "1100011" | "0010111" | "0110111" | "1101111",
-        '1' when "0010011" | "0100011" | "0000011",
+        '0' when "0110011" | "1100011" | "0010111" | "1101111",
+        '1' when "0010011" | "0100011" | "0000011" | "0110111",
         'U' when others;
 
     with opcode select RegWrite <=
@@ -61,5 +62,9 @@ begin
     with opcode select write_back_ctrl <=
         '1' when "0010111" | "0110111" | "1101111",
         '0' when others;
+        
+    with opcode select Lui_ctrl  <= 
+    	'1' when "0110111",
+    	'0' when others; 
 
 end architecture RTL;
