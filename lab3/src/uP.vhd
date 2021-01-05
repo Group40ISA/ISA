@@ -82,11 +82,25 @@ ARCHITECTURE structural OF uP IS
 		);
 	end component Forward_unit;
 
+	component Hazard_detection_unit is
+		port(
+			rs1, rs2, rd_ID_EX, rd_EX_MEM : in  std_logic_vector(4 downto 0);
+			mem_wrt                       : in  std_logic;
+			effective_branch              : in  std_logic;
+			clk                           : in  std_logic;
+			rst                           : in  std_logic;
+			opcode                        : in  std_logic_vector(6 downto 0);
+			sel_ctrl                      : out std_logic;
+			pc_enable                     : out std_logic; ---but it is not useful: the pc has never stopped
+			nop_injector                  : out std_logic
+		);
+	end component Hazard_detection_unit;
+
 	----------------------------------------------------------
 	---------------------CU SIGNALs---------------------------
 	SIGNAL branch, mem_read, mem_to_reg, mem_write, alu_src, reg_write, write_back_ctrl : STD_LOGIC;
 	SIGNAL alu_op                                                                       : STD_LOGIC_VECTOR(1 DOWNTO 0);
-	SIGNAL JAL_signal, Lui_ctrl                                                                   : STD_LOGIC;
+	SIGNAL JAL_signal, Lui_ctrl                                                         : STD_LOGIC;
 	----------------------------------------------------------
 	-------------------ALU_CTRL SIGNALs-----------------------
 	SIGNAL alu_ctrl                                                                     : STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -99,15 +113,19 @@ ARCHITECTURE structural OF uP IS
 	-------------------RF SIGNALs-----------------------------
 	SIGNAL read1, read2                                                                 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL out_writeback_mux                                                            : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	SIGNAL alu_input_lui																: STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL alu_input_lui                                                                : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL alu_input                                                                    : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL immediate                                                                    : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL out_mem_mux                                                                  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	----------------------------------------------------------------------
 	--------------------BRANCH SIGNALS------------------------------------
 	SIGNAL pc_jump, pc_next, mux_to_pc                                                  : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	SIGNAL pc_int                                                                       : STD_LOGIC_VECTOR(31 DOWNTO 0); 
+	SIGNAL pc_int                                                                       : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL effective_branch                                                             : STD_LOGIC;
 	SIGNAL four_byte                                                                    : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL sel_ctrl                                                                     : std_logic;
+	SIGNAL pc_enable                                                                    : std_logic; ---but it is not useful: the pc has never stopped
+	SIGNAL nop_injector                                                                 : std_logic;
 	----------------------------------------------------------------------
 	-------------------PIPE SIGNAL STAGE IF/ID----------------------------
 	SIGNAL pc_int_IF_ID, instruction_IF_ID, pc_next_IF_ID                               : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -129,7 +147,6 @@ ARCHITECTURE structural OF uP IS
 	SIGNAL branch_EX_MEM, mem_read_EX_MEM, mem_to_reg_EX_MEM, mem_write_EX_MEM          : STD_LOGIC;
 	SIGNAL write_back_ctrl_EX_MEM, reg_write_EX_MEM                                     : STD_LOGIC;
 	SIGNAL pc_next_EX_MEM                                                               : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	SIGNAL zero_EX_MEM                                                                  : STD_LOGIC;
 	SIGNAL alu_result_signal_EX_MEM                                                     : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL read2_EX_MEM                                                                 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL WReg_EX_MEM                                                                  : STD_LOGIC_VECTOR(4 DOWNTO 0);
@@ -144,7 +161,6 @@ ARCHITECTURE structural OF uP IS
 	SIGNAL WReg_MEM_WB                                                                  : STD_LOGIC_VECTOR(4 DOWNTO 0);
 	SIGNAL reg_write_MEM_WB                                                             : STD_LOGIC;
 	SIGNAL data_MEM_WB                                                                  : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	
 
 BEGIN
 
@@ -161,8 +177,10 @@ BEGIN
 		END IF;
 	END PROCESS;
 
-	WITH (branch_EX_MEM AND zero_EX_MEM) SELECT mux_to_pc <=
-		pc_jump_EX_MEM WHEN '1',
+	effective_branch <= branch_ID_EX and zero;
+
+	WITH (effective_branch) SELECT mux_to_pc <=
+		pc_jump WHEN '1',
 		pc_next WHEN OTHERS;
 
 	pc        <= pc_int;
@@ -201,16 +219,32 @@ BEGIN
 
 	cu_op : CU
 		PORT MAP(
-			opcode => instruction_IF_ID(6 DOWNTO 0),
-			Branch => branch,
-			MemRead => mem_read,
-			MemToReg => mem_to_reg,
-			AluOp => alu_op,
-			MemWrite => mem_write,
-			AluSrc => alu_src,
-			Lui_ctrl => Lui_ctrl,
-			RegWrite => reg_write,
+			opcode          => instruction_IF_ID(6 DOWNTO 0),
+			Branch          => branch,
+			MemRead         => mem_read,
+			MemToReg        => mem_to_reg,
+			AluOp           => alu_op,
+			MemWrite        => mem_write,
+			AluSrc          => alu_src,
+			Lui_ctrl        => Lui_ctrl,
+			RegWrite        => reg_write,
 			write_back_ctrl => write_back_ctrl
+		);
+
+	hzd_unit : Hazard_detection_unit
+		PORT MAP(
+			rs1 => instruction_IF_ID(19 DOWNTO 15),
+			rs2 => instruction_IF_ID(24 DOWNTO 20),
+			rd_ID_EX => WReg_ID_EX,
+			rd_EX_MEM => WReg_EX_MEM,
+			mem_wrt => mem_write_ID_EX,
+			effective_branch => effective_branch,
+			clk => clk,
+			rst => rst,
+			opcode => instruction_IF_ID(6 DOWNTO 0), ---TODO
+			sel_ctrl => sel_ctrl,
+			pc_enable => pc_enable,
+			nop_injector => nop_injector	
 		);
 
 	ID_EX : PROCESS(clk, rst)
@@ -221,7 +255,7 @@ BEGIN
 			mem_to_reg_ID_EX      <= '0';
 			mem_write_ID_EX       <= '0';
 			alu_src_ID_EX         <= '0';
-			Lui_ctrl			  <= '0';
+			Lui_ctrl              <= '0';
 			reg_write_ID_EX       <= '0';
 			write_back_ctrl_ID_EX <= '0';
 			alu_op_ID_EX          <= "00";
@@ -235,13 +269,13 @@ BEGIN
 			add_AluOpCtrl_ID_EX   <= (OTHERS => '0');
 			pc_next_ID_EX         <= (OTHERS => '0');
 
-		ELSIF (clk'event AND clk = '1') THEN
+		ELSIF (clk'event AND clk = '1') THEN --TODO insert signal related to nop_injector and MUX before control signals
 			branch_ID_EX          <= branch;
 			mem_read_ID_EX        <= mem_read;
 			mem_to_reg_ID_EX      <= mem_to_reg;
 			mem_write_ID_EX       <= mem_write;
 			alu_src_ID_EX         <= alu_src;
-			Lui_ctrl_ID_EX   	  <= Lui_ctrl;
+			Lui_ctrl_ID_EX        <= Lui_ctrl;
 			reg_write_ID_EX       <= reg_write;
 			write_back_ctrl_ID_EX <= write_back_ctrl;
 			pc_next_ID_EX         <= pc_next_IF_ID;
@@ -264,10 +298,10 @@ BEGIN
 			add_AluOp => add_AluOpCtrl_ID_EX,
 			AluCtrl   => alu_ctrl
 		);
-		
-	WITH Lui_ctrl_ID_EX SELECT alu_input_lui  <= 
+
+	WITH Lui_ctrl_ID_EX SELECT alu_input_lui <=
 		read1_ID_EX WHEN '0',
-		(OTHERS  => '0') WHEN '1',
+		(OTHERS => '0') WHEN '1',
 		read1_ID_EX WHEN OTHERS;
 
 	WITH alu_src_ID_EX SELECT alu_input <=
@@ -297,17 +331,17 @@ BEGIN
 
 	forward : Forward_unit
 		PORT map(
-			rs_1 => rs_1,
-			rs_2 => rs_2,
-			rd_ex_mem => WReg_EX_MEM,
-			rd_mem_wb => WReg_MEM_WB,
-			reg_wrt_ex_mem => reg_write_EX_MEM,
-			reg_wrt_mem_wb => reg_write_MEM_WB,
-			alu_src => alu_src,
+			rs_1              => rs_1,
+			rs_2              => rs_2,
+			rd_ex_mem         => WReg_EX_MEM,
+			rd_mem_wb         => WReg_MEM_WB,
+			reg_wrt_ex_mem    => reg_write_EX_MEM,
+			reg_wrt_mem_wb    => reg_write_MEM_WB,
+			alu_src           => alu_src,
 			wb_sel_mux_ex_mem => wb_sel_mux_EX_MEM,
-			rst => rst,
-			forward_A => Forward_A,
-			forward_B => Forward_B
+			rst               => rst,
+			forward_A         => Forward_A,
+			forward_B         => Forward_B
 		);
 
 	pc_jump <= STD_LOGIC_VECTOR(signed(pc_int_ID_EX) + signed(immediate_ID_EX));
@@ -323,11 +357,10 @@ BEGIN
 			write_back_ctrl_EX_MEM   <= '0';
 			reg_write_EX_MEM         <= '0';
 			pc_next_EX_MEM           <= (OTHERS => '0');
-			zero_EX_MEM              <= '0';
 			alu_result_signal_EX_MEM <= (OTHERS => '0');
 			read2_EX_MEM             <= (OTHERS => '0');
 			WReg_EX_MEM              <= (OTHERS => '0');
-			
+
 		ELSIF (clk'event AND clk = '1') THEN
 
 			pc_jump_EX_MEM           <= pc_jump;
@@ -338,7 +371,6 @@ BEGIN
 			write_back_ctrl_EX_MEM   <= write_back_ctrl_ID_EX;
 			reg_write_EX_MEM         <= reg_write_ID_EX;
 			pc_next_EX_MEM           <= pc_next_ID_EX;
-			zero_EX_MEM              <= zero;
 			alu_result_signal_EX_MEM <= alu_result_signal;
 			read2_EX_MEM             <= read2_ID_EX;
 			WReg_EX_MEM              <= WReg_ID_EX;
