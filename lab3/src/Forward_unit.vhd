@@ -17,7 +17,7 @@ end entity Forward_unit;
 architecture RTL of Forward_unit is
 
 begin
-	process(rst, rs_1, rs_2, rd_ex_mem, rd_mem_wb, alu_src)
+	process(rst, rs_1, rs_2, rd_ex_mem, rd_mem_wb, alu_src, reg_wrt_ex_mem, reg_wrt_mem_wb, wb_sel_mux_ex_mem)
 	begin
 		if (rst = '1') then
 			forward_A  <= "00";

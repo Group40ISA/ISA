@@ -6,38 +6,69 @@ use ieee.numeric_std.all;
 -----in this way we 'll have only 2 NOP rather than 3
 
 entity Hazard_detection_unit is
-	port(
-		rs1, rs2, rd_ID_EX, rd_EX_MEM : in  std_logic_vector(4 downto 0);
-		mem_wrt                       : in  std_logic;
-		effective_branch              : in  std_logic;
-		clk                           : in  std_logic;
-		rst                           : in  std_logic;
-		opcode                        : in  std_logic_vector(6 downto 0);
-		sel_ctrl                      : out std_logic;
-		pc_enable                     : out std_logic; ---but it is not useful: the pc has never stopped
-		nop_injector                  : out std_logic
-	);
+    port(
+        rs1, rs2, rd_ID_EX, rd_EX_MEM          : in  std_logic_vector(4 downto 0);
+        alu_src                                : in  std_logic;
+        mem_wrt                                : in  std_logic;
+        mem_read_ID_EX                         : in  std_logic;
+        effective_branch                       : in  std_logic;
+        clk                                    : in  std_logic;
+        rst                                    : in  std_logic;
+        opcode                                 : in  std_logic_vector(6 downto 0);
+        pc_enable                              : out std_logic;
+        nop_injector_ID_EX, nop_injector_IF_ID : out std_logic
+    );
 end entity Hazard_detection_unit;
 
 architecture RTL of Hazard_detection_unit is
 
 begin
-	beq : process(effective_branch, rst)
-	begin
-		if (rst = '1') then
-			sel_ctrl     <= '0';
-			pc_enable    <= '0';
-			nop_injector <= '0';
-		else
-			if (effective_branch = '1') then
-				sel_ctrl     <= '1';
-				nop_injector <= '1';
-			else
-				sel_ctrl     <= '0';
-				nop_injector <= '0';
-			end if;
-		end if;
+    hz : process(effective_branch, rst, rs1, rs2, rd_ID_EX, mem_read_ID_EX)
+    begin
+        if (rst = '1') then
+            pc_enable          <= '0';
+            nop_injector_ID_EX <= '0';
+            nop_injector_IF_ID <= '0';
+        else
+            ------
+            ----these code line operates on the beq/jump instructions         
+            ------
+            if (effective_branch = '1') then
 
-	end process;
+                nop_injector_ID_EX <= '1';
+                nop_injector_IF_ID <= '1';
+            else
+                nop_injector_ID_EX <= '0';
+                nop_injector_IF_ID <= '0';
+            end if;
+            ------
+            ----this code lines operates on the store instructions         
+            ------        
+            if (mem_read_ID_EX = '1') then
+                --This control is used to recognize if the istruction is an not a I-type 
+                --and in such case compare  both registers  
+                if (alu_src = '0') then
+                    if (rs1 = rd_ID_EX or rs2 = rd_ID_EX) then
+                        nop_injector_ID_EX <= '1';
+                        pc_enable          <= '1';
+                    else
+                        nop_injector_ID_EX <= '0';
+                        pc_enable          <= '0';
+                    end if;
+                elsif (alu_src = '1') then --if the instruction is an I-type,control only rs1.
+                    if (rs1 = rd_ID_EX) then
+                        nop_injector_ID_EX <= '1';
+                        pc_enable          <= '1';
+                    else
+                        nop_injector_ID_EX <= '0';
+                        pc_enable          <= '0';
+                    end if;
+                end if;
+            else
+                --Normal condition.
+                pc_enable <= '0';
+            end if;
+        end if;
+    end process hz;
 
 end architecture RTL;
