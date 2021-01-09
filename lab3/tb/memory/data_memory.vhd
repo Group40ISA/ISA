@@ -13,7 +13,6 @@ ENTITY data_memory IS
         address_parallelism : INTEGER := 32;
         data_parallelism    : INTEGER := 32);
     PORT(
-        clk                         : IN  STD_LOGIC;
         init                        : IN  STD_LOGIC;
         input_data                  : IN  STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
         address                     : IN  STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0);
@@ -61,7 +60,7 @@ BEGIN
     --  process to have a transparent read/write data_memory                      --
     --------------------------------------------------------------------------------
 
-    init_proc : PROCESS(init, address, input_data, write_en) --, write_en, read_en, address, input_data, clk)
+    init_proc : PROCESS(init, address, input_data, write_en) -- @suppress 
         VARIABLE in_instr_line : line;
         VARIABLE init_pointer  : INTEGER := 268500992; -- variable that points at successive lines of the memory for every read line
         VARIABLE value_instr   : STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
@@ -89,7 +88,7 @@ BEGIN
 
     end process init_proc;
 
-    process(read_en, address)
+    process(read_en, address) --@suppress
     begin
         IF read_en = '1' and init = '0' and to_integer(unsigned(address)) >= 268500992 THEN
             output_data(31 downto 24) <= data_mem(to_integer(unsigned(address)));

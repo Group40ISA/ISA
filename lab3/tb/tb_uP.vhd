@@ -40,7 +40,6 @@ ARCHITECTURE rtl OF tb_uP IS
             data_parallelism    : INTEGER
         );
         port(
-            clk                         : IN  STD_LOGIC;
             init                        : IN  STD_LOGIC;
             input_data                  : IN  STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
             address                     : IN  STD_LOGIC_VECTOR(address_parallelism - 1 DOWNTO 0);
@@ -82,7 +81,6 @@ BEGIN
             address_parallelism => 32,
             data_parallelism    => 32)
         PORT MAP(
-            clk         => clk,
             init        => init,
             input_data  => out_rf,
             address     => alu_result,

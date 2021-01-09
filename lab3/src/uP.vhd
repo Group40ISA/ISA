@@ -171,11 +171,24 @@ BEGIN
             instruction_IF_ID <= (OTHERS => '0');
             pc_next_IF_ID     <= (OTHERS => '0');
         ELSIF (clk'event AND clk = '1') THEN
+
+            -----------TODO------------
+            --WORKING CHANGE [BY RV]--TODO
+            -----------TODO------------
+            -----------TODO------------
+      --si deve risolvere l'hazard dello store se lo vogliamo fare
+      -- mi son scordato che decidemmo
             IF (nop_injector_IF_ID = '1') then
+                --se salta allora inserisco la nop
                 pc_int_IF_ID      <= (OTHERS => '0');
                 instruction_IF_ID <= "00000000000000000000000000010011";
                 pc_next_IF_ID     <= (OTHERS => '0');
-            ELSE
+            ELSif (nop_injector_ID_EX='1')then
+                -- se si verifica l'hazard con la LOAD O SW, BLOCCO IL REGISTRO
+                pc_int_IF_ID      <=pc_int_IF_ID;
+                instruction_IF_ID <= instruction_IF_ID;
+                pc_next_IF_ID <= pc_next_IF_ID;
+            else
                 pc_int_IF_ID      <= pc_int;
                 instruction_IF_ID <= instruction;
                 pc_next_IF_ID     <= pc_next;
@@ -253,7 +266,7 @@ BEGIN
             effective_branch   => effective_branch,
             clk                => clk,
             rst                => rst,
-            opcode             => instruction_IF_ID(6 DOWNTO 0), --TODO
+            opcode             => instruction_IF_ID(6 DOWNTO 0), 
             pc_enable          => pc_enable,
             nop_injector_ID_EX => nop_injector_ID_EX,
             nop_injector_IF_ID => nop_injector_IF_ID
@@ -281,7 +294,7 @@ BEGIN
             add_AluOpCtrl_ID_EX   <= (OTHERS => '0');
             pc_next_ID_EX         <= (OTHERS => '0');
         ELSIF (clk'event and clk = '1') THEN
-            IF (nop_injector_ID_EX = '1') THEN --TODO insert signal related to nop_injector and MUX before control signals
+            IF (nop_injector_ID_EX = '1') THEN 
                 branch_ID_EX          <= '0';
                 mem_read_ID_EX        <= '0';
                 mem_to_reg_ID_EX      <= '0';
@@ -322,6 +335,7 @@ BEGIN
             END IF;
         END IF;
     END PROCESS;
+   
     -------------------------------------------------------------------------------------------------------
     --------------------------EXECUTION STAGE--------------------------------------------------------------
     aluctrl : AluControl
@@ -371,7 +385,17 @@ BEGIN
             rd_mem_wb         => WReg_MEM_WB,
             reg_wrt_ex_mem    => reg_write_EX_MEM,
             reg_wrt_mem_wb    => reg_write_MEM_WB,
-            alu_src           => alu_src,
+            
+            -----------TODO------------
+            --WORKING CHANGE [BY RV]TODO
+            -----------TODO------------
+            -----------TODO------------
+            
+            alu_src           => alu_src_ID_EX ,--PRIMA C'ERA ALU_SRC,MA VEDENDO LE SIMULAZIONI,NON MI TORNAVA
+                                                -- QUINDI HO MESSO QUESTO SIGNAL, SE NON VI TROVATE TESTATE con l'altro,
+                                                --MA MI PARE NON SI TROVI IL RISULTATO FINALE.
+                                                --PS, SCARICATE ANCHE LA MEMORIA,HO INSERITO PIÙ COLPI DI CLK
+                                                --PER RIUSCIRE A VEDERE IL RISULTATO FINALE
             wb_sel_mux_ex_mem => wb_sel_mux_EX_MEM,
             rst               => rst,
             forward_A         => Forward_A,
@@ -394,9 +418,7 @@ BEGIN
             alu_result_signal_EX_MEM <= (OTHERS => '0');
             read2_EX_MEM             <= (OTHERS => '0');
             WReg_EX_MEM              <= (OTHERS => '0');
-
         ELSIF (clk'event AND clk = '1') THEN
-
             pc_jump_EX_MEM           <= pc_jump;
             branch_EX_MEM            <= branch_ID_EX;
             mem_read_EX_MEM          <= mem_read_ID_EX;
@@ -408,9 +430,9 @@ BEGIN
             alu_result_signal_EX_MEM <= alu_result_signal;
             read2_EX_MEM             <= read2_ID_EX;
             WReg_EX_MEM              <= WReg_ID_EX;
-
         END IF;
     END PROCESS;
+    
     -------------------------------------------------------------------------------------------------------
     ------------------------------ MEMORIZATION STAGE------------------------------------------------------
     JAL_signal        <= branch_EX_MEM AND reg_write_EX_MEM;
@@ -419,7 +441,6 @@ BEGIN
     data_mem_read     <= mem_read_EX_MEM;
     data_mem_write    <= mem_write_EX_MEM;
     wb_sel_mux_EX_MEM <= mem_to_reg_EX_MEM & write_back_ctrl_EX_MEM;
-
     MEM_WB : PROCESS(clk, rst)
     BEGIN
         IF (rst = '1') THEN
@@ -431,7 +452,6 @@ BEGIN
             WReg_MEM_WB              <= (OTHERS => '0');
             reg_write_MEM_WB         <= '0';
             data_MEM_WB              <= (OTHERS => '0');
-
         ELSIF (clk'event AND clk = '1') THEN
             pc_jump_MEM_WB           <= pc_jump_EX_MEM;
             JAL_signal_MEM_WB        <= JAL_signal;
@@ -441,7 +461,6 @@ BEGIN
             WReg_MEM_WB              <= WReg_EX_MEM;
             reg_write_MEM_WB         <= reg_write_EX_MEM;
             data_MEM_WB              <= data;
-
         END IF;
     END PROCESS;
 
@@ -452,7 +471,7 @@ BEGIN
         pc_jump_MEM_WB WHEN "11",       --select the AUIPC way
         alu_result_signal_MEM_WB WHEN "00" | "01", --select the alu way or lui way
         data_MEM_WB WHEN OTHERS;
-
+        
     WITH (JAL_signal_MEM_WB) SELECT out_writeback_mux <=
         pc_next_MEM_WB WHEN '1',
         out_mem_mux WHEN OTHERS;
