@@ -21,7 +21,7 @@ end entity Hazard_detection_unit;
 architecture RTL of Hazard_detection_unit is
 
 begin
-    hz : process(effective_branch, rst, rs1, rs2, rd_ID_EX, mem_read_ID_EX)
+    hz : process(effective_branch,rst,rs1,rs2,rd_ID_EX,rd_EX_MEM,mem_read_ID_EX,mem_write, alu_src)
     begin
         if (rst = '1') then
             pc_enable          <= '0';
