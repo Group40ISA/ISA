@@ -86,7 +86,7 @@ ARCHITECTURE structural OF uP IS
         port(
             rs1, rs2, rd_ID_EX, rd_EX_MEM          : in  std_logic_vector(4 downto 0);
             alu_src                                : in  std_logic;
-            mem_write                                : in  std_logic;
+            mem_write                              : in  std_logic;
             mem_read_ID_EX                         : in  std_logic;
             effective_branch                       : in  std_logic;
             rst                                    : in  std_logic;
@@ -122,7 +122,7 @@ ARCHITECTURE structural OF uP IS
     SIGNAL pc_int                                                                       : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL effective_branch                                                             : STD_LOGIC;
     SIGNAL four_byte                                                                    : STD_LOGIC_VECTOR(31 DOWNTO 0);
-    SIGNAL pc_enable                                                                    : std_logic; ---but it is not useful: the pc has never stopped
+    SIGNAL pc_enable                                                                    : std_logic;
     SIGNAL nop_injector_ID_EX, nop_injector_IF_ID                                       : std_logic;
     ----------------------------------------------------------------------
     -------------------PIPE SIGNAL STAGE IF/ID----------------------------
@@ -162,6 +162,33 @@ ARCHITECTURE structural OF uP IS
 
 BEGIN
 
+    -----------------------------------------------------------------------------------------
+    ------------------------------------FETCH STAGE------------------------------------------
+
+    four_byte <= (2 => '1', OTHERS => '0');
+    pc_next   <= STD_LOGIC_VECTOR(unsigned(pc_int) + unsigned(four_byte));
+    WITH (effective_branch) SELECT mux_to_pc <=
+        pc_jump WHEN '1',
+        pc_next WHEN OTHERS;
+
+    ProgramCounter : PROCESS(clk, rst)
+    BEGIN
+        IF (rst = '1') THEN
+            pc_int <= STD_LOGIC_VECTOR(to_unsigned(4194304, 32));
+        ELSIF (clk'event AND clk = '1') THEN
+            if (pc_enable = '1') then
+                --In case of some hazards or branches,the program counter
+                -- needed to be stopped and save the precedent address.
+                pc_int <= pc_int;
+            else
+                pc_int <= mux_to_pc;
+            end if;
+        END IF;
+    END PROCESS ProgramCounter;
+    pc <= pc_int;
+
+    -----------------------------------------------------------------------------------------
+    ------------------------------------INSTRUCTION DECODE-----------------------------------
     IF_ID : PROCESS(clk, rst)
     BEGIN
         IF (rst = '1') THEN
@@ -169,23 +196,17 @@ BEGIN
             instruction_IF_ID <= (OTHERS => '0');
             pc_next_IF_ID     <= (OTHERS => '0');
         ELSIF (clk'event AND clk = '1') THEN
-
-            -----------TODO------------
-            --WORKING CHANGE [BY RV]--TODO
-            -----------TODO------------
-            -----------TODO------------
-      --si deve risolvere l'hazard dello store se lo vogliamo fare
-      -- mi son scordato che decidemmo
             IF (nop_injector_IF_ID = '1') then
-                --se salta allora inserisco la nop
+                --If the jump is verified a nop is inserted in the register
                 pc_int_IF_ID      <= (OTHERS => '0');
                 instruction_IF_ID <= "00000000000000000000000000010011";
                 pc_next_IF_ID     <= (OTHERS => '0');
-            ELSif (nop_injector_ID_EX='1')then
-                -- se si verifica l'hazard con la LOAD O SW, BLOCCO IL REGISTRO
-                pc_int_IF_ID      <=pc_int_IF_ID;
+            ELSif (nop_injector_ID_EX = '1') then
+                -- If the store-word hazard or load-word hazard
+                -- is verified the register save the precedent contenet.
+                pc_int_IF_ID      <= pc_int_IF_ID;
                 instruction_IF_ID <= instruction_IF_ID;
-                pc_next_IF_ID <= pc_next_IF_ID;
+                pc_next_IF_ID     <= pc_next_IF_ID;
             else
                 pc_int_IF_ID      <= pc_int;
                 instruction_IF_ID <= instruction;
@@ -194,32 +215,6 @@ BEGIN
         END IF;
     END PROCESS;
 
-    effective_branch <= branch_ID_EX and zero;
-
-    WITH (effective_branch) SELECT mux_to_pc <=
-        pc_jump WHEN '1',
-        pc_next WHEN OTHERS;
-
-    pc        <= pc_int;
-    four_byte <= (2 => '1', OTHERS => '0');
-
-    PROCESS(clk, rst)
-    BEGIN
-        IF (rst = '1') THEN
-            pc_int <= STD_LOGIC_VECTOR(to_unsigned(4194304, 32));
-        ELSIF (clk'event AND clk = '1' ) THEN
-            if(pc_enable = '1')then
-                pc_int <= pc_int;
-            else
-                pc_int <= mux_to_pc;
-            end if;
-        END IF;
-    END PROCESS;
-
-    pc_next <= STD_LOGIC_VECTOR(unsigned(pc_int) + unsigned(four_byte));
-
-    --------------------------------------------------------------------------------------------------------
-    ------------------------------------INSTRUCTION DECODE--------------------------------------------------
     imm : Imm_Gen
         PORT MAP(
             instr => instruction_IF_ID,
@@ -268,6 +263,8 @@ BEGIN
             nop_injector_IF_ID => nop_injector_IF_ID
         );
 
+    ----------------------------------------------------------------------------------------
+    --------------------------------EXECUTION STAGE-----------------------------------------
     ID_EX : PROCESS(clk, rst)
     BEGIN
         IF (rst = '1') THEN
@@ -290,7 +287,8 @@ BEGIN
             add_AluOpCtrl_ID_EX   <= (OTHERS => '0');
             pc_next_ID_EX         <= (OTHERS => '0');
         ELSIF (clk'event and clk = '1') THEN
-            IF (nop_injector_ID_EX = '1') THEN 
+            IF (nop_injector_ID_EX = '1') THEN
+                --In case of hazards or branchs verified,a nop insertion is needed. 
                 branch_ID_EX          <= '0';
                 mem_read_ID_EX        <= '0';
                 mem_to_reg_ID_EX      <= '0';
@@ -331,9 +329,10 @@ BEGIN
             END IF;
         END IF;
     END PROCESS;
-   
-    -------------------------------------------------------------------------------------------------------
-    --------------------------EXECUTION STAGE--------------------------------------------------------------
+
+    pc_jump          <= STD_LOGIC_VECTOR(signed(pc_int_ID_EX) + signed(immediate_ID_EX));
+    effective_branch <= branch_ID_EX and zero;
+
     aluctrl : AluControl
         PORT MAP(
             AluOp     => alu_op_ID_EX,
@@ -381,24 +380,12 @@ BEGIN
             rd_mem_wb         => WReg_MEM_WB,
             reg_wrt_ex_mem    => reg_write_EX_MEM,
             reg_wrt_mem_wb    => reg_write_MEM_WB,
-            
-            -----------TODO------------
-            --WORKING CHANGE [BY RV]TODO
-            -----------TODO------------
-            -----------TODO------------
-            
-            alu_src           => alu_src_ID_EX ,--PRIMA C'ERA ALU_SRC,MA VEDENDO LE SIMULAZIONI,NON MI TORNAVA
-                                                -- QUINDI HO MESSO QUESTO SIGNAL, SE NON VI TROVATE TESTATE con l'altro,
-                                                --MA MI PARE NON SI TROVI IL RISULTATO FINALE.
-                                                --PS, SCARICATE ANCHE LA MEMORIA,HO INSERITO PIÙ COLPI DI CLK
-                                                --PER RIUSCIRE A VEDERE IL RISULTATO FINALE
+            alu_src           => alu_src_ID_EX,
             wb_sel_mux_ex_mem => wb_sel_mux_EX_MEM,
             rst               => rst,
             forward_A         => Forward_A,
             forward_B         => Forward_B
         );
-
-    pc_jump <= STD_LOGIC_VECTOR(signed(pc_int_ID_EX) + signed(immediate_ID_EX));
 
     EX_MEM : PROCESS(clk, rst)
     BEGIN
@@ -428,15 +415,16 @@ BEGIN
             WReg_EX_MEM              <= WReg_ID_EX;
         END IF;
     END PROCESS;
-    
-    -------------------------------------------------------------------------------------------------------
-    ------------------------------ MEMORIZATION STAGE------------------------------------------------------
+
+    ----------------------------------------------------------------------------------------
+    ------------------------------ MEMORIZATION STAGE---------------------------------------
     JAL_signal        <= branch_EX_MEM AND reg_write_EX_MEM;
     alu_result        <= alu_result_signal_EX_MEM;
     out_rf            <= read2_EX_MEM;
     data_mem_read     <= mem_read_EX_MEM;
     data_mem_write    <= mem_write_EX_MEM;
     wb_sel_mux_EX_MEM <= mem_to_reg_EX_MEM & write_back_ctrl_EX_MEM;
+
     MEM_WB : PROCESS(clk, rst)
     BEGIN
         IF (rst = '1') THEN
@@ -467,7 +455,7 @@ BEGIN
         pc_jump_MEM_WB WHEN "11",       --select the AUIPC way
         alu_result_signal_MEM_WB WHEN "00" | "01", --select the alu way or lui way
         data_MEM_WB WHEN OTHERS;
-        
+
     WITH (JAL_signal_MEM_WB) SELECT out_writeback_mux <=
         pc_next_MEM_WB WHEN '1',
         out_mem_mux WHEN OTHERS;
