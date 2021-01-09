@@ -9,12 +9,10 @@ entity Hazard_detection_unit is
     port(
         rs1, rs2, rd_ID_EX, rd_EX_MEM          : in  std_logic_vector(4 downto 0);
         alu_src                                : in  std_logic;
-        mem_wrt                                : in  std_logic;
+        mem_write                              : in  std_logic;
         mem_read_ID_EX                         : in  std_logic;
         effective_branch                       : in  std_logic;
-        clk                                    : in  std_logic;
         rst                                    : in  std_logic;
-        opcode                                 : in  std_logic_vector(6 downto 0);
         pc_enable                              : out std_logic;
         nop_injector_ID_EX, nop_injector_IF_ID : out std_logic
     );
@@ -41,6 +39,7 @@ begin
                 nop_injector_ID_EX <= '0';
                 nop_injector_IF_ID <= '0';
             end if;
+
             ------
             ----this code lines operates on the store instructions         
             ------        
@@ -67,6 +66,25 @@ begin
             else
                 --Normal condition.
                 pc_enable <= '0';
+            end if;
+
+            ------
+            ----these code line operates on store-word instruction         
+            ------
+            if (mem_write = '1') then
+                if (rs2 = rd_ID_EX) then
+                    nop_injector_ID_EX <= '1';
+                    pc_enable          <= '1';
+                elsif (rs2 = rd_EX_MEM) then
+                    nop_injector_ID_EX <= '1';
+                    pc_enable          <= '1';
+                else
+                    nop_injector_ID_EX <= '0';
+                    pc_enable          <= '0';
+                end if;
+            else
+                nop_injector_ID_EX <= '0';
+                pc_enable          <= '0';
             end if;
         end if;
     end process hz;

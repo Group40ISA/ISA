@@ -86,12 +86,10 @@ ARCHITECTURE structural OF uP IS
         port(
             rs1, rs2, rd_ID_EX, rd_EX_MEM          : in  std_logic_vector(4 downto 0);
             alu_src                                : in  std_logic;
-            mem_wrt                                : in  std_logic;
+            mem_write                                : in  std_logic;
             mem_read_ID_EX                         : in  std_logic;
             effective_branch                       : in  std_logic;
-            clk                                    : in  std_logic;
             rst                                    : in  std_logic;
-            opcode                                 : in  std_logic_vector(6 downto 0);
             pc_enable                              : out std_logic;
             nop_injector_ID_EX, nop_injector_IF_ID : out std_logic
         );
@@ -261,12 +259,10 @@ BEGIN
             rd_ID_EX           => WReg_ID_EX,
             rd_EX_MEM          => WReg_EX_MEM,
             alu_src            => alu_src,
-            mem_wrt            => mem_write_ID_EX,
+            mem_write          => mem_write,
             mem_read_ID_EX     => mem_read_ID_EX,
             effective_branch   => effective_branch,
-            clk                => clk,
             rst                => rst,
-            opcode             => instruction_IF_ID(6 DOWNTO 0), 
             pc_enable          => pc_enable,
             nop_injector_ID_EX => nop_injector_ID_EX,
             nop_injector_IF_ID => nop_injector_IF_ID
