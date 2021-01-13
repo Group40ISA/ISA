@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
------to have lower number of NOP, it 's possible to move the and related to target address in the stage of execution
+-----to have lower number of NOP, it 's possible to move the AND related to target address in the stage of execution
 -----in this way we 'll have only 2 NOP rather than 3
 
 entity Hazard_detection_unit is
@@ -11,10 +11,10 @@ entity Hazard_detection_unit is
         alu_src                                : in  std_logic;
         mem_write                              : in  std_logic;
         mem_read_ID_EX                         : in  std_logic;
-        effective_branch                       : in  std_logic;
+        effective_branch                       : in  std_logic; -- signal useful to indicate the jump condition
         rst                                    : in  std_logic;
         pc_enable                              : out std_logic;
-        nop_injector_ID_EX, nop_injector_IF_ID : out std_logic
+        nop_injector_ID_EX, nop_injector_IF_ID : out std_logic -- signal useful to insert the NOP operation into the pipe
     );
 end entity Hazard_detection_unit;
 
@@ -41,11 +41,11 @@ begin
             end if;
 
             ------
-            ----this code lines operates on the store instructions         
+            ----these code lines operates on the store instructions         
             ------        
             if (mem_read_ID_EX = '1') then
-                --This control is used to recognize if the istruction is an not a I-type 
-                --and in such case compare  both registers  
+                --This control is used to recognize if the istruction is not an I-type 
+                --and in such case compare both registers  
                 if (alu_src = '0') then
                     if (rs1 = rd_ID_EX or rs2 = rd_ID_EX) then
                         nop_injector_ID_EX <= '1';
@@ -69,8 +69,8 @@ begin
             end if;
 
             ------
-            ----these code line operates on store-word instruction         
-            ------
+            ----these code line operates on store-word instruction when the rd register of previous instruction is the same        
+            ----rs register of the store instruction
             if (mem_write = '1') then
                 if (rs2 = rd_ID_EX) then
                     nop_injector_ID_EX <= '1';

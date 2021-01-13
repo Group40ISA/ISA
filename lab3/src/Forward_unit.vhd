@@ -10,11 +10,14 @@ entity Forward_unit is
         alu_src                        : in  std_logic;
         wb_sel_mux_ex_mem              : in  std_logic_vector(1 downto 0);
         rst                            : in  std_logic;
-        forward_A, forward_B           : out std_logic_vector(1 downto 0)
+        forward_A, forward_B           : out std_logic_vector(1 downto 0) --signals useful to select the correct bypassing
     );
 end entity Forward_unit;
 
 architecture RTL of Forward_unit is
+	
+	--the data dependencies are verified up to two consecutive clock edges, because of that the comparisons are performed between
+	--the signals out of RF and the siganls out of ex_mem reg and mem_wb reg   
 
 begin
     process(rst, rs_1, rs_2, rd_ex_mem, rd_mem_wb, alu_src, reg_wrt_ex_mem, reg_wrt_mem_wb, wb_sel_mux_ex_mem)
@@ -36,7 +39,11 @@ begin
             else
                 forward_A <= "00";      ---READ 1 way 
             end if;
-            if (alu_src = '0') then
+            
+            --in case of alu_src=1, so when we are dealing with I type instruction we do not have to verify if there are 
+            --hazard on rs2
+             
+            if (alu_src = '0') then 
                 if (rs_2 = rd_ex_mem) then
                     if (wb_sel_mux_ex_mem = "11") then
                         forward_B <= "11"; ---AUIPC way
