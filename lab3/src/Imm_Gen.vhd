@@ -25,8 +25,10 @@ begin
 			if(instr(14 downto 12) = "011") then
 				if(MSB = '0') then
 					imm_ADDI <= (others => '0');
-				else
+				elsif (MSB = '1') then 
 					imm_ADDI <= (0  => '1' , others => '0');
+				else 
+					imm_ADDI <= (others  => 'U');
 				end if;
 			else
 				imm_ADDI  <= ext & instr(31 downto 20);
