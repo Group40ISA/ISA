@@ -37,7 +37,7 @@ BEGIN
         VARIABLE value_instr   : STD_LOGIC_VECTOR(instruction_parallelism - 1 DOWNTO 0);
     BEGIN
         IF init = '1' THEN
-            file_open(text_file, "C:\Users\andre\workspaceSigasi\Lab3\tb\memory\code_ABS.txt", read_mode);
+            file_open(text_file, "/home/raffaele/Scrivania/Uni/II anno/ISA/git_hub/ISA/ISA/lab3/tb/memory/code_ABS.txt", read_mode);
             WHILE NOT (endfile(text_file)) and init_pointer <=4194388 LOOP -- stops the loop if exceed text_memory dim.
                 readline(text_file, in_instr_line);
                 read(in_instr_line, value_instr);

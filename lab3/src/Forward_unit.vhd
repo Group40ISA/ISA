@@ -4,28 +4,31 @@ use ieee.numeric_std.all;
 
 entity Forward_unit is
     port(
-        rs_1, rs_2                     : in  std_logic_vector(4 downto 0);
-        rd_ex_mem, rd_mem_wb           : in  std_logic_vector(4 downto 0);
-        reg_wrt_ex_mem, reg_wrt_mem_wb : in  std_logic;
-        alu_src                        : in  std_logic;
-        wb_sel_mux_ex_mem              : in  std_logic_vector(1 downto 0);
-        rst                            : in  std_logic;
-        forward_A, forward_B           : out std_logic_vector(1 downto 0) --signals useful to select the correct bypassing
+        rs_1, rs_2                                      : in  std_logic_vector(4 downto 0);
+        rd_ex_mem, rd_mem_wb                            : in  std_logic_vector(4 downto 0);
+        reg_wrt_id_ex, reg_wrt_ex_mem, reg_wrt_mem_wb : in  std_logic;
+        alu_src                                         : in  std_logic;
+        wb_sel_mux_ex_mem                               : in  std_logic_vector(1 downto 0);
+        rst                                             : in  std_logic;
+        rs_if_id, rd_id_ex                              : in  std_logic_vector(4 downto 0);
+        imm_ctrl                                        : out std_logic_vector(1 downto 0);
+        forward_A, forward_B                            : out std_logic_vector(1 downto 0) --signals useful to select the correct bypassing
     );
 end entity Forward_unit;
 
 architecture RTL of Forward_unit is
-	
-	--the data dependencies are verified up to two consecutive clock edges, because of that the comparisons are performed between
-	--the signals out of RF and the siganls out of ex_mem reg and mem_wb reg   
-
+    ------
+    --the data dependencies are verified up to two consecutive clock edges, because of that the comparisons are performed between
+    --the signals out of RF and the siganls out of ex_mem reg and mem_wb reg   
+    ------ 
 begin
-    process(rst, rs_1, rs_2, rd_ex_mem, rd_mem_wb, alu_src, reg_wrt_ex_mem, reg_wrt_mem_wb, wb_sel_mux_ex_mem)
+    process(rst, rs_1, rs_2, rd_ex_mem, rd_mem_wb, alu_src, reg_wrt_ex_mem,reg_wrt_id_ex, reg_wrt_mem_wb, wb_sel_mux_ex_mem, rs_if_id, rd_id_ex)
     begin
         if (rst = '1') then
             forward_A <= "00";
             forward_B <= "00";
-        elsif (reg_wrt_ex_mem = '1' or reg_wrt_mem_wb = '1') then
+            imm_ctrl  <= "00";
+        elsif (reg_wrt_ex_mem = '1' or reg_wrt_mem_wb = '1' or reg_wrt_id_ex='1' ) then
             if (rs_1 = rd_ex_mem) then
                 if (wb_sel_mux_ex_mem = "11") then
                     forward_A <= "11";  ---AUIPC way
@@ -40,10 +43,12 @@ begin
                 forward_A <= "00";      ---READ 1 way 
             end if;
             
+            ----
             --in case of alu_src=1, so when we are dealing with I type instruction we do not have to verify if there are 
             --hazard on rs2
-             
-            if (alu_src = '0') then 
+            ----
+            
+            if (alu_src = '0') then
                 if (rs_2 = rd_ex_mem) then
                     if (wb_sel_mux_ex_mem = "11") then
                         forward_B <= "11"; ---AUIPC way
@@ -60,6 +65,20 @@ begin
             else
                 forward_B <= "00";
             end if;
+            
+            ----
+            --
+            --
+            ----
+            
+            if(rs_if_id =rd_id_ex)then
+                imm_ctrl <= "01";       --select the msb of alu result in the id/ex phase.
+            elsif(rs_if_id=rd_ex_mem)then
+                imm_ctrl <= "10";       --select the msb of alu in the ex/mem phase.
+            else
+                imm_ctrl <= "00";       -- select the msb of the register file's out.
+            end if;            
+            
         end if;
     end process;
 

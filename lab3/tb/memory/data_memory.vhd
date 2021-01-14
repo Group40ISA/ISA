@@ -39,7 +39,7 @@ BEGIN
     BEGIN
         IF end_code = '1' and end_code'event THEN
             mem_text := data_mem;
-            file_open(text_content, "C:\Users\andre\workspaceSigasi\Lab3\tb\memory\content_data.txt", append_mode);
+            file_open(text_content,"/home/raffaele/Scrivania/Uni/II anno/ISA/git_hub/ISA/ISA/lab3/tb/memory/content_data.txt", append_mode);
 
             WHILE (out_pointer < 268505088) LOOP
                 in_text     := mem_text(out_pointer) & mem_text((out_pointer + 1)) & mem_text((out_pointer + 2)) & mem_text((out_pointer + 3));
@@ -66,7 +66,7 @@ BEGIN
         VARIABLE value_instr   : STD_LOGIC_VECTOR(data_parallelism - 1 DOWNTO 0);
     BEGIN
         IF init = '1' THEN
-            file_open(text_file, "C:\Users\andre\workspaceSigasi\Lab3\tb\memory\data.txt", read_mode);
+            file_open(text_file, "/home/raffaele/Scrivania/Uni/II anno/ISA/git_hub/ISA/ISA/lab3/tb/memory/data.txt", read_mode);
             WHILE NOT (endfile(text_file)) and init_pointer < 268505088 LOOP -- stops the loop if exceed text_memory dim.
                 readline(text_file, in_instr_line);
                 read(in_instr_line, value_instr);
