@@ -1,0 +1,11 @@
+variable clock "5.0"
+
+sh vcd2saif -input ../vcd/uP.vcd -output ../saif/uP.saif
+
+create_clock -name my_clk -period $clock clk
+
+read_verilog -netlist ../netlist/uP.v
+read_saif -input ../saif/uP.saif -instance tb_uP/risc_lite -unit ns -scale 1 
+
+report_power > report/report_power_backannotation.txt
+report_area > report/report_area_netlist_verilog.txt

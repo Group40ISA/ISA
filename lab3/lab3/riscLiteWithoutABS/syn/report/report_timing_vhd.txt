@@ -1,0 +1,104 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : uP
+Version: O-2018.06-SP4
+Date   : Wed Feb 17 00:13:29 2021
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: rst (input port clocked by my_clk)
+  Endpoint: pipe_flush1
+            (output port clocked by my_clk)
+  Path Group: my_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  uP                 5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock my_clk (rise edge)                                0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  input external delay                                    0.50       0.50 f
+  rst (in)                                                0.00       0.50 f
+  forward/rst (ForwardUnit)                               0.00       0.50 f
+  forward/U34/ZN (INV_X1)                                 0.03       0.53 r
+  forward/U13/ZN (OAI21_X1)                               0.04       0.57 f
+  forward/U27/ZN (NOR4_X1)                                0.12       0.69 r
+  forward/forward_B[0] (ForwardUnit)                      0.00       0.69 r
+  U1426/ZN (INV_X1)                                       0.04       0.73 f
+  U1389/ZN (NAND2_X1)                                     0.04       0.77 r
+  U1387/ZN (NOR2_X1)                                      0.03       0.80 f
+  U1393/Z (BUF_X2)                                        0.06       0.85 f
+  U1406/ZN (AOI222_X1)                                    0.12       0.97 r
+  U1424/ZN (OAI221_X1)                                    0.06       1.03 f
+  op/B[0] (ALU)                                           0.00       1.03 f
+  op/U294/ZN (XNOR2_X1)                                   0.07       1.10 f
+  op/add_1_root_add_58_2/B[0] (ALU_DW01_add_0)            0.00       1.10 f
+  op/add_1_root_add_58_2/U1_0/CO (FA_X1)                  0.11       1.21 f
+  op/add_1_root_add_58_2/U1_1/CO (FA_X1)                  0.09       1.30 f
+  op/add_1_root_add_58_2/U1_2/CO (FA_X1)                  0.09       1.39 f
+  op/add_1_root_add_58_2/U1_3/CO (FA_X1)                  0.09       1.48 f
+  op/add_1_root_add_58_2/U1_4/CO (FA_X1)                  0.09       1.58 f
+  op/add_1_root_add_58_2/U1_5/CO (FA_X1)                  0.09       1.67 f
+  op/add_1_root_add_58_2/U1_6/CO (FA_X1)                  0.09       1.76 f
+  op/add_1_root_add_58_2/U1_7/CO (FA_X1)                  0.09       1.85 f
+  op/add_1_root_add_58_2/U1_8/CO (FA_X1)                  0.09       1.94 f
+  op/add_1_root_add_58_2/U1_9/CO (FA_X1)                  0.09       2.03 f
+  op/add_1_root_add_58_2/U1_10/CO (FA_X1)                 0.09       2.12 f
+  op/add_1_root_add_58_2/U1_11/CO (FA_X1)                 0.09       2.21 f
+  op/add_1_root_add_58_2/U1_12/CO (FA_X1)                 0.09       2.30 f
+  op/add_1_root_add_58_2/U1_13/CO (FA_X1)                 0.09       2.39 f
+  op/add_1_root_add_58_2/U1_14/CO (FA_X1)                 0.09       2.48 f
+  op/add_1_root_add_58_2/U1_15/CO (FA_X1)                 0.09       2.57 f
+  op/add_1_root_add_58_2/U1_16/CO (FA_X1)                 0.09       2.66 f
+  op/add_1_root_add_58_2/U1_17/CO (FA_X1)                 0.09       2.75 f
+  op/add_1_root_add_58_2/U1_18/CO (FA_X1)                 0.09       2.84 f
+  op/add_1_root_add_58_2/U1_19/CO (FA_X1)                 0.09       2.93 f
+  op/add_1_root_add_58_2/U1_20/CO (FA_X1)                 0.09       3.03 f
+  op/add_1_root_add_58_2/U1_21/CO (FA_X1)                 0.09       3.12 f
+  op/add_1_root_add_58_2/U1_22/CO (FA_X1)                 0.09       3.21 f
+  op/add_1_root_add_58_2/U1_23/CO (FA_X1)                 0.09       3.30 f
+  op/add_1_root_add_58_2/U1_24/CO (FA_X1)                 0.09       3.39 f
+  op/add_1_root_add_58_2/U1_25/CO (FA_X1)                 0.09       3.48 f
+  op/add_1_root_add_58_2/U1_26/CO (FA_X1)                 0.09       3.57 f
+  op/add_1_root_add_58_2/U1_27/CO (FA_X1)                 0.09       3.66 f
+  op/add_1_root_add_58_2/U1_28/CO (FA_X1)                 0.09       3.75 f
+  op/add_1_root_add_58_2/U1_29/CO (FA_X1)                 0.09       3.84 f
+  op/add_1_root_add_58_2/U1_30/CO (FA_X1)                 0.09       3.93 f
+  op/add_1_root_add_58_2/U1_31/S (FA_X1)                  0.12       4.05 f
+  op/add_1_root_add_58_2/SUM[31] (ALU_DW01_add_0)         0.00       4.05 f
+  op/U300/ZN (NOR4_X1)                                    0.07       4.11 r
+  op/U299/ZN (NAND4_X1)                                   0.05       4.16 f
+  op/U295/ZN (OAI21_X1)                                   0.04       4.20 r
+  op/zero (ALU)                                           0.00       4.20 r
+  U1409/ZN (NAND2_X1)                                     0.04       4.24 f
+  U1412/ZN (INV_X1)                                       0.03       4.27 r
+  hzd_unit/effective_branch (HazardDetectionUnit)         0.00       4.27 r
+  hzd_unit/U25/ZN (NAND4_X1)                              0.04       4.31 f
+  hzd_unit/U27/ZN (NAND2_X1)                              0.05       4.36 r
+  hzd_unit/pipe_flush1 (HazardDetectionUnit)              0.00       4.36 r
+  pipe_flush1 (out)                                       0.03       4.39 r
+  data arrival time                                                  4.39
+
+  clock my_clk (rise edge)                                5.00       5.00
+  clock network delay (ideal)                             0.00       5.00
+  clock uncertainty                                      -0.07       4.93
+  output external delay                                  -0.50       4.43
+  data required time                                                 4.43
+  --------------------------------------------------------------------------
+  data required time                                                 4.43
+  data arrival time                                                 -4.39
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.04
+
+
+1

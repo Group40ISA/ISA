@@ -1,0 +1,611 @@
+[02/10 00:19:45      0s] 
+[02/10 00:19:45      0s] Cadence Innovus(TM) Implementation System.
+[02/10 00:19:45      0s] Copyright 2017 Cadence Design Systems, Inc. All rights reserved worldwide.
+[02/10 00:19:45      0s] 
+[02/10 00:19:45      0s] Version:	v17.11-s080_1, built Fri Aug 4 11:13:11 PDT 2017
+[02/10 00:19:45      0s] Options:	
+[02/10 00:19:45      0s] Date:		Wed Feb 10 00:19:45 2021
+[02/10 00:19:45      0s] Host:		localhost.localdomain (x86_64 w/Linux 3.10.0-957.5.1.el7.x86_64) (1core*2cpus*Westmere E56xx/L56xx/X56xx (Nehalem-C) 4096KB)
+[02/10 00:19:45      0s] OS:		CentOS Linux release 7.6.1810 (Core) 
+[02/10 00:19:45      0s] 
+[02/10 00:19:45      0s] License:
+[02/10 00:19:45      0s] 		invs	Innovus Implementation System	17.1	checkout succeeded
+[02/10 00:19:45      0s] 		8 CPU jobs allowed with the current license(s). Use setMultiCpuUsage to set your required CPU count.
+[02/10 00:20:08     21s] @(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+[02/10 00:20:08     21s] @(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+[02/10 00:20:08     21s] @(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+[02/10 00:20:08     21s] @(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+[02/10 00:20:08     21s] @(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+[02/10 00:20:08     21s] @(#)CDS: CPE v17.11-s095
+[02/10 00:20:08     21s] @(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+[02/10 00:20:08     21s] @(#)CDS: OA 22.50-p063 Fri Feb  3 19:45:13 2017
+[02/10 00:20:08     21s] @(#)CDS: SGN 10.10-p124 (19-Aug-2014) (64 bit executable)
+[02/10 00:20:08     21s] @(#)CDS: RCDB 11.10
+[02/10 00:20:08     21s] --- Running on localhost.localdomain (x86_64 w/Linux 3.10.0-957.5.1.el7.x86_64) (1core*2cpus*Westmere E56xx/L56xx/X56xx (Nehalem-C) 4096KB) ---
+[02/10 00:20:08     21s] Create and set the environment variable TMPDIR to /tmp/innovus_temp_19289_localhost.localdomain_isa40_LV9DH5.
+
+[02/10 00:20:08     21s] Change the soft stacksize limit to 0.2%RAM (31 mbytes). Set global soft_stack_size_limit to change the value.
+[02/10 00:20:09     22s] 
+[02/10 00:20:09     22s] **INFO:  MMMC transition support version v31-84 
+[02/10 00:20:09     22s] 
+[02/10 00:20:09     22s] <CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+[02/10 00:20:09     22s] <CMD> suppressMessage ENCEXT-2799
+[02/10 00:20:09     22s] <CMD> getDrawView
+[02/10 00:20:09     22s] <CMD> loadWorkspace -name Physical
+[02/10 00:20:10     22s] <CMD> win
+[02/10 00:20:27     25s] <CMD> set init_design_netlisttype verilog
+[02/10 00:20:27     25s] <CMD> set init_design_settop 1
+[02/10 00:20:27     25s] <CMD> set init_top_cell uP
+[02/10 00:20:27     25s] <CMD> set init_verilog ../netlist/uP.v
+[02/10 00:20:27     25s] <CMD> set init_lef_file /software/dk/nangate45/lef/NangateOpenCellLibrary.lef
+[02/10 00:20:27     25s] <CMD> set init_gnd_net VSS
+[02/10 00:20:27     25s] <CMD> set init_pwr_net VDD
+[02/10 00:20:32     26s] <CMD> set init_mmmc_file mmm_design.tcl
+[02/10 00:20:32     26s] <CMD> init_design
+[02/10 00:20:32     26s] #% Begin Load MMMC data ... (date=02/10 00:20:32, mem=456.5M)
+[02/10 00:20:32     26s] #% End Load MMMC data ... (date=02/10 00:20:32, total cpu=0:00:00.0, real=0:00:00.0, peak res=456.5M, current mem=453.0M)
+[02/10 00:20:32     26s] 
+[02/10 00:20:32     26s] Loading LEF file /software/dk/nangate45/lef/NangateOpenCellLibrary.lef ...
+[02/10 00:20:32     26s] Set DBUPerIGU to M2 pitch 380.
+[02/10 00:20:32     26s] 
+[02/10 00:20:32     26s] viaInitial starts at Wed Feb 10 00:20:32 2021
+viaInitial ends at Wed Feb 10 00:20:32 2021
+Loading view definition file from mmm_design.tcl
+[02/10 00:20:32     26s] Reading MY_LIBSET timing library '/software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib' ...
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AND2_X1' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AND2_X2' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AND2_X4' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AND3_X1' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AND3_X2' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AND3_X4' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AND4_X1' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AND4_X2' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AND4_X4' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AOI21_X1' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AOI21_X2' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AOI21_X4' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AOI22_X1' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AOI22_X2' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AOI22_X4' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AOI211_X1' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AOI211_X2' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AOI211_X4' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AOI221_X1' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] **WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'ZN' of cell 'AOI221_X2' is not defined in the library. (File /software/dk/nangate45/liberty/NangateOpenCellLibrary_typical_ecsm_nowlm.lib)
+[02/10 00:20:32     26s] Message <TECHLIB-436> has exceeded the message display limit of '20'. Use 'set_message -no_limit -id list_of_msgIDs' to reset the message limit.
+[02/10 00:20:34     28s] Read 134 cells in library 'NangateOpenCellLibrary' 
+[02/10 00:20:34     28s] *** End library_loading (cpu=0.03min, real=0.03min, mem=18.9M, fe_cpu=0.47min, fe_real=0.82min, fe_mem=525.4M) ***
+[02/10 00:20:34     28s] #% Begin Load netlist data ... (date=02/10 00:20:34, mem=547.7M)
+[02/10 00:20:34     28s] *** Begin netlist parsing (mem=525.4M) ***
+[02/10 00:20:34     28s] Created 134 new cells from 1 timing libraries.
+[02/10 00:20:34     28s] Reading netlist ...
+[02/10 00:20:34     28s] Backslashed names will retain backslash and a trailing blank character.
+[02/10 00:20:34     28s] Reading verilog netlist '../netlist/uP.v'
+[02/10 00:20:34     28s] 
+[02/10 00:20:34     28s] *** Memory Usage v#1 (Current mem = 525.363M, initial mem = 179.684M) ***
+[02/10 00:20:34     28s] *** End netlist parsing (cpu=0:00:00.1, real=0:00:00.0, mem=525.4M) ***
+[02/10 00:20:34     28s] #% End Load netlist data ... (date=02/10 00:20:34, total cpu=0:00:00.1, real=0:00:00.0, peak res=547.7M, current mem=478.1M)
+[02/10 00:20:34     28s] Set top cell to uP.
+[02/10 00:20:35     28s] Hooked 134 DB cells to tlib cells.
+[02/10 00:20:35     28s] Starting recursive module instantiation check.
+[02/10 00:20:35     28s] No recursion found.
+[02/10 00:20:35     28s] Building hierarchical netlist for Cell uP ...
+[02/10 00:20:35     28s] *** Netlist is unique.
+[02/10 00:20:35     28s] ** info: there are 135 modules.
+[02/10 00:20:35     28s] ** info: there are 7255 stdCell insts.
+[02/10 00:20:35     28s] 
+[02/10 00:20:35     28s] *** Memory Usage v#1 (Current mem = 541.027M, initial mem = 179.684M) ***
+[02/10 00:20:35     28s] Generated pitch 1.68 in metal10 is different from 1.6 defined in technology file in preferred direction.
+[02/10 00:20:35     28s] Generated pitch 0.84 in metal8 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:20:35     28s] Generated pitch 0.84 in metal7 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:20:35     28s] Set Default Net Delay as 1000 ps.
+[02/10 00:20:35     28s] Set Default Net Load as 0.5 pF. 
+[02/10 00:20:35     28s] Set Default Input Pin Transition as 0.1 ps.
+[02/10 00:20:35     28s] Extraction setup Delayed 
+[02/10 00:20:35     28s] *Info: initialize multi-corner CTS.
+[02/10 00:20:35     29s] Reading timing constraints file '../netlist/uP.sdc' ...
+[02/10 00:20:35     29s] Current (total cpu=0:00:29.1, real=0:00:50.0, peak res=604.4M, current mem=604.4M)
+[02/10 00:20:35     29s] INFO (CTE): Constraints read successfully.
+[02/10 00:20:35     29s] WARNING (CTE-25): Line: 8 of File ../netlist/uP.sdc : Skipped unsupported command: set_units
+[02/10 00:20:35     29s] 
+[02/10 00:20:35     29s] 
+[02/10 00:20:35     29s] Ending "Constraint file reading stats" (total cpu=0:00:00.1, real=0:00:00.0, peak res=618.8M, current mem=618.8M)
+[02/10 00:20:36     29s] Current (total cpu=0:00:29.2, real=0:00:51.0, peak res=618.8M, current mem=618.8M)
+[02/10 00:20:36     29s] Creating Cell Server ...(0, 1, 1, 1)
+[02/10 00:20:36     29s] Summary for sequential cells identification: 
+[02/10 00:20:36     29s]   Identified SBFF number: 16
+[02/10 00:20:36     29s]   Identified MBFF number: 0
+[02/10 00:20:36     29s]   Identified SB Latch number: 0
+[02/10 00:20:36     29s]   Identified MB Latch number: 0
+[02/10 00:20:36     29s]   Not identified SBFF number: 0
+[02/10 00:20:36     29s]   Not identified MBFF number: 0
+[02/10 00:20:36     29s]   Not identified SB Latch number: 0
+[02/10 00:20:36     29s]   Not identified MB Latch number: 0
+[02/10 00:20:36     29s]   Number of sequential cells which are not FFs: 13
+[02/10 00:20:36     29s] Total number of combinational cells: 99
+[02/10 00:20:36     29s] Total number of sequential cells: 29
+[02/10 00:20:36     29s] Total number of tristate cells: 6
+[02/10 00:20:36     29s] Total number of level shifter cells: 0
+[02/10 00:20:36     29s] Total number of power gating cells: 0
+[02/10 00:20:36     29s] Total number of isolation cells: 0
+[02/10 00:20:36     29s] Total number of power switch cells: 0
+[02/10 00:20:36     29s] Total number of pulse generator cells: 0
+[02/10 00:20:36     29s] Total number of always on buffers: 0
+[02/10 00:20:36     29s] Total number of retention cells: 0
+[02/10 00:20:36     29s] List of usable buffers: BUF_X1 BUF_X2 BUF_X4 BUF_X8 BUF_X16 BUF_X32 CLKBUF_X1 CLKBUF_X2 CLKBUF_X3
+[02/10 00:20:36     29s] Total number of usable buffers: 9
+[02/10 00:20:36     29s] List of unusable buffers:
+[02/10 00:20:36     29s] Total number of unusable buffers: 0
+[02/10 00:20:36     29s] List of usable inverters: INV_X1 INV_X2 INV_X4 INV_X8 INV_X16 INV_X32
+[02/10 00:20:36     29s] Total number of usable inverters: 6
+[02/10 00:20:36     29s] List of unusable inverters:
+[02/10 00:20:36     29s] Total number of unusable inverters: 0
+[02/10 00:20:36     29s] List of identified usable delay cells:
+[02/10 00:20:36     29s] Total number of identified usable delay cells: 0
+[02/10 00:20:36     29s] List of identified unusable delay cells:
+[02/10 00:20:36     29s] Total number of identified unusable delay cells: 0
+[02/10 00:20:36     29s] Creating Cell Server, finished. 
+[02/10 00:20:36     29s] 
+[02/10 00:20:36     29s] No delay cells were detected in the set of buffers. Buffers will be used to fix hold violations.
+[02/10 00:20:36     29s] Deleting Cell Server ...
+[02/10 00:20:36     29s] Patterns Extraction called explicitly through PreRoutePatternsIfNeeded call 
+[02/10 00:20:36     29s] Extraction setup Started 
+[02/10 00:20:36     29s] Initializing multi-corner RC extraction with 1 active RC Corners ...
+[02/10 00:20:36     29s] Reading Capacitance Table File /software/dk/nangate45/lef/captables/NCSU_FreePDK_45nm.capTbl ...
+[02/10 00:20:36     29s] Cap table was created using Encounter 08.10-p004_1.
+[02/10 00:20:36     29s] Process name: master_techFreePDK45.
+[02/10 00:20:36     29s] Importing multi-corner RC tables ... 
+[02/10 00:20:36     29s] Summary of Active RC-Corners : 
+[02/10 00:20:36     29s]  
+[02/10 00:20:36     29s]  Analysis View: MyAnView
+[02/10 00:20:36     29s]     RC-Corner Name        : my_rc
+[02/10 00:20:36     29s]     RC-Corner Index       : 0
+[02/10 00:20:36     29s]     RC-Corner Temperature : 25 Celsius
+[02/10 00:20:36     29s]     RC-Corner Cap Table   : '/software/dk/nangate45/lef/captables/NCSU_FreePDK_45nm.capTbl'
+[02/10 00:20:36     29s]     RC-Corner PreRoute Res Factor         : 1
+[02/10 00:20:36     29s]     RC-Corner PreRoute Cap Factor         : 1
+[02/10 00:20:36     29s]     RC-Corner PostRoute Res Factor        : 1 {1 1 1}
+[02/10 00:20:36     29s]     RC-Corner PostRoute Cap Factor        : 1 {1 1 1}
+[02/10 00:20:36     29s]     RC-Corner PostRoute XCap Factor       : 1 {1 1 1}
+[02/10 00:20:36     29s]     RC-Corner PreRoute Clock Res Factor   : 1	[Derived from postRoute_res (effortLevel low)]
+[02/10 00:20:36     29s]     RC-Corner PreRoute Clock Cap Factor   : 1	[Derived from postRoute_cap (effortLevel low)]
+[02/10 00:20:36     29s]     RC-Corner PostRoute Clock Cap Factor  : 1 {1 1 1} 	[Derived from postRoute_cap (effortLevel low)]
+[02/10 00:20:36     29s]     RC-Corner PostRoute Clock Res Factor  : 1 {1 1 1} 	[Derived from postRoute_res (effortLevel low)]
+[02/10 00:20:36     29s] 
+[02/10 00:20:36     29s] *** Summary of all messages that are not suppressed in this session:
+[02/10 00:20:36     29s] Severity  ID               Count  Summary                                  
+[02/10 00:20:36     29s] WARNING   TECHLIB-436         20  Attribute '%s' on '%s' pin '%s' of cell ...
+[02/10 00:20:36     29s] *** Message Summary: 20 warning(s), 0 error(s)
+[02/10 00:20:36     29s] 
+[02/10 00:21:26     36s] <CMD> getIoFlowFlag
+[02/10 00:21:52     40s] <CMD> setIoFlowFlag 0
+[02/10 00:21:52     40s] <CMD> floorPlan -coreMarginsBy die -site FreePDK45_38x28_10R_NP_162NW_34O -r 1.0 0.6 0.8 0.8 0.8 0.8
+[02/10 00:21:52     40s] Generated pitch 1.68 in metal10 is different from 1.6 defined in technology file in preferred direction.
+[02/10 00:21:52     40s] Generated pitch 0.84 in metal8 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:21:52     40s] Generated pitch 0.84 in metal7 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:21:52     40s] **WARN: (IMPFP-325):	Floorplan of the design is resized. All current floorplan objects are automatically derived based on specified new floorplan. This may change blocks, fixed standard cells, existing routes and blockages.
+[02/10 00:21:52     40s] <CMD> uiSetTool select
+[02/10 00:21:52     40s] <CMD> getIoFlowFlag
+[02/10 00:21:52     40s] <CMD> fit
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingOffset 1.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingThreshold 1.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingJogDistance 1.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingLayers {}
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingOffset 1.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingThreshold 1.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingJogDistance 1.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingLayers {}
+[02/10 00:23:20     52s] <CMD> set sprCreateIeStripeWidth 10.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeStripeThreshold 1.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeStripeWidth 10.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeStripeThreshold 1.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingOffset 1.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingThreshold 1.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingJogDistance 1.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeRingLayers {}
+[02/10 00:23:20     52s] <CMD> set sprCreateIeStripeWidth 10.0
+[02/10 00:23:20     52s] <CMD> set sprCreateIeStripeThreshold 1.0
+[02/10 00:23:49     56s] <CMD> setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer metal10 -stacked_via_bottom_layer metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+[02/10 00:23:49     56s] The ring targets are set to core/block ring wires.
+[02/10 00:23:49     56s] addRing command will consider rows while creating rings.
+[02/10 00:23:49     56s] addRing command will disallow rings to go over rows.
+[02/10 00:23:49     56s] addRing command will ignore shorts while creating rings.
+[02/10 00:23:49     56s] <CMD> addRing -nets {VDD VSS} -type core_rings -follow core -layer {top metal1 bottom metal1 left metal2 right metal2} -width {top 0.8 bottom 0.8 left 0.8 right 0.8} -spacing {top 0.8 bottom 0.8 left 0.8 right 0.8} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -extend_corner {} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+[02/10 00:23:49     56s] 
+[02/10 00:23:49     56s] **WARN: (IMPPP-220):	The power planner does not create core rings outside the design boundary. Check the design boundary, or specify valid offsets.
+[02/10 00:23:49     56s] **WARN: (IMPPP-4051):	Fail to add rings. Gaps among IO cells may exist. Execute command addIoFiller to fill gaps among cells before addRing.
+[02/10 00:23:56     57s] <CMD> gui_select -rect {-3.036 37.714 -8.306 37.450}
+[02/10 00:24:08     59s] <CMD> panPage -1 0
+[02/10 00:24:08     59s] <CMD> panPage 0 1
+[02/10 00:24:12     59s] <CMD> fit
+[02/10 00:24:18     60s] <CMD> getIoFlowFlag
+[02/10 00:24:32     62s] <CMD> setIoFlowFlag 0
+[02/10 00:24:32     62s] <CMD> floorPlan -site FreePDK45_38x28_10R_NP_162NW_34O -r 0.995492349692 0.59997 1.8 1.8 1.8 1.8
+[02/10 00:24:32     62s] Generated pitch 1.68 in metal10 is different from 1.6 defined in technology file in preferred direction.
+[02/10 00:24:32     62s] Generated pitch 0.84 in metal8 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:24:32     62s] Generated pitch 0.84 in metal7 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:24:32     62s] **WARN: (IMPFP-325):	Floorplan of the design is resized. All current floorplan objects are automatically derived based on specified new floorplan. This may change blocks, fixed standard cells, existing routes and blockages.
+[02/10 00:24:32     62s] <CMD> uiSetTool select
+[02/10 00:24:32     62s] <CMD> getIoFlowFlag
+[02/10 00:24:32     62s] <CMD> fit
+[02/10 00:24:51     65s] <CMD> setIoFlowFlag 0
+[02/10 00:24:51     65s] <CMD> floorPlan -site FreePDK45_38x28_10R_NP_162NW_34O -r 0.977174118091 0.599589 2.6 2.6 2.6 2.6
+[02/10 00:24:51     65s] Generated pitch 1.68 in metal10 is different from 1.6 defined in technology file in preferred direction.
+[02/10 00:24:51     65s] Generated pitch 0.84 in metal8 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:24:51     65s] Generated pitch 0.84 in metal7 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:24:51     65s] **WARN: (IMPFP-325):	Floorplan of the design is resized. All current floorplan objects are automatically derived based on specified new floorplan. This may change blocks, fixed standard cells, existing routes and blockages.
+[02/10 00:24:51     65s] <CMD> uiSetTool select
+[02/10 00:24:51     65s] <CMD> getIoFlowFlag
+[02/10 00:24:51     65s] <CMD> fit
+[02/10 00:24:53     65s] <CMD> setIoFlowFlag 0
+[02/10 00:24:53     65s] <CMD> floorPlan -site FreePDK45_38x28_10R_NP_162NW_34O -r 0.959202740579 0.599311 2.66 2.66 2.66 2.66
+[02/10 00:24:53     65s] Generated pitch 1.68 in metal10 is different from 1.6 defined in technology file in preferred direction.
+[02/10 00:24:53     65s] Generated pitch 0.84 in metal8 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:24:53     65s] Generated pitch 0.84 in metal7 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:24:53     65s] <CMD> uiSetTool select
+[02/10 00:24:53     65s] <CMD> getIoFlowFlag
+[02/10 00:24:53     65s] <CMD> fit
+[02/10 00:25:15     69s] <CMD> setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer metal10 -stacked_via_bottom_layer metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+[02/10 00:25:15     69s] The ring targets are set to core/block ring wires.
+[02/10 00:25:15     69s] addRing command will consider rows while creating rings.
+[02/10 00:25:15     69s] addRing command will disallow rings to go over rows.
+[02/10 00:25:15     69s] addRing command will ignore shorts while creating rings.
+[02/10 00:25:15     69s] <CMD> addRing -nets {VDD VSS} -type core_rings -follow core -layer {top metal1 bottom metal1 left metal2 right metal2} -width {top 0.8 bottom 0.8 left 0.8 right 0.8} -spacing {top 0.8 bottom 0.8 left 0.8 right 0.8} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -extend_corner {} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+[02/10 00:25:15     69s] 
+[02/10 00:25:15     69s] **WARN: (IMPPP-220):	The power planner does not create core rings outside the design boundary. Check the design boundary, or specify valid offsets.
+[02/10 00:25:15     69s] **WARN: (IMPPP-4051):	Fail to add rings. Gaps among IO cells may exist. Execute command addIoFiller to fill gaps among cells before addRing.
+[02/10 00:26:31     79s] <CMD> ::mp::clearAllSeed
+[02/10 00:26:31     79s] <CMD> setPlanDesignMode -effort high -incremental false -boundaryPlace true -fixPlacedMacros false -noColorize false
+[02/10 00:26:31     79s] <CMD> planDesign
+[02/10 00:26:31     79s] Deleted 0 physical inst  (cell - / prefix -).
+[02/10 00:26:31     79s] ***** New seed flow = 1. *****  
+[02/10 00:26:31     79s] Ignore PD Guides: numIgnoredGuide = 0 
+[02/10 00:26:31     79s] Extracting standard cell pins and blockage ...... 
+[02/10 00:26:31     79s] Pin and blockage extraction finished
+[02/10 00:26:31     79s] Extracting macro/IO cell pins and blockage ...... 
+[02/10 00:26:31     79s] Pin and blockage extraction finished
+[02/10 00:26:31     79s] *** Starting "NanoPlace(TM) placement v#10 (mem=741.1M)" ...
+[02/10 00:26:31     79s] total jobs 1303
+[02/10 00:26:31     79s] multi thread init TemplateIndex for each ta. thread num 1
+[02/10 00:26:31     79s] Wait...
+[02/10 00:26:32     80s] *** Build Buffered Sizing Timing Model
+[02/10 00:26:32     80s] (cpu=0:00:00.8 mem=756.4M) ***
+[02/10 00:26:32     80s] *** Build Virtual Sizing Timing Model
+[02/10 00:26:32     80s] (cpu=0:00:00.9 mem=762.0M) ***
+[02/10 00:26:32     80s] No user setting net weight.
+[02/10 00:26:32     80s] Options: timingDriven clkGateAware pinGuide congEffort=auto gpeffort=medium 
+[02/10 00:26:32     80s] #std cell=7255 (0 fixed + 7255 movable) #block=0 (0 floating + 0 preplaced)
+[02/10 00:26:32     80s] #ioInst=0 #net=7449 #term=27824 #term/net=3.74, #fixedIo=0, #floatIo=0, #fixedPin=0, #floatPin=167
+[02/10 00:26:32     80s] stdCell: 7255 single + 0 double + 0 multi
+[02/10 00:26:32     80s] Total standard cell length = 10.5841 (mm), area = 0.0148 (mm^2)
+[02/10 00:26:32     80s] Core basic site is FreePDK45_38x28_10R_NP_162NW_34O
+[02/10 00:26:32     80s] Estimated cell power/ground rail width = 0.175 um
+[02/10 00:26:32     80s] Layer info - lib-1st H=1, V=2.  Cell-FPin=1. Top-pin=2
+[02/10 00:26:32     80s] Apply auto density screen in pre-place stage.
+[02/10 00:26:32     80s] Auto density screen increases utilization from 0.599 to 0.599
+[02/10 00:26:32     80s] Auto density screen runtime: cpu = 0:00:00.0 real = 0:00:00.0 mem = 765.8M
+[02/10 00:26:32     80s] Average module density = 0.599.
+[02/10 00:26:32     80s] Density for the design = 0.599.
+[02/10 00:26:32     80s]        = stdcell_area 55706 sites (14818 um^2) / alloc_area 92950 sites (24725 um^2).
+[02/10 00:26:32     80s] Pin Density = 0.2993.
+[02/10 00:26:32     80s]             = total # of pins 27824 / total area 92950.
+[02/10 00:26:32     80s] Initial padding reaches pin density 0.456 for top
+[02/10 00:26:32     80s] Min area ratio padding skipped minAreaTgt 1.050, addOnArea 1.500
+[02/10 00:26:32     80s] Initial padding increases density from 0.599 to 0.950 for top
+[02/10 00:26:32     80s] Fence Initialization: numPrefixFence = 0,  numAutoFence = 0, numPrefixGuide = 0  numAutoGuide = 0 numNoCon = 0 
+[02/10 00:26:32     80s] === lastAutoLevel = 8 
+[02/10 00:26:32     80s] [adp] 0:1:0:1
+[02/10 00:26:33     80s] Iteration  1: Total net bbox = 1.404e-09 (9.66e-10 4.39e-10)
+[02/10 00:26:33     80s]               Est.  stn bbox = 1.477e-09 (1.02e-09 4.60e-10)
+[02/10 00:26:33     80s]               cpu = 0:00:00.0 real = 0:00:00.0 mem = 779.9M
+[02/10 00:26:33     80s] User specified -module_cluster_mode =  0 
+[02/10 00:26:33     80s] Iteration  2: Total net bbox = 0.000e+00 (0.00e+00 0.00e+00)
+[02/10 00:26:33     80s]               Est.  stn bbox = 0.000e+00 (0.00e+00 0.00e+00)
+[02/10 00:26:33     80s]               cpu = 0:00:00.0 real = 0:00:00.0 mem = 780.5M
+[02/10 00:26:33     80s] exp_mt_sequential is set from setPlaceMode option to 1
+[02/10 00:26:33     80s] Setting dotProdMode from setPlaceMode option to Multi-thread sequential mode (nrThread=1)
+[02/10 00:26:33     80s] place_exp_mt_interval set to default 32
+[02/10 00:26:33     80s] place_exp_mt_interval_bias (first half) set to default 0.750000
+[02/10 00:26:34     80s] Iteration  3: Total net bbox = 1.435e+02 (6.15e+01 8.21e+01)
+[02/10 00:26:34     80s]               Est.  stn bbox = 1.778e+02 (7.55e+01 1.02e+02)
+[02/10 00:26:34     80s]               cpu = 0:00:00.2 real = 0:00:01.0 mem = 797.5M
+[02/10 00:26:36     82s] Iteration  4: Total net bbox = 8.718e+04 (4.00e+04 4.72e+04)
+[02/10 00:26:36     82s]               Est.  stn bbox = 1.126e+05 (5.18e+04 6.08e+04)
+[02/10 00:26:36     82s]               cpu = 0:00:02.0 real = 0:00:02.0 mem = 796.9M
+[02/10 00:26:39     85s] Iteration  5: Total net bbox = 8.892e+04 (4.99e+04 3.90e+04)
+[02/10 00:26:39     85s]               Est.  stn bbox = 1.172e+05 (6.79e+04 4.93e+04)
+[02/10 00:26:39     85s]               cpu = 0:00:02.9 real = 0:00:03.0 mem = 796.9M
+[02/10 00:26:39     85s]  RelinkConst: Total constraint = 0, Relinked 0 constraints . 
+[02/10 00:26:39     85s] User specified -fenceSpacing =  -1.0000 
+[02/10 00:26:39     85s] User specified fence spacing: -1.0000 um
+[02/10 00:26:39     85s] *** The nonConstraint instance area ratio is 0.560719 
+[02/10 00:26:39     85s] *** The prefixed-fenceArea/coreBoxArea is 0.000000, The auto-ConstraintArea/coreBoxArea is 0.000000 
+[02/10 00:26:39     85s] Start Auto fence creation, hasNoConInst = 1  .
+[02/10 00:26:39     85s] 
+[02/10 00:26:39     85s] ================== Start Auto-Fence Creation ==================
+[02/10 00:26:39     85s] User define fence spacing: -1.0000 um
+[02/10 00:26:39     85s] Number of Movable Guide      : 0
+[02/10 00:26:39     85s] Number of Movable Region     : 0
+[02/10 00:26:39     85s] Number of Movable Fence      : 0
+[02/10 00:26:39     85s] Number of Movable Soft Guide : 0
+[02/10 00:26:39     85s] Total Movable Objects        : 0 (non-group: 0, group: 0)
+[02/10 00:26:39     85s] Total Prefixed Objects       : 0
+[02/10 00:26:39     85s] Total Partition Cut Objects  : 0
+[02/10 00:26:39     85s] 
+[02/10 00:26:39     85s] 
+[02/10 00:26:39     85s] 
+[02/10 00:26:39     85s] Number of Nested Objects    : 0
+[02/10 00:26:39     85s] Number of Non-Nested Objects: 0
+[02/10 00:26:39     85s] Number of Nested Sets       : 0
+[02/10 00:26:39     85s] Number of Master&Clone Pairs: 0
+[02/10 00:26:39     85s] 
+[02/10 00:26:39     85s] Fence Spacing: 2.0000 um
+[02/10 00:26:39     85s] Snap Spacing: X(0.1900 um), Y(1.4000 um)
+[02/10 00:26:39     85s] Fence2Core Spaceing: 0.0000 um
+[02/10 00:26:39     85s] 
+[02/10 00:26:39     85s] ==== Design Information ====
+[02/10 00:26:39     85s] Core site: (5320, 5320) - (326420, 313320)
+[02/10 00:26:39     85s] Design Whitespace% : 100.00%
+[02/10 00:26:39     85s] Maximum Logical Level: 0
+[02/10 00:26:39     85s] Has Non-constraint Instance: 1
+[02/10 00:26:39     85s] Allow Disjoint Whitespace: 0
+[02/10 00:26:39     85s] 
+[02/10 00:26:39     85s] ==To Place Non-Nested Objects==
+[02/10 00:26:39     85s] Targets: 
+[02/10 00:26:39     85s] Number of Total Targets: 0
+[02/10 00:26:39     85s] 
+[02/10 00:26:39     85s] ================== Finished Auto-Fence Creation ===============
+[02/10 00:26:39     85s] *** Done Auto-Fence Creation, (cpu = 0:00:00.0, mem = 793.9M, mem_delta = 0.0M) ***
+[02/10 00:26:39     85s] End Auto fence creation 1.
+[02/10 00:26:39     85s] Iteration  6: Total net bbox = 1.085e+05 (6.44e+04 4.41e+04)
+[02/10 00:26:39     85s]               Est.  stn bbox = 1.372e+05 (8.26e+04 5.46e+04)
+[02/10 00:26:39     85s]               cpu = 0:00:05.5 real = 0:00:07.0 mem = 793.9M
+[02/10 00:26:39     85s] *** cost = 1.085e+05 (6.44e+04 4.41e+04) (cpu for global=0:00:05.5) real=448031:26:39***
+[02/10 00:26:39     85s] Solver runtime cpu: 0:00:05.1 real: 0:00:05.2
+[02/10 00:26:39     85s] Core Placement runtime cpu: 0:00:05.4 real: 0:00:07.0
+[02/10 00:26:39     85s] *** Free Virtual Timing Model ...(mem=779.9M)
+[02/10 00:26:39     86s] checkFence: found no fence violation.
+[02/10 00:26:39     86s] Checking routing tracks.....
+[02/10 00:26:39     86s] Checking other grids.....
+[02/10 00:26:39     86s] Checking routing blockage.....
+[02/10 00:26:39     86s] Checking components.....
+[02/10 00:26:39     86s] Checking constraints (guide/region/fence).....
+[02/10 00:26:39     86s] Checking groups.....
+[02/10 00:26:39     86s] 
+[02/10 00:26:39     86s] Checking Preroutes.....
+[02/10 00:26:39     86s] No. of regular pre-routes not on tracks : 0 
+[02/10 00:26:39     86s] 
+[02/10 00:26:39     86s] Reporting Utilizations.....
+[02/10 00:26:39     86s] 
+[02/10 00:26:39     86s] Core utilization  = 59.931146
+[02/10 00:26:39     86s] Effective Utilizations
+[02/10 00:26:39     86s] Core basic site is FreePDK45_38x28_10R_NP_162NW_34O
+[02/10 00:26:39     86s] Layer info - lib-1st H=1, V=2.  Cell-FPin=1. Top-pin=2
+[02/10 00:26:39     86s] Average module density = 0.599.
+[02/10 00:26:39     86s] Density for the design = 0.599.
+[02/10 00:26:39     86s]        = stdcell_area 55706 sites (14818 um^2) / alloc_area 92950 sites (24725 um^2).
+[02/10 00:26:39     86s] Pin Density = 0.2993.
+[02/10 00:26:39     86s]             = total # of pins 27824 / total area 92950.
+[02/10 00:26:39     86s] *** Message Summary: 0 warning(s), 0 error(s)
+[02/10 00:26:39     86s] 
+[02/10 00:27:31     93s] <CMD> getIoFlowFlag
+[02/10 00:28:12     99s] <CMD> addIoFiller
+[02/10 00:28:12     99s] 
+[02/10 00:28:12     99s] Usage: addIoFiller [-help] -cell {name list} [-fillAnyGap] [-fillerOrient <R0|R90|R180|R270|MX|MX90|MY|MY90>] [-from <coord>]
+[02/10 00:28:12     99s]                    [-prefix <string>] [-side <top|bottom|left|right>] [-to <coord>] [-useSmallIoHeight] [-row <num> ] [-logic [ -deriveConnectivity ]]
+[02/10 00:28:12     99s] 
+[02/10 00:28:12     99s] **ERROR: (IMPTCM-32):	Wrong number of arguments specified for command "addIoFiller".
+
+[02/10 00:28:31    101s] **ERROR: (IMPSYT-6577):	Enter a filler cell name.
+[02/10 00:28:42    103s] <CMD> getIoFlowFlag
+[02/10 00:29:27    109s] <CMD> setIoFlowFlag 0
+[02/10 00:29:27    109s] <CMD> floorPlan -site FreePDK45_38x28_10R_NP_162NW_34O -r 1.0 0.6 5.0 5.0 5.0 5.0
+[02/10 00:29:27    109s] Generated pitch 1.68 in metal10 is different from 1.6 defined in technology file in preferred direction.
+[02/10 00:29:27    109s] Generated pitch 0.84 in metal8 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:29:27    109s] Generated pitch 0.84 in metal7 is different from 0.8 defined in technology file in preferred direction.
+[02/10 00:29:27    109s] **WARN: (IMPFP-325):	Floorplan of the design is resized. All current floorplan objects are automatically derived based on specified new floorplan. This may change blocks, fixed standard cells, existing routes and blockages.
+[02/10 00:29:27    109s] <CMD> uiSetTool select
+[02/10 00:29:27    109s] <CMD> getIoFlowFlag
+[02/10 00:29:27    109s] <CMD> fit
+[02/10 00:29:36    110s] <CMD> setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer metal10 -stacked_via_bottom_layer metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+[02/10 00:29:36    110s] The ring targets are set to core/block ring wires.
+[02/10 00:29:36    110s] addRing command will consider rows while creating rings.
+[02/10 00:29:36    110s] addRing command will disallow rings to go over rows.
+[02/10 00:29:36    110s] addRing command will ignore shorts while creating rings.
+[02/10 00:29:36    110s] <CMD> addRing -nets {VDD VSS} -type core_rings -follow core -layer {top metal1 bottom metal1 left metal2 right metal2} -width {top 0.8 bottom 0.8 left 0.8 right 0.8} -spacing {top 0.8 bottom 0.8 left 0.8 right 0.8} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -extend_corner {} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+[02/10 00:29:36    110s] 
+[02/10 00:29:36    110s] Ring generation is complete.
+[02/10 00:29:36    110s] vias are now being generated.
+[02/10 00:29:36    110s] addRing created 8 wires.
+[02/10 00:29:36    110s] ViaGen created 8 vias, deleted 0 via to avoid violation.
+[02/10 00:29:36    110s] +--------+----------------+----------------+
+[02/10 00:29:36    110s] |  Layer |     Created    |     Deleted    |
+[02/10 00:29:36    110s] +--------+----------------+----------------+
+[02/10 00:29:36    110s] | metal1 |        4       |       NA       |
+[02/10 00:29:36    110s] |  via1  |        8       |        0       |
+[02/10 00:29:36    110s] | metal2 |        4       |       NA       |
+[02/10 00:29:36    110s] +--------+----------------+----------------+
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingOffset 1.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingThreshold 1.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingJogDistance 1.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingLayers {}
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingOffset 1.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingThreshold 1.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingJogDistance 1.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingLayers {}
+[02/10 00:29:41    111s] <CMD> set sprCreateIeStripeWidth 10.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeStripeThreshold 1.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeStripeWidth 10.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeStripeThreshold 1.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingOffset 1.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingThreshold 1.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingJogDistance 1.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeRingLayers {}
+[02/10 00:29:41    111s] <CMD> set sprCreateIeStripeWidth 10.0
+[02/10 00:29:41    111s] <CMD> set sprCreateIeStripeThreshold 1.0
+[02/10 00:29:54    113s] <CMD> setAddStripeMode -ignore_block_check false -break_at none -route_over_rows_only false -rows_without_stripes_only false -extend_to_closest_target none -stop_at_last_wire_for_area false -partial_set_thru_domain false -ignore_nondefault_domains false -trim_antenna_back_to_shape none -spacing_type edge_to_edge -spacing_from_block 0 -stripe_min_length 0 -stacked_via_top_layer metal10 -stacked_via_bottom_layer metal1 -via_using_exact_crossover_size false -split_vias false -orthogonal_only true -allow_jog { padcore_ring  block_ring }
+[02/10 00:29:54    113s] addStripe will allow jog to connect padcore ring and block ring.
+[02/10 00:29:54    113s] Stripes will stop at the boundary of the specified area.
+[02/10 00:29:54    113s] When breaking rings, the power planner will consider the existence of blocks.
+[02/10 00:29:54    113s] Stripes will not extend to closest target.
+[02/10 00:29:54    113s] The power planner will set stripe antenna targets to none (no trimming allowed).
+[02/10 00:29:54    113s] Stripes will not be created over regions without power planning wires.
+[02/10 00:29:54    113s] The entire stripe set will break at the domain if one of the nets is not in the domain.
+[02/10 00:29:54    113s] addStripe will break automatically at non-default domains when generating global stripes over the core area or default domain.
+[02/10 00:29:54    113s] AddStripe segment minimum length set to 1
+[02/10 00:29:54    113s] Offset for stripe breaking is set to 0.
+[02/10 00:29:54    113s] <CMD> addStripe -nets {VDD VSS} -layer metal1 -direction vertical -width 0.8 -spacing 0.8 -set_to_set_distance 100 -start_from left -switch_layer_over_obs false -max_same_layer_jog_length 2 -padcore_ring_top_layer_limit metal10 -padcore_ring_bottom_layer_limit metal1 -block_ring_top_layer_limit metal10 -block_ring_bottom_layer_limit metal1 -use_wire_group 0 -snap_wire_center_to_grid None -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+[02/10 00:29:54    113s] 
+[02/10 00:29:54    113s] Starting stripe generation ...
+[02/10 00:29:54    113s] Non-Default Mode Option Settings :
+[02/10 00:29:54    113s]   NONE
+[02/10 00:29:54    113s] Stripe generation is complete.
+[02/10 00:29:54    113s] vias are now being generated.
+[02/10 00:29:54    113s] addStripe created 8 wires.
+[02/10 00:29:54    113s] ViaGen created 8 vias, deleted 0 via to avoid violation.
+[02/10 00:29:54    113s] +--------+----------------+----------------+
+[02/10 00:29:54    113s] |  Layer |     Created    |     Deleted    |
+[02/10 00:29:54    113s] +--------+----------------+----------------+
+[02/10 00:29:54    113s] | metal1 |        4       |       NA       |
+[02/10 00:29:54    113s] |  via1  |        8       |        0       |
+[02/10 00:29:54    113s] | metal2 |        4       |       NA       |
+[02/10 00:29:54    113s] +--------+----------------+----------------+
+[02/10 00:30:34    119s] <CMD> setAddStripeMode -ignore_block_check false -break_at none -route_over_rows_only false -rows_without_stripes_only false -extend_to_closest_target none -stop_at_last_wire_for_area false -partial_set_thru_domain false -ignore_nondefault_domains false -trim_antenna_back_to_shape none -spacing_type edge_to_edge -spacing_from_block 0 -stripe_min_length 0 -stacked_via_top_layer metal10 -stacked_via_bottom_layer metal1 -via_using_exact_crossover_size false -split_vias false -orthogonal_only true -allow_jog { padcore_ring  block_ring }
+[02/10 00:30:34    119s] addStripe will allow jog to connect padcore ring and block ring.
+[02/10 00:30:34    119s] Stripes will stop at the boundary of the specified area.
+[02/10 00:30:34    119s] When breaking rings, the power planner will consider the existence of blocks.
+[02/10 00:30:34    119s] Stripes will not extend to closest target.
+[02/10 00:30:34    119s] The power planner will set stripe antenna targets to none (no trimming allowed).
+[02/10 00:30:34    119s] Stripes will not be created over regions without power planning wires.
+[02/10 00:30:34    119s] The entire stripe set will break at the domain if one of the nets is not in the domain.
+[02/10 00:30:34    119s] addStripe will break automatically at non-default domains when generating global stripes over the core area or default domain.
+[02/10 00:30:34    119s] AddStripe segment minimum length set to 1
+[02/10 00:30:34    119s] Offset for stripe breaking is set to 0.
+[02/10 00:30:34    119s] <CMD> addStripe -nets {VDD VSS} -layer metal1 -direction vertical -width 0.8 -spacing 0.8 -set_to_set_distance 100 -start_from left -switch_layer_over_obs false -max_same_layer_jog_length 2 -padcore_ring_top_layer_limit metal10 -padcore_ring_bottom_layer_limit metal1 -block_ring_top_layer_limit metal10 -block_ring_bottom_layer_limit metal1 -use_wire_group 0 -snap_wire_center_to_grid None -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+[02/10 00:30:34    119s] 
+[02/10 00:30:34    119s] Starting stripe generation ...
+[02/10 00:30:34    119s] Non-Default Mode Option Settings :
+[02/10 00:30:34    119s]   NONE
+[02/10 00:30:34    119s] **WARN: (IMPPP-170):	The power planner failed to create a wire at (5.53, 2.92) (5.53, 163.96) because same wire already exists.
+[02/10 00:30:34    119s] **WARN: (IMPPP-170):	The power planner failed to create a wire at (105.53, 2.92) (105.53, 163.96) because same wire already exists.
+[02/10 00:30:34    119s] **WARN: (IMPPP-170):	The power planner failed to create a wire at (7.13, 1.32) (7.13, 6.77) because same wire already exists.
+[02/10 00:30:34    119s] **WARN: (IMPPP-170):	The power planner failed to create a wire at (7.13, 5.97) (7.13, 160.91) because same wire already exists.
+[02/10 00:30:34    119s] **WARN: (IMPPP-170):	The power planner failed to create a wire at (7.13, 160.11) (7.13, 165.56) because same wire already exists.
+[02/10 00:30:34    119s] **WARN: (IMPPP-170):	The power planner failed to create a wire at (107.13, 1.32) (107.13, 6.77) because same wire already exists.
+[02/10 00:30:34    119s] **WARN: (IMPPP-170):	The power planner failed to create a wire at (107.13, 5.97) (107.13, 160.91) because same wire already exists.
+[02/10 00:30:34    119s] **WARN: (IMPPP-170):	The power planner failed to create a wire at (107.13, 160.11) (107.13, 165.56) because same wire already exists.
+[02/10 00:30:34    119s] Stripe generation is complete.
+[02/10 00:33:40    143s] <CMD> setAddStripeMode -ignore_block_check false -break_at none -route_over_rows_only false -rows_without_stripes_only false -extend_to_closest_target none -stop_at_last_wire_for_area false -partial_set_thru_domain false -ignore_nondefault_domains false -trim_antenna_back_to_shape none -spacing_type edge_to_edge -spacing_from_block 0 -stripe_min_length 0 -stacked_via_top_layer metal10 -stacked_via_bottom_layer metal1 -via_using_exact_crossover_size false -split_vias false -orthogonal_only true -allow_jog { padcore_ring  block_ring }
+[02/10 00:33:40    143s] addStripe will allow jog to connect padcore ring and block ring.
+[02/10 00:33:40    143s] Stripes will stop at the boundary of the specified area.
+[02/10 00:33:40    143s] When breaking rings, the power planner will consider the existence of blocks.
+[02/10 00:33:40    143s] Stripes will not extend to closest target.
+[02/10 00:33:40    143s] The power planner will set stripe antenna targets to none (no trimming allowed).
+[02/10 00:33:40    143s] Stripes will not be created over regions without power planning wires.
+[02/10 00:33:40    143s] The entire stripe set will break at the domain if one of the nets is not in the domain.
+[02/10 00:33:40    143s] addStripe will break automatically at non-default domains when generating global stripes over the core area or default domain.
+[02/10 00:33:40    143s] AddStripe segment minimum length set to 1
+[02/10 00:33:40    143s] Offset for stripe breaking is set to 0.
+[02/10 00:33:40    143s] <CMD> addStripe -nets {VDD VSS} -layer metal2 -direction vertical -width 8 -spacing 1 -set_to_set_distance 100 -start_from left -switch_layer_over_obs false -max_same_layer_jog_length 2 -padcore_ring_top_layer_limit metal10 -padcore_ring_bottom_layer_limit metal1 -block_ring_top_layer_limit metal10 -block_ring_bottom_layer_limit metal1 -use_wire_group 0 -snap_wire_center_to_grid None -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+[02/10 00:33:40    143s] 
+[02/10 00:33:40    143s] **WARN: (IMPPP-136):	The currently specified  spacing 1.0000 in -spacing option is less than the required spacing 1.5000 for widths specified as 8.0000 and 8.0000.
+[02/10 00:33:40    143s] Starting stripe generation ...
+[02/10 00:33:40    143s] Non-Default Mode Option Settings :
+[02/10 00:33:40    143s]   NONE
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (5.13, 2.92) (5.93, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (5.13, 163.16) (5.93, 163.96)
+[02/10 00:33:40    143s] **WARN: (IMPPP-354):	The power planner did not generate vertical stripe at 9.130 2.920 9.130 163.160 with width 8.000 either because the stripe would merge with rings, or because stripe could not be connected to any legal targets, or because stripe would break design rule. 
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.93, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 163.16) (105.93, 163.96)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.23, 3.72)
+[02/10 00:33:40    143s] **WARN: (EMS-27):	Message (IMPPP-532) has exceeded the current message display limit of 20.
+[02/10 00:33:40    143s] To increase the message display limit, refer to the product command reference manual.
+[02/10 00:33:40    143s] Stripe generation is complete.
+[02/10 00:33:40    143s] vias are now being generated.
+[02/10 00:33:40    143s] addStripe created 7 wires.
+[02/10 00:33:40    143s] ViaGen created 10 vias, deleted 0 via to avoid violation.
+[02/10 00:33:40    143s] +--------+----------------+----------------+
+[02/10 00:33:40    143s] |  Layer |     Created    |     Deleted    |
+[02/10 00:33:40    143s] +--------+----------------+----------------+
+[02/10 00:33:40    143s] |  via1  |        8       |        0       |
+[02/10 00:33:40    143s] | metal2 |        5       |       NA       |
+[02/10 00:33:40    143s] |  via2  |        2       |        0       |
+[02/10 00:33:40    143s] | metal3 |        2       |       NA       |
+[02/10 00:33:40    143s] +--------+----------------+----------------+
+[02/10 00:34:02    146s] <CMD> setAddStripeMode -ignore_block_check false -break_at none -route_over_rows_only false -rows_without_stripes_only false -extend_to_closest_target none -stop_at_last_wire_for_area false -partial_set_thru_domain false -ignore_nondefault_domains false -trim_antenna_back_to_shape none -spacing_type edge_to_edge -spacing_from_block 0 -stripe_min_length 0 -stacked_via_top_layer metal10 -stacked_via_bottom_layer metal1 -via_using_exact_crossover_size false -split_vias false -orthogonal_only true -allow_jog { padcore_ring  block_ring }
+[02/10 00:34:02    146s] addStripe will allow jog to connect padcore ring and block ring.
+[02/10 00:34:02    146s] Stripes will stop at the boundary of the specified area.
+[02/10 00:34:02    146s] When breaking rings, the power planner will consider the existence of blocks.
+[02/10 00:34:02    146s] Stripes will not extend to closest target.
+[02/10 00:34:02    146s] The power planner will set stripe antenna targets to none (no trimming allowed).
+[02/10 00:34:02    146s] Stripes will not be created over regions without power planning wires.
+[02/10 00:34:02    146s] The entire stripe set will break at the domain if one of the nets is not in the domain.
+[02/10 00:34:02    146s] addStripe will break automatically at non-default domains when generating global stripes over the core area or default domain.
+[02/10 00:34:02    146s] AddStripe segment minimum length set to 1
+[02/10 00:34:02    146s] Offset for stripe breaking is set to 0.
+[02/10 00:34:02    146s] <CMD> addStripe -nets {VDD VSS} -layer metal2 -direction vertical -width 1.8 -spacing 0.8 -set_to_set_distance 100 -start_from left -switch_layer_over_obs false -max_same_layer_jog_length 2 -padcore_ring_top_layer_limit metal10 -padcore_ring_bottom_layer_limit metal1 -block_ring_top_layer_limit metal10 -block_ring_bottom_layer_limit metal1 -use_wire_group 0 -snap_wire_center_to_grid None -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+[02/10 00:34:02    146s] 
+[02/10 00:34:02    146s] **WARN: (IMPPP-136):	The currently specified  spacing 0.8000 in -spacing option is less than the required spacing 1.5000 for widths specified as 1.8000 and 1.8000.
+[02/10 00:34:02    146s] Starting stripe generation ...
+[02/10 00:34:02    146s] Non-Default Mode Option Settings :
+[02/10 00:34:02    146s]   NONE
+[02/10 00:34:02    146s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (5.13, 2.92) (5.93, 3.72)
+[02/10 00:34:02    146s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (5.13, 163.16) (5.93, 163.96)
+[02/10 00:34:02    146s] **WARN: (IMPPP-354):	The power planner did not generate vertical stripe at 6.030 2.920 6.030 163.160 with width 1.800 either because the stripe would merge with rings, or because stripe could not be connected to any legal targets, or because stripe would break design rule. 
+[02/10 00:34:02    146s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 2.92) (105.93, 3.72)
+[02/10 00:34:02    146s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 163.16) (105.93, 163.96)
+[02/10 00:34:02    146s] Stripe generation is complete.
+[02/10 00:34:02    146s] vias are now being generated.
+[02/10 00:34:02    146s] **WARN: (IMPPP-532):	ViaGen Warning: top layer and bottom layer have same direction but only orthogonal via is allowed between layer: metal2 & metal1 at (105.13, 13.52) (105.93, 151.86)
+[02/10 00:34:02    146s] addStripe created 10 wires.
+[02/10 00:34:02    146s] ViaGen created 10 vias, deleted 0 via to avoid violation.
+[02/10 00:34:02    146s] +--------+----------------+----------------+
+[02/10 00:34:02    146s] |  Layer |     Created    |     Deleted    |
+[02/10 00:34:02    146s] +--------+----------------+----------------+
+[02/10 00:34:02    146s] |  via1  |        4       |        0       |
+[02/10 00:34:02    146s] | metal2 |        6       |       NA       |
+[02/10 00:34:02    146s] |  via2  |        6       |        0       |
+[02/10 00:34:02    146s] | metal3 |        4       |       NA       |
+[02/10 00:34:02    146s] +--------+----------------+----------------+
+[02/10 00:34:30    150s] <CMD> selectWire 14.1300 1.3200 22.1300 165.5600 2 VSS
+[02/10 00:34:31    150s] <CMD> deleteSelectedFromFPlan
+[02/10 00:34:34    151s] <CMD> selectWire 114.1300 1.3200 122.1300 165.5600 2 VSS
+[02/10 00:34:35    151s] <CMD> deleteSelectedFromFPlan
+[02/10 00:34:36    151s] <CMD> selectWire 97.2300 124.3650 113.1300 132.3650 3 VDD
+[02/10 00:34:37    151s] <CMD> deleteSelectedFromFPlan
+[02/10 00:34:39    151s] <CMD> zoomSelected
+[02/10 00:34:40    152s] <CMD> zoomSelected
+[02/10 00:34:40    152s] <CMD> zoomSelected
+[02/10 00:34:52    153s] 
+[02/10 00:34:52    153s] *** Memory Usage v#1 (Current mem = 784.016M, initial mem = 179.684M) ***
+[02/10 00:34:52    153s] 
+[02/10 00:34:52    153s] *** Summary of all messages that are not suppressed in this session:
+[02/10 00:34:52    153s] Severity  ID               Count  Summary                                  
+[02/10 00:34:52    153s] WARNING   IMPFP-325            4  Floorplan of the design is resized. All ...
+[02/10 00:34:52    153s] ERROR     IMPSYT-6577          2  Enter a filler cell name.                
+[02/10 00:34:52    153s] WARNING   IMPPP-136            2  The currently specified %s spacing %.4f ...
+[02/10 00:34:52    153s] WARNING   IMPPP-532           48  ViaGen Warning: top layer and bottom lay...
+[02/10 00:34:52    153s] WARNING   IMPPP-170            8  The power planner failed to create a wir...
+[02/10 00:34:52    153s] WARNING   IMPPP-4051           2  Fail to add rings. Gaps among IO cells m...
+[02/10 00:34:52    153s] WARNING   IMPPP-220            2  The power planner does not create core r...
+[02/10 00:34:52    153s] WARNING   IMPPP-354            2  The power planner did not generate %s st...
+[02/10 00:34:52    153s] ERROR     IMPTCM-32            1  Wrong number of arguments specified for ...
+[02/10 00:34:52    153s] WARNING   TECHLIB-436         20  Attribute '%s' on '%s' pin '%s' of cell ...
+[02/10 00:34:52    153s] *** Message Summary: 88 warning(s), 3 error(s)
+[02/10 00:34:52    153s] 
+[02/10 00:34:52    153s] --- Ending "Innovus" (totcpu=0:02:34, real=0:15:07, mem=784.0M) ---

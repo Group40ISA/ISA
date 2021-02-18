@@ -1,0 +1,305 @@
+Loading db file '/software/synopsys/syn_current_64.18/libraries/syn/gtech.db'
+Loading db file '/software/synopsys/syn_current_64.18/libraries/syn/standard.sldb'
+  Loading link library 'NangateOpenCellLibrary'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+Warning:  ../src/uP.vhd:347: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+Warning:  ../src/uP.vhd:356: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+Warning:  ../src/uP.vhd:363: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+Warning:  ../src/uP.vhd:458: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+
+Statistics for case statements in always block at line 174 in file
+	'../src/uP.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           174            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 347 in file
+	'../src/uP.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           347            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 352 in file
+	'../src/uP.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           352            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 356 in file
+	'../src/uP.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           356            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 363 in file
+	'../src/uP.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           363            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 458 in file
+	'../src/uP.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           458            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 464 in file
+	'../src/uP.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           464            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine uP line 178 in file
+		'../src/uP.vhd'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|     pc_int_reg      | Flip-flop |  31   |  Y  | N  | Y  | N  | N  | N  | N  |
+|     pc_int_reg      | Flip-flop |   1   |  N  | N  | N  | Y  | N  | N  | N  |
+===============================================================================
+
+Inferred memory devices in process
+	in routine uP line 196 in file
+		'../src/uP.vhd'.
+=================================================================================
+|     Register Name     |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+=================================================================================
+|   pc_next_IF_ID_reg   | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|   pc_int_IF_ID_reg    | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+| instruction_IF_ID_reg | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+=================================================================================
+
+Inferred memory devices in process
+	in routine uP line 272 in file
+		'../src/uP.vhd'.
+=====================================================================================
+|       Register Name       |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+=====================================================================================
+|     pc_next_ID_EX_reg     | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|     branch_ID_EX_reg      | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    mem_read_ID_EX_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|   mem_to_reg_ID_EX_reg    | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    mem_write_ID_EX_reg    | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|     alu_src_ID_EX_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    Lui_ctrl_ID_EX_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    reg_write_ID_EX_reg    | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+| write_back_ctrl_ID_EX_reg | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|     alu_op_ID_EX_reg      | Flip-flop |   2   |  Y  | N  | Y  | N  | N  | N  | N  |
+|     pc_int_ID_EX_reg      | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      read1_ID_EX_reg      | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      read2_ID_EX_reg      | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|    immediate_ID_EX_reg    | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|         rs_1_reg          | Flip-flop |   5   |  Y  | N  | Y  | N  | N  | N  | N  |
+|         rs_2_reg          | Flip-flop |   5   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      WReg_ID_EX_reg       | Flip-flop |   5   |  Y  | N  | Y  | N  | N  | N  | N  |
+|  add_AluOpCtrl_ID_EX_reg  | Flip-flop |   4   |  Y  | N  | Y  | N  | N  | N  | N  |
+=====================================================================================
+
+Inferred memory devices in process
+	in routine uP line 394 in file
+		'../src/uP.vhd'.
+========================================================================================
+|        Register Name         |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+========================================================================================
+|       WReg_EX_MEM_reg        | Flip-flop |   5   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      pc_jump_EX_MEM_reg      | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      branch_EX_MEM_reg       | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|     mem_read_EX_MEM_reg      | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    mem_to_reg_EX_MEM_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|     mem_write_EX_MEM_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|  write_back_ctrl_EX_MEM_reg  | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|     reg_write_EX_MEM_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|      pc_next_EX_MEM_reg      | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+| alu_result_signal_EX_MEM_reg | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|       read2_EX_MEM_reg       | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+========================================================================================
+
+Inferred memory devices in process
+	in routine uP line 433 in file
+		'../src/uP.vhd'.
+========================================================================================
+|        Register Name         |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+========================================================================================
+|       data_MEM_WB_reg        | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      pc_jump_MEM_WB_reg      | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|    JAL_signal_MEM_WB_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    wb_sel_mux_MEM_WB_reg     | Flip-flop |   2   |  Y  | N  | Y  | N  | N  | N  | N  |
+| alu_result_signal_MEM_WB_reg | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      pc_next_MEM_WB_reg      | Flip-flop |  32   |  Y  | N  | Y  | N  | N  | N  | N  |
+|       WReg_MEM_WB_reg        | Flip-flop |   5   |  Y  | N  | Y  | N  | N  | N  | N  |
+|     reg_write_MEM_WB_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+========================================================================================
+Presto compilation completed successfully.
+Elaborated 1 design.
+Current design is now 'uP'.
+Information: Building the design 'ImmGen'. (HDL-193)
+
+Statistics for case statements in always block at line 19 in file
+	'../src/Imm_Gen.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            19            |    auto/auto     |
+===============================================
+Presto compilation completed successfully.
+Information: Building the design 'RegisterFile'. (HDL-193)
+
+Inferred memory devices in process
+	in routine RegisterFile line 29 in file
+		'../src/RegisterFile.vhd'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      RegF_reg       | Flip-flop | 1024  |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Statistics for MUX_OPs
+======================================================
+| block name/line  | Inputs | Outputs | # sel inputs |
+======================================================
+| RegisterFile/26  |   32   |   32    |      5       |
+| RegisterFile/27  |   32   |   32    |      5       |
+======================================================
+Presto compilation completed successfully.
+Information: Building the design 'CU'. (HDL-193)
+
+Statistics for case statements in always block at line 23 in file
+	'../src/CU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            23            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 32 in file
+	'../src/CU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            32            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 36 in file
+	'../src/CU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            36            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 42 in file
+	'../src/CU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            42            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 47 in file
+	'../src/CU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            47            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 52 in file
+	'../src/CU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            52            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 57 in file
+	'../src/CU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            57            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 62 in file
+	'../src/CU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            62            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 66 in file
+	'../src/CU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            66            |    auto/auto     |
+===============================================
+Presto compilation completed successfully.
+Information: Building the design 'HazardDetectionUnit'. (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'AluControl'. (HDL-193)
+
+Statistics for case statements in always block at line 19 in file
+	'../src/AluControl.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            19            |    auto/auto     |
+===============================================
+Presto compilation completed successfully.
+Information: Building the design 'ALU'. (HDL-193)
+Warning:  ../src/ALU.vhd:41: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+Warning:  ../src/ALU.vhd:46: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+Warning:  ../src/ALU.vhd:51: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+Warning:  ../src/ALU.vhd:68: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+
+Statistics for case statements in always block at line 41 in file
+	'../src/ALU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            41            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 46 in file
+	'../src/ALU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            46            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 51 in file
+	'../src/ALU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            51            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 68 in file
+	'../src/ALU.vhd'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            68            |    auto/auto     |
+===============================================
+Presto compilation completed successfully.
+Information: Building the design 'ForwardUnit'. (HDL-193)
+Presto compilation completed successfully.
+1

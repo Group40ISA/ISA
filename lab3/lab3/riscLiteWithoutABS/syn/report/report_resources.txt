@@ -1,0 +1,40 @@
+ 
+****************************************
+Report : resources
+Design : uP
+Version: O-2018.06-SP4
+Date   : Tue Feb  2 12:49:02 2021
+****************************************
+
+Resource Sharing Report for design uP in file ../src/uP.vhd
+
+===============================================================================
+|          |              |            | Contained     |                      |
+| Resource | Module       | Parameters | Resources     | Contained Operations |
+===============================================================================
+| r327     | DW01_add     | width=32   |               | add_167              |
+| r329     | DW01_add     | width=32   |               | add_333              |
+| hzd_unit/r307           |            |               |                      |
+|          | DW_cmp       | width=5    |               | hzd_unit/eq_33_2     |
+|          |              |            |               | hzd_unit/eq_46       |
+| hzd_unit/r312           |            |               |                      |
+|          | DW_cmp       | width=5    |               | hzd_unit/eq_33       |
+| hzd_unit/r314           |            |               |                      |
+|          | DW_cmp       | width=5    |               | hzd_unit/eq_51       |
+| op/r310  | DW01_add     | width=32   |               | op/add_1_root_add_58_2 |
+| op/r312  | DW_cmp       | width=32   |               | op/eq_61             |
+| op/r314  | DW_sra       | A_width=32 |               | op/sra_74            |
+|          |              | SH_width=5 |               |                      |
+| forward/r310            |            |               |                      |
+|          | DW_cmp       | width=5    |               | forward/eq_27        |
+| forward/r312            |            |               |                      |
+|          | DW_cmp       | width=5    |               | forward/eq_35        |
+| forward/r314            |            |               |                      |
+|          | DW_cmp       | width=5    |               | forward/eq_42        |
+| forward/r316            |            |               |                      |
+|          | DW_cmp       | width=5    |               | forward/eq_50        |
+===============================================================================
+
+
+No implementations to report
+1

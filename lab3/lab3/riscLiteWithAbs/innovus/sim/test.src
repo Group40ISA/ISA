@@ -1,0 +1,30 @@
+#setting env
+
+rm -rf ../sim/work
+vlib work
+
+# compile
+
+vcom -93 -work ./work ../../tb/clk_gen.vhd
+vcom -93 -work ./work ../../tb/memory/dataMemory.vhd
+vcom -93 -work ./work ../../tb/memory/textMemory.vhd
+vcom -93 -work ./work ../../src/CU.vhd
+vcom -93 -work ./work ../../src/AluControl.vhd
+vcom -93 -work ./work ../../src/ALU.vhd
+vcom -93 -work ./work ../../src/Forward_unit.vhd
+vcom -93 -work ./work ../../src/Hazard_detection_unit.vhd
+vcom -93 -work ./work ../../src/Imm_Gen.vhd
+vcom -93 -work ./work ../../src/RegisterFile.vhd
+
+vlog -work ./work ../uP.v
+vlog -work ./work ../../tb/tb_uP.v 
+vsim -L /software/dk/nangate45/verilog/msim6.2g -sdftyp /tb_uP/risc_lite=../uP.sdf work.tb_uP  
+
+#create vcd
+
+vcd file ../uP.vcd
+vcd add /tb_uP/risc_lite/*
+
+# run simulation
+add wave *
+run 250 ns
