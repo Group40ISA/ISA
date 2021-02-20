@@ -6,7 +6,7 @@ Lab1 : files related to the implementation of the IIR direct form II and the Loo
 
 Lab2 : files related to the implementation of the MBE multiplier with unsigned dadda tree adder and analysis of the floating point multiplier given.
 
-Lab3: 
+Lab3: files related to the implementation of a risc like processor with a reduced ISA
 
 Members of the group:
 
